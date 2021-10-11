@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/register/style.css' %}">
+    <link rel="icon" href="{% static 'smile.ico' %}">
+</head>
+
+<body>
+<div class="login-box">
+    {#        <h2>Đăng nhập</h2>#}
+    <a id="home" href="/"><img
+            src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
+            alt="Home"></a>
+
+    <form id="form" action="/register/" method="post">
+        {% csrf_token %}
+        <div class="user-box">
+            <input type="text" autocomplete="off" name="name" required>
+            <label>Họ và tên</label>
+        </div>
+        <div class="user-box">
+            <input type="text" autocomplete="off" name="phone" required>
+            <label>Số điện thoại</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password" required>
+            <label>Mật khẩu</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="password2" required>
+            <label>Nhập lại mật khẩu</label>
+        </div>
+        <a href="#" onclick="document.getElementById('form').submit()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Đăng ký
+        </a>
+        <input type="submit" hidden/>{# enter for submit #}
+    </form>
+    <p class="link">
+        <br>
+        <a href="/login">Đã có tài khoản?</a>
+    </p>
+</div>
+</body>
+
+</html>
