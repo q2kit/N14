@@ -19,14 +19,14 @@ def register(request):
         password2 = ls.get('password2')
 
         if password != password2:
-            return render(request, 'register.html', {'err': "Mật khẩu không trùng khớp."})
+            return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
         try:
             Customer.objects.get(phone=phone)
-            return render(request, 'register.html', {'err': "Tài khoản đã tồn tại."})
+            return render(request, 'register.html', {'result': "Tài khoản đã tồn tại."})
         except Customer.DoesNotExist:
             Customer.objects.create(name=name, phone=phone, password=password)
-            return render(request, 'login.html', {'code': 'completeRegistration'})
-    return render(request, 'register.html', {'err': None})
+            return render(request, 'login.html', {'result': 'completeRegistration'})
+    return render(request, 'register.html', {'result': None})
 
 
 def login(request):
