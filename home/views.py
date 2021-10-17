@@ -1,7 +1,6 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .forms import RegisterForm
 from .models import Customer
 
 
@@ -48,6 +47,8 @@ def login(request):
 
 
 def forgot(request):
+    passwordFefault = "5ghfE$Dg"
+
     if request.method == 'POST':
         phone = request.POST.dict().get('phone')
         try:

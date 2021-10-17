@@ -20,15 +20,16 @@
     {% if code == 'completeRegistration' %}
         <p id="completeRegistration">Đăng ký thành công. Vui lòng đăng nhập.</p>
     {% endif %}
-    <form id="form" action="/login/" method="post">
+    <form id="form" action="/forgot/" method="post">
         {% csrf_token %}
         <div class="user-box">
-            <input type="text" autocomplete="off" name="phone" required>
+            <input id="inputPhone" type="text" autocomplete="off" name="phone" required>
             <label>Số điện thoại</label>
         </div>
+        <p id="invalid">Số điện thoại không hợp lệ.</p>
         <div class="user-box" id="inputOtp">
             <input type="text" autocomplete="off" name="otp" required>
-            <label>Nhập mã</label>
+            <label>Nhập mã OTP</label>
         </div>
         <a id="getOtp" href="#" onclick="unhide()">
             <span></span>

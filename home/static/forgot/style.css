@@ -52,6 +52,11 @@ body {
 /*    margin-left: 126px;*/
 /*}*/
 
+form p{
+    color: red;
+    display: none;
+}
+
 .login-box .user-box {
     position: relative;
 }
