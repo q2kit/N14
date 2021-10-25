@@ -39,16 +39,32 @@ body {
 .menu-home li a {
     color: white;
     display: table;
-    width: 70px;
-    margin: 0px 15px 0px 15px;
+    width: 100%;
+    /* margin: 0 20% 0 20%; */
     height: 44px;
     line-height: 44px;
     text-decoration: none;
 }
 
 .menu-home li a:hover {
+    background-color: rgba(120, 120, 120, 0.404);
     font-size:19px;
     color: rgb(0, 174, 255);
+}
+
+#logo-home{
+    width: 40px;
+    height: 44px;
+}
+
+#logo-home::hover{
+    /*  */
+}
+
+#logo-home img{
+    margin-top:3px;
+    height:35px;
+    width:35px;
 }
 
 .in-out {

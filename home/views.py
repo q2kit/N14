@@ -19,14 +19,16 @@ def register(request):
         password2 = ls.get('password2')
 
         if password != password2:
-            return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
+            return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
+        # if password != password2:
+        #     return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
         try:
             Customer.objects.get(phone=phone)
             return render(request, 'register.html', {'result': "Tài khoản đã tồn tại."})
         except Customer.DoesNotExist:
             Customer.objects.create(name=name, phone=phone, password=password)
             return render(request, 'login.html', {'result': 'completeRegistration'})
-    return render(request, 'register.html', {'result': None})
+    return render(request, 'register.html', {'result': ''})
 
 
 def login(request):
@@ -41,9 +43,9 @@ def login(request):
         if obj:
             return redirect('/')
         else:
-            return render(request, 'login.html', {'code': 'incorrect'})
+            return render(request, 'login.html', {'result': 'incorrect'})
 
-    return render(request, 'login.html', {'code': None})
+    return render(request, 'login.html', {'result': None})
 
 
 def forgot(request):
@@ -55,6 +57,6 @@ def forgot(request):
             obj = Customer.objects.get(phone=phone)
 
         except Customer.DoesNotExist:
-            return render(request, 'forgot.html', {'msg': 'notFound'})
+            return render(request, 'forgot.html', {'result': 'notFound'})
 
-    return render(request, 'forgot.html', {'msg': 'getPhone'})
+    return render(request, 'forgot.html', {'result': 'getPhone'})

@@ -12,45 +12,43 @@
 </head>
 
 <body>
-<div class="login-box">
-    <a id="home" href="/"><img
-            src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
-            alt="Home"></a>
-    {% if code == 'completeRegistration' %}
+    <div class="login-box">
+        <a id="home" href="/"><img src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg" alt="Home"></a>
+        {% if result == 'completeRegistration' %}
         <p id="completeRegistration">Đăng ký thành công. Vui lòng đăng nhập.</p>
-    {% endif %}
-    <form id="form" action="/login/" method="post">
-        {% csrf_token %}
-        <div class="user-box">
-            <input type="text" autocomplete="off" name="phone" required>
-            <label>Số điện thoại</label>
-        </div>
-        <div class="user-box">
-            <input type="password" name="password" required>
-            <label>Mật khẩu</label>
-        </div>
-        {% if code == 'incorrect' %}
+        {% endif %}
+        <form id="form" action="/login/" method="post">
+            {% csrf_token %}
+            <div class="user-box">
+                <input type="text" autocomplete="off" name="phone" required>
+                <label>Số điện thoại</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" required>
+                <label>Mật khẩu</label>
+            </div>
+            {% if result == 'incorrect' %}
             <div class="incorrect"><br>
                 <p>Sai tài khoản hoặc mật khẩu.</p>
                 Vui lòng thử lại.
             </div>
-        {% endif %}
-        <a href="#" onclick="document.getElementById('form').submit()">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span> Đăng nhập
-        </a>
-        <input type="submit" hidden/>{# enter for submit #}
-    </form>
-    <p class="link">
-        <br>
-        <a href="/forgot">Quên mật khẩu?</a>
-        <br>
-        <br>
-        <a href="/register">Chưa có tài khoản?</a>
-    </p>
-</div>
+            {% endif %}
+            <a href="#" onclick="document.getElementById('form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> Đăng nhập
+            </a>
+            <input type="submit" hidden/>{# enter for submit #}
+        </form>
+        <p class="link">
+            <br>
+            <a href="/forgot">Quên mật khẩu?</a>
+            <br>
+            <br>
+            <a href="/register">Chưa có tài khoản?</a>
+        </p>
+    </div>
 </body>
 
 </html>

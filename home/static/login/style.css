@@ -22,11 +22,22 @@ body {
     border-radius: 10px;
 }
 
+
 /*.login-box h2 {*/
+
+
 /*    margin: 0 0 30px;*/
+
+
 /*    padding: 0;*/
+
+
 /*    color: #fff;*/
+
+
 /*    text-align: center;*/
+
+
 /*}*/
 
 .login-box #home {
@@ -46,10 +57,19 @@ body {
     filter: blur(1px);
 }
 
+
 /*.login-box #home img:hover ~ #home {*/
+
+
 /*    width: 68px;*/
+
+
 /*    height: 90px;*/
+
+
 /*    margin-left: 126px;*/
+
+
 /*}*/
 
 .login-box .user-box {
@@ -79,8 +99,8 @@ body {
     transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
     top: -20px;
     left: 0;
     color: #03e9f4;
@@ -90,7 +110,7 @@ body {
 .login-box form a {
     position: relative;
     text-align: center;
-    width:140px;
+    width: 140px;
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
@@ -220,6 +240,8 @@ p a:hover {
     color: red;
 }
 
-#completeRegistration{
-    color: white;
+#completeRegistration {
+    line-height: 40px;
+    font-size: 13px;
+    color: red;
 }
