@@ -8,7 +8,7 @@ from .models import Customer, Product
 
 def index(request):
     Data = {'products': Product.objects.all()}
-    return render(request, 'index.html')
+    return render(request, 'index.html', Data)
 
 
 def register(request):

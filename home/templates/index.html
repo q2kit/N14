@@ -57,7 +57,6 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-   
   </div>
 </div>
 <div class="row policies ">
@@ -72,7 +71,6 @@
       <div class="policy d-flex align-items-center">
          <div style="width: 100%;"> <i class="fal fa-shipping-fast"></i>
           <p>Giao hàng toàn quốc</p></div>
-
       </div>
   </div>
   <div class="col-sm-3 padding-0 ">
@@ -80,7 +78,6 @@
          <div style="width: 100%;"> <i class="fal fa-shield"></i>
           <p>Bảo hành có cam kết
             tới 12 tháng</p></div>
-
       </div>
   </div>
   <div class="col-sm-3 padding-0 ">
@@ -88,11 +85,9 @@
          <div style="width: 100%;"> <i class="fal fa-undo"></i>
           <p>Có thể đổi trả tại
 Thegioididong và DienmayXanh</p></div>
-
       </div>
   </div>
 </div>
-
 <div class="row pt-5 pb-5">
    <div class="col-6 col-sm-3  pt-3" >
     <a href="">
@@ -103,13 +98,11 @@ Thegioididong và DienmayXanh</p></div>
   </a>
   </div>
   <div class="col-6 col-sm-3  pt-3"  >
-    
     <a href="">
     <div class="category ">
         <img src="{% static 'img/product/mac/mac.png' %}" alt="">
       <p>Mac</p>
     </div>
-
     </a>
   </div>
   <div class="col-6 col-sm-3  pt-3" >
@@ -123,43 +116,90 @@ Thegioididong và DienmayXanh</p></div>
   <div class="col-6 col-sm-3 pt-3" >
      <a href="">
     <div class="category ">
-     
         <img src="{% static 'img/product/watch/watch.png' %}" alt="">
         <p>Watch</p>
-     
     </div>
      </a>
   </div>
- 
 </div>
 <div class="row">
-  <div class="col-sm-12 session">
+  <div class="col-sm-12 sessionTitle">
     <i class="fab fa-apple"></i> <span>iPhone</span>
   </div>
 </div>
 <div class="row"> 
-     
       {% for product   in products %}
-      
         {% if product.category == 'iphone' %}
-           <div class="col-sm-3 mt-3 ">
+           <div class="col-6  col-sm-3 mt-3">
        <div class="product">
           <a href="/product/{{product.id}}">
-
             <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
              <p class="productName">{{product.productName}}</p>
-        </a>
-        
-          <div class="d-flex justify-content-between" style="width: 100%;">
-            <p class="productPrice"  style="display: inline-block;">{{product.unitPrice}}</p>
-              <!-- <button  type="button" name="" id="" class="btn btn-primary btn-lg btn-block">add to cart</button> -->
-          </div>
+           </a>
+            <p class="productPrice">{{product.unitPrice}}</p>
        </div>
     </div>
         {% endif %}
-    
-        
     {% endfor %}
-  
+</div>
+<div class="row">
+  <div class="col-sm-12 sessionTitle">
+    <i class="fab fa-apple"></i> <span>Mac</span>
   </div>
+</div>
+<div class="row"> 
+      {% for product   in products %}
+        {% if product.category == 'mac' %}
+           <div class="col-6 col-sm-3 mt-3 ">
+       <div class="product">
+          <a href="/product/{{product.id}}">
+            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+             <p class="productName">{{product.productName}}</p>
+           </a>
+            <p class="productPrice">{{product.unitPrice}}</p>
+       </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="row">
+  <div class="col-sm-12 sessionTitle">
+    <i class="fab fa-apple"></i> <span>iPad</span>
+  </div>
+</div>
+<div class="row"> 
+      {% for product   in products %}
+        {% if product.category == 'ipad' %}
+           <div class="col-6 col-sm-3 mt-3 ">
+       <div class="product">
+          <a href="/product/{{product.id}}">
+            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+             <p class="productName">{{product.productName}}</p>
+           </a>
+            <p class="productPrice">{{product.unitPrice}}</p>
+       </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="row">
+  <div class="col-sm-12 sessionTitle">
+    <i class="fab fa-apple"></i> <span>Watch</span>
+  </div>
+</div>
+<div class="row"> 
+      {% for product   in products %}
+        {% if product.category == 'watch' %}
+           <div class="col-6 col-sm-3 mt-3 ">
+       <div class="product">
+          <a href="/product/{{product.id}}">
+            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+             <p class="productName">{{product.productName}}</p>
+           </a>
+            <p class="productPrice">{{product.unitPrice}}</p>
+       </div>
+    </div>
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock content %}
