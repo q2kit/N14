@@ -7,7 +7,6 @@ $(".searchIcon").click(function () {
 });
 $(".myNavbar .fa-times").click(function () {
   $(".searchForm").css("display", "none");
-  $(".searchForm").css("width", "70%");
   $(".main").css("display", "block");
   $(".menu").css("display", "block");
 });

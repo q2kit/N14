@@ -2,6 +2,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: #3e3e3f;
+  color: white;
+}
+a, a:hover{
+  color: white;
 }
 .padding-0 {
   padding-right: 0rem;
@@ -75,7 +79,7 @@ input:focus {
 .searchForm {
   display: none;
   transition: all 1s;
-  width: 70%;
+  width: 90%;
   position: relative;
 }
 .myNavbar .fa-times {
@@ -87,4 +91,44 @@ input:focus {
   display: inline;
   cursor: pointer;
   font-size: 1.3rem;
+}
+
+/* policies */
+.policies{
+  background-color: #2f3033;
+}
+.policy{
+  width: 100%;
+  text-align: center;
+   height: 9rem;
+  background-color: #2f3033;
+}
+.policy i{
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+
+/* categories */
+.category{
+  width: 100%;
+  background-color: #2f3033;
+  height: 15rem;
+  border-radius: 1rem;
+}
+.category img{
+  width: 50%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.category p{
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.category:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
