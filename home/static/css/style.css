@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: black;
+    height: 60px;
+    width: 100%;
+}
+
+.head{
+    width: 1000px;
+    margin: auto;
+}
+
+.head .logo-home {
+    height: 60px;
+    width: 25%;
+    display: inline-block;
+}
+
+.head .logo-home a{
+    display: inline-block;
+    /* margin: 0 calc(25%-50px) 0 calc(25%-50px); */
+    /* margin: 0 10 0 10; */
+    /* text-align: center; */
+    align-items: center;
+}
+
+.head .menu {
+    height: 60px;
+    width: 50%;
+    display: inline-block;
+}
+
+.head .search-cart {
+    height: 60px;
+    width: 25%;
+    display: inline-block;
+}
