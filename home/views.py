@@ -1,12 +1,13 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Customer
+from .models import Customer, Product
 
 
 # Create your views here.
 
 def index(request):
+    Data = {'products': Product.objects.all()}
     return render(request, 'index.html')
 
 

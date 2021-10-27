@@ -132,4 +132,34 @@ Thegioididong và DienmayXanh</p></div>
   </div>
  
 </div>
+<div class="row">
+  <div class="col-sm-12 session">
+    <i class="fab fa-apple"></i> <span>iPhone</span>
+  </div>
+</div>
+<div class="row"> 
+     
+      {% for product   in products %}
+      
+        {% if product.category == 'iphone' %}
+           <div class="col-sm-3 mt-3 ">
+       <div class="product">
+          <a href="/product/{{product.id}}">
+
+            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+             <p class="productName">{{product.productName}}</p>
+        </a>
+        
+          <div class="d-flex justify-content-between" style="width: 100%;">
+            <p class="productPrice"  style="display: inline-block;">{{product.unitPrice}}</p>
+              <!-- <button  type="button" name="" id="" class="btn btn-primary btn-lg btn-block">add to cart</button> -->
+          </div>
+       </div>
+    </div>
+        {% endif %}
+    
+        
+    {% endfor %}
+  
+  </div>
 {% endblock content %}

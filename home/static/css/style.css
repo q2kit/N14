@@ -132,3 +132,11 @@ input:focus {
 .category:hover{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+/* session */
+.session i,.session span{
+  font-size: 3rem;
+}
+.session {
+text-align: center;
+}
