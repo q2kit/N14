@@ -1,64 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N14 Store - Apple Store</title>
-    {% load static %}
-    <link href="{% static '/logo.svg' %}" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <div class="head">
-            <div class="logo-home">
-                <a href="/">
-                    <img style="width: 50px;height: 50px;margin-top: 5px;" src="{% static '/logo.svg' %}" alt="Home">
-                </a>
-            </div>
-            <ul class="menu">
-                <li class="menu-ip ">
-                    <a href="/iphone/">
-                        <span>iPhone</span>
-                    </a>
-                </li>
-                <li class="menu-mac ">
-                    <a href="/mac/">
-                        <span>Mac</span>
-                    </a>
-                </li>
-                <li class="menu-ipad ">
-                    <a href="/ipad/">
-                        <span>iPad</span>
-                    </a>
-                </li>
-                <li class="menu-watch ">
-                    <a href="/apple-watch/">
-                        <span>Watch</span>
-                    </a>
-                </li>
-                <li class="menu-access ">
-                    <a href="/phu-kien/">
-                        <span>Phụ kiện</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="search-cart">
-                <div class="search-sp">
-                    <i class="topzone-search"></i>
-                </div>
-                <a href="/gio-hang/" class="cart">
-                    <i class="topzone-cart"></i>
-                </a>
-                <div class="view-cart">
-                    <i class="topzone-cohang"></i>
-                    <span>Đã thêm sản phẩm vào giỏ hàng</span>
-                    <a href="/gio-hang/">Xem giỏ hàng</a>
-                </div>
-            </div>
 
-        </div>
-    </header>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+{% endblock content %}

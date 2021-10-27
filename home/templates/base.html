@@ -1,45 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
-    <link rel="icon" href="{% static 'logo.svg' %}"> {% block templates %}{% endblock %}
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}" />
+    <link rel="icon" href="{% static 'logo.svg' %}" />
+    {% block templates %}{% endblock %}
+  </head>
 
-<body>
-    <div class="banner">
-        <marquee id="text">10/10 giảm 5% cho tất cả các sản phẩm.</marquee>
-
-        <div style="height: 44px;width:100%; background-color:#303030;">
-            <ul class="menu-home">
-                <li>
-                    <a id="logo-home" href="/"><img src="{% static 'logo.svg' %}" alt="Home"></a>
-                    <!-- <a href="/"><img src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg" alt="Home"></a> -->
-                </li>
-                <li><a href="/iphone">iPhone</a></li>
-                <li><a href="/ipad">iPad</a></li>
-                <li><a href="/macbook">MacBook</a></li>
-                <li><a href="/watch">Watch</a></li>
-                <li><a href="/news">Tin tức</a></li>
-            </ul>
-
-            <div class='in-out'>
-                {% if logged %} Welcome, {{ username }}
-                <a href='/login/'>Đăng xuất</a> {% else %}
-                <a href='/login/'>Đăng nhập</a> {% endif %}
-            </div>
+  <body>
+    <div class="container-fluid">
+      <div class="row myNavbar">
+        <div class="col-3 d-flex align-items-center">
+          <div class="">
+            <a href="{% url 'home' %}">
+              <img src="{% static 'img/logo.png' %}" alt="" />
+            </a>
+          </div>
         </div>
+        <div class="col-6 padding-0">
+          <div class="searchForm">
+            <form class="" action="/search">
+              <input
+                autocomplete="off"
+                name="q"
+                class="searchInput"
+                type="search"
+                placeholder="Bạn tìm gì..."
+                aria-label="Search"
+              />
+              {% comment %}
+              <button
+                class="btn pl-2 btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+              {% endcomment %}
+            </form>
+            <i class="fal fa-times"></i>
+          </div>
+          <div class="main">
+            <ul class="d-flex">
+              <li class="d-flex align-items-center">
+                <a href="">iPhone</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="">Mac</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="">iPad</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="">Watch</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="">Blog</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3 padding-0">
+          <div class="menu pl-5 pr-5">
+            <ul class="d-flex justify-content-between">
+              <li class="d-flex align-items-center">
+                <div class="bg searchIcon">
+                  <i class="far fa-search"></i>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="">
+                  <div class="bg">
+                    <i class="far fa-shopping-bag"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="{% url 'login' %}">
+                  <div class="bg">
+                    <i class="far fa-user"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div style="height: 78px;"></div>
-
     {% block content %}{% endblock %}
-
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
 </html>

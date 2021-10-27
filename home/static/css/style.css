@@ -1,41 +1,89 @@
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
+}
+.padding-0 {
+  padding-right: 0rem;
+  padding-left: 0rem;
+}
+.myNavbar li {
+  color: white;
+  cursor: pointer;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+.myNavbar {
+  background-color: black;
+}
+.myNavbar li,
+.myNavbar ul,
+.main,
+.menu {
+  height: 100%;
+}
+.myNavbar a {
+  color: white;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  transition: all 1s;
+}
+.myNavbar a:hover {
+  text-decoration: none;
+}
+.main li:hover {
+  background-color: #2f3033;
 }
 
-header{
-    background-color: black;
-    height: 60px;
-    width: 100%;
+.myNavbar img {
+  width: 100%;
+}
+.menu .bg {
+  height: 2rem;
+  position: relative;
+  width: 2rem;
+  background-color: #2f3033;
+  border-radius: 50%;
+}
+.menu i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.menu .bg:hover {
+  background-color: #4f5155;
+}
+.menu a {
+  display: inline;
+  padding: 0;
 }
 
-.head{
-    width: 1000px;
-    margin: auto;
+.searchInput {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  color: white;
+  transition: all 1s;
 }
-
-.head .logo-home {
-    height: 60px;
-    width: 25%;
-    display: inline-block;
+input:focus {
+  outline: none;
 }
-
-.head .logo-home a{
-    display: inline-block;
-    /* margin: 0 calc(25%-50px) 0 calc(25%-50px); */
-    /* margin: 0 10 0 10; */
-    /* text-align: center; */
-    align-items: center;
+.searchForm {
+  display: none;
+  transition: all 1s;
+  width: 70%;
+  position: relative;
 }
-
-.head .menu {
-    height: 60px;
-    width: 50%;
-    display: inline-block;
-}
-
-.head .search-cart {
-    height: 60px;
-    width: 25%;
-    display: inline-block;
+.myNavbar .fa-times {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  color: white;
+  display: inline;
+  cursor: pointer;
+  font-size: 1.3rem;
 }
