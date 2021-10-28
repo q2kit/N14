@@ -11,6 +11,11 @@ def index(request):
     return render(request, 'index.html', Data)
 
 
+def productDetail(request, id):
+    Data = {'product': Product.objects.get(id=id)}
+    return render(request, 'productDetail.html', Data)
+
+
 def register(request):
     if request.method == 'POST':
         ls = request.POST.dict()

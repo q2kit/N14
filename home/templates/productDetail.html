@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+ {% load static %} 
+{% block title %}{{product.productName}}{% endblock title %}
+{% block content %}
+<div class="row productDetail pt-5 pb-5">
+    
+    <div class="col-6">
+        <div class="">
+            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+        
+        </div>
+    </div>
+    <div class="col-6">
+        <p class="productName">{{product.productName}}</p>
+        <p class="productPrice">{{product.unitPrice}} ₫</p> 
+        <p>Dung lượng</p>
+        <div class="capacity capacity--active">64GB</div>
+        <div class="capacity">128GB</div>
+        <div class="capacity">256GB</div>
+        <p class="mt-3">Màu</p>
+        <div class="colors mb-5">
+            <div class="color color--active" style="background-color:  #3c4870;"></div>
+            <div class="color " style="background-color:  #b90b2d;"></div>
+            <div class="color " style="background-color:  #ebebe3;"></div>
+            <div class="color" style="background-color:  #262626;"></div>
+            <div class="color" style="background-color:  #b7afe6;"></div>
+        </div>
+        <a href="">
+            <div class="addtocart mr-3">Mua ngay</div>
+             
+        </a>
+        <a href="">
+           <div class="installment">Trả góp</div>
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 padding-0">
+        <img style="width: 100%;" src="{% static 'img/mota.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota2.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota3.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota4.jpg' %}" alt="">
+    </div>
+</div>
+
+{% endblock content %}

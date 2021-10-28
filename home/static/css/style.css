@@ -147,12 +147,12 @@ text-align: center;
 border-radius: 2rem;
 padding: 2rem 1rem;
 }
-.productName{
+.product .productName{
   margin-top: 1rem;
   text-align: center;
   font-weight: 400;
 }
-.productPrice{
+.product .productPrice{
 text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
@@ -170,4 +170,55 @@ text-align: center;
 .footer .address{
   font-size: 0.7rem;
   color: #838891;
+}
+
+/* product detail */
+.productDetail .productName{
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.productDetail .productPrice{
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.productDetail .capacity{
+  background-color: #4f5155;
+  /* width: 3rem; */
+  text-align: center;
+  padding: 0.5rem 1rem;
+  display: inline;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.productDetail .capacity--active{
+  background-color: rgb(26, 26, 26);
+
+}
+.productDetail .color{
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.productDetail .color--active{
+   border: 3px solid  #e5e5e5;
+   box-shadow: #0071e3 0px 2px 4px 0px, #0071e3 0px 0px 0px 2px;
+}
+.addtocart,.installment{
+  background-color: #0071e3;
+  text-align: center;
+
+  display: inline;
+  padding: 1.2rem 4rem;
+font-size: 1.5rem;
+font-weight: 700;
+border-radius: 1rem;
+}
+.installment{
+  background-color: #fff;
+  color: #2f3033;
 }
