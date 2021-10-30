@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row pt-4 ">
     <div class="col-sm-12">
-         <p>Kết quả tìm kiếm cho: <strong>{{request.POST.q}}</strong> </p>
+         <p>Kết quả tìm kiếm cho: <strong>{{request.GET.q}}</strong> </p>
     </div>
 </div>
     {% if result %}
