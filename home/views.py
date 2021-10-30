@@ -39,8 +39,8 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        phone = request.POST.dict().get('phone')
-        password = request.POST.dict().get('password')
+        phone = request.POST['phone']
+        password = request.POST['password']
         try:
             obj = Customer.objects.get(phone=phone, password=password)
         except Customer.DoesNotExist:
@@ -58,7 +58,7 @@ def forgot(request):
     passwordFefault = "5ghfE$Dg"
 
     if request.method == 'POST':
-        phone = request.POST.dict().get('phone')
+        phone = request.POST['phone']
         try:
             obj = Customer.objects.get(phone=phone)
 
@@ -70,17 +70,18 @@ def forgot(request):
 def search(request):
     if request.method == 'GET':
         try:
-            q = request.GET.dict().get('q').lower().split()
+            q = request.GET['q'].lower().split()
             products = Product.objects.all()
             result = []
             for product in products:
                 ok = False
                 for text in q:
                     if text in product.productName.lower():
-                        ok = True
+                        result.append(product)
                         break
-                if ok:
-                    result.append(product)
+                
+            
+
             return render(request, 'search.html', {'result': result})
         except:
             return render(request, 'search.html', {'result': None})

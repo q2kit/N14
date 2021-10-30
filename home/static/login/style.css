@@ -243,5 +243,17 @@ p a:hover {
 #completeRegistration {
     line-height: 40px;
     font-size: 13px;
-    color: red;
+    color: rgb(0, 174, 255);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

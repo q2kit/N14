@@ -23,12 +23,12 @@
     <form id="form" action="/forgot/" method="post">
         {% csrf_token %}
         <div class="user-box">
-            <input id="inputPhone" type="text" autocomplete="off" name="phone" required>
+            <input id="inputPhone" type="number" autocomplete="off" name="phone" inputmode="numeric" required>
             <label>Số điện thoại</label>
         </div>
         <p id="invalid">Số điện thoại không hợp lệ.</p>
         <div class="user-box" id="Otp">
-            <input id="inputOtp" type="text" autocomplete="off" name="otp" required>
+            <input id="inputOtp" type="number" autocomplete="off" name="otp" inputmode="numeric" required>
             <label>Nhập mã OTP</label>
         </div>
         <a id="getOtp" href="#" onclick="unhide()">
