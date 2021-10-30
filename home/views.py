@@ -1,3 +1,4 @@
+import phone as phone
 from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -6,12 +7,12 @@ from .models import *
 
 # Create your views here.
 
-def index(request, *args):
+def index(request):
     try:
-        customer = list(args)[0]
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
     except:
         customer = None
-
     Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
@@ -22,12 +23,17 @@ def productDetail(request, id):
 
 
 def register(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
+
     if request.method == 'POST':
-        ls = request.POST.dict()
-        name = ls.get('name')
-        phone = ls.get('phone')
-        password = ls.get('password')
-        password2 = ls.get('password2')
+        name = request.POST['name']
+        phone = request.POST['phone']
+        password = request.POST['password']
+        password2 = request.POST['password2']
 
         if password != password2:
             return render(request, 'register.html',
@@ -44,12 +50,18 @@ def register(request):
 
 
 def login(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
     if request.method == 'POST':
         phone = request.POST['phone']
         password = request.POST['password']
         try:
             customer = Customer.objects.get(phone=phone, password=password)
-            return index(request, customer)
+            request.session['customer'] = customer.phone
+            return redirect('/')
         except Customer.DoesNotExist:
             return render(request, 'login.html', {'result': 'incorrect'})
 
@@ -57,6 +69,11 @@ def login(request):
 
 
 def forgot(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
     passwordDefault = "5ghfE$Dg"
 
     if request.method == 'POST':
@@ -88,3 +105,12 @@ def search(request):
             return render(request, 'search.html', {'result': None})
 
     return render(request, 'search.html', {'result': None})
+
+
+def account(request):
+    try:
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except:
+        return redirect('/login')
+    return render(request, 'account.html')

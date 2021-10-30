@@ -10,5 +10,6 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('product/<int:id>', views.productDetail),
     path('search/', views.search, name='search'),
+    path('account/', views.account, name='account'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
