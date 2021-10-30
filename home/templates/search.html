@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Home{% endblock title %}
+{% block content %}
+    {% if result %}
+        {% for product in result %}
+            {{ product.productName }}
+            <img src="/media/{{product.showcasedImg}}" alt="{{ product.productName }}">
+        {% endfor %}
+    {% endif %}
+{% endblock content %}

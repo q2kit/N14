@@ -1,4 +1,4 @@
-from django.http.response import HttpResponseRedirect
+from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import Customer, Product
@@ -61,3 +61,28 @@ def forgot(request):
             return render(request, 'forgot.html', {'result': 'notFound'})
 
     return render(request, 'forgot.html', {'result': 'getPhone'})
+
+def search(request):
+    if request.method == 'POST':
+        q = request.POST.dict().get('q').lower().split()
+        print(q)
+
+        # print(q)
+        # return HttpResponse("<h1>POST</h1>")
+        # return HttpResponse(q)
+        products = Product.objects.all()
+        result = []
+        for product in products:
+            ok = False
+            for text in q:
+                if text in product.productName.lower():
+                    ok = True
+                    break
+            if ok:
+                result.append(product)
+        # print(len(result))
+        print(result)
+        return render(request, 'search.html', {'result': result})
+        
+    
+    return HttpResponse("heloo", {'result': None})
