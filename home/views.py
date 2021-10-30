@@ -63,26 +63,21 @@ def forgot(request):
     return render(request, 'forgot.html', {'result': 'getPhone'})
 
 def search(request):
-    if request.method == 'POST':
-        q = request.POST.dict().get('q').lower().split()
-        print(q)
+    if request.method == 'GET':
+        try:
+            q = request.GET.dict().get('q').lower().split()
+            products = Product.objects.all()
+            result = []
+            for product in products:
+                ok = False
+                for text in q:
+                    if text in product.productName.lower():
+                        ok = True
+                        break
+                if ok:
+                    result.append(product)
+            return render(request, 'search.html', {'result': result})
+        except:
+            return render(request, 'search.html', {'result': None})
 
-        # print(q)
-        # return HttpResponse("<h1>POST</h1>")
-        # return HttpResponse(q)
-        products = Product.objects.all()
-        result = []
-        for product in products:
-            ok = False
-            for text in q:
-                if text in product.productName.lower():
-                    ok = True
-                    break
-            if ok:
-                result.append(product)
-        # print(len(result))
-        print(result)
-        return render(request, 'search.html', {'result': result})
-        
-    
-    return HttpResponse("heloo", {'result': None})
+    return render(request, 'search.html', {'result': None})

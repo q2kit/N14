@@ -4,8 +4,10 @@
 {% block content %}
     {% if result %}
         {% for product in result %}
-            {{ product.productName }}
-            <img src="/media/{{product.showcasedImg}}" alt="{{ product.productName }}">
+            <p class="name">{{ product.productName }}</p>
+            <img src="{{product.showcasedImg.url}}" alt="{{ product.productName }}">
         {% endfor %}
+    {% else %}
+    Can't find anything.
     {% endif %}
 {% endblock content %}
