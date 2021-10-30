@@ -132,7 +132,7 @@ input:focus {
   transform: translateX(-50%);
 }
 .category:hover,.product:hover{
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(133, 129, 129, 0.35) 0px 5px 15px;
 }
 
 /* session */
@@ -144,7 +144,7 @@ text-align: center;
 }
 .product{
   background-color: #2f3033;
-border-radius: 2rem;
+border-radius: 1.5rem;
 padding: 2rem 1rem;
 }
 .product .productName{
@@ -171,7 +171,9 @@ text-align: center;
   font-size: 0.7rem;
   color: #838891;
 }
-
+.footer img{
+  width: 30%;
+}
 /* product detail */
 .productDetail .productName{
   font-size: 2rem;
