@@ -24,7 +24,7 @@
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/queries.css' %}" />
-    <link rel="icon" href="{% static 'img/hi.jpg' %}" />
+    <link rel="icon" href="{% static 'logo.svg' %}" />
     {% block templates %}{% endblock %}
   </head>
 
@@ -34,11 +34,11 @@
         <div class="col-3 d-flex align-items-center">
           <div class="">
             <a href="{% url 'home' %}">
-              <img src="{% static 'img/logo.png' %}" alt="" />
+              <img style="height:60px;" src="{% static 'img/banner.png' %}" alt="" />
             </a>
           </div>
         </div>
-        <div class="col-6 padding-0">
+        <div class="col-6 padding-0" style="text-align:center;">
           <div class="searchForm">
             <form class="" action="/search/" method="get">
               <input

@@ -9,7 +9,7 @@
     {% load static %}
     <link href="{% static '/logo.svg' %}" rel="shortcut icon" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{% static '/login/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="./login.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./login.css"> -->
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <form id="form" action="/login/" method="post">
             {% csrf_token %}
             <div class="user-box">
-                <input type="text" autocomplete="off" name="phone" required>
+                <input type="number" autocomplete="off" name="phone" inputmode="numeric" required>
                 <label>Số điện thoại</label>
             </div>
             <div class="user-box">

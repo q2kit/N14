@@ -25,7 +25,8 @@ def register(request):
         password2 = ls.get('password2')
 
         if password != password2:
-            return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
+            return render(request, 'register.html',
+                          {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
         # if password != password2:
         #     return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
         try:
@@ -39,8 +40,8 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        phone = request.POST.dict().get('phone')
-        password = request.POST.dict().get('password')
+        phone = request.POST['phone']
+        password = request.POST['password']
         try:
             obj = Customer.objects.get(phone=phone, password=password)
         except Customer.DoesNotExist:
@@ -55,10 +56,10 @@ def login(request):
 
 
 def forgot(request):
-    passwordFefault = "5ghfE$Dg"
+    passwordDefault = "5ghfE$Dg"
 
     if request.method == 'POST':
-        phone = request.POST.dict().get('phone')
+        phone = request.POST['phone']
         try:
             obj = Customer.objects.get(phone=phone)
 
@@ -67,20 +68,20 @@ def forgot(request):
 
     return render(request, 'forgot.html', {'result': 'getPhone'})
 
+
 def search(request):
     if request.method == 'GET':
         try:
-            q = request.GET.dict().get('q').lower().split()
+            q = request.GET['q'].lower().split()
             products = Product.objects.all()
             result = []
             for product in products:
                 ok = False
                 for text in q:
                     if text in product.productName.lower():
-                        ok = True
+                        result.append(product)
                         break
-                if ok:
-                    result.append(product)
+
             return render(request, 'search.html', {'result': result})
         except:
             return render(request, 'search.html', {'result': None})
