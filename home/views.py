@@ -1,13 +1,18 @@
 from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Customer, Product
+from .models import *
 
 
 # Create your views here.
 
-def index(request):
-    Data = {'products': Product.objects.all()}
+def index(request, *args):
+    try:
+        customer = list(args)[0]
+    except:
+        customer = None
+
+    Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
 
@@ -43,13 +48,9 @@ def login(request):
         phone = request.POST['phone']
         password = request.POST['password']
         try:
-            obj = Customer.objects.get(phone=phone, password=password)
+            customer = Customer.objects.get(phone=phone, password=password)
+            return index(request, customer)
         except Customer.DoesNotExist:
-            obj = None
-
-        if obj:
-            return redirect('/')
-        else:
             return render(request, 'login.html', {'result': 'incorrect'})
 
     return render(request, 'login.html', {'result': None})
@@ -61,7 +62,7 @@ def forgot(request):
     if request.method == 'POST':
         phone = request.POST['phone']
         try:
-            obj = Customer.objects.get(phone=phone)
+            user = Customer.objects.get(phone=phone)
 
         except Customer.DoesNotExist:
             return render(request, 'forgot.html', {'result': 'notFound'})
