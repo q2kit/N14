@@ -40,7 +40,8 @@
         </div>
         <div class="col-6 padding-0">
           <div class="searchForm">
-            <form class="" action="/search">
+            <form class="" action="/search/" method="POST">
+              {% csrf_token %}
               <input
                 autocomplete="off"
                 name="q"

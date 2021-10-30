@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Home{% endblock title %}
+{% block content %}
+<div class="row pt-4 ">
+    <div class="col-sm-12">
+         <p>Kết quả tìm kiếm cho: <strong>{{request.POST.q}}</strong> </p>
+    </div>
+</div>
+    {% if result %}
+        <div class="row pt-5 pb-5">
+            {% for product in result %}
+               <div class="col-6 col-sm-3 mt-3 ">
+                    <div class="product">
+                        <a href="/product/{{product.id}}">
+                            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+                            <p class="productName">{{product.productName}}</p>
+                        </a>
+                            <p class="productPrice">{{product.unitPrice}} ₫</p>
+                    </div>
+             </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="row">
+        <div class="col-12">
+           <p class="notfound" > Không tìm thấy sản phẩm nào</p>
+        </div>
+        <div class="col-12 hint">
+           Để tìm được kết quả chính xác hơn, bạn vui lòng: <br>
+
+            Kiểm tra lỗi chính tả của từ khóa đã nhập <br>
+
+            Thử lại bằng từ khóa khác <br>
+
+            Thử lại bằng những từ khóa tổng quát hơn <br>
+
+            Thử lại bằng những từ khóa ngắn gọn hơn<br>
+        </div>
+        
+    </div>
+    {% endif %}
+{% endblock content %}

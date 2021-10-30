@@ -161,6 +161,7 @@ text-align: center;
 /* footer */
 .footer{
   background-color: black;
+
 }
 .footer ul{
   list-style-type: none;
@@ -223,4 +224,13 @@ border-radius: 1rem;
 .installment{
   background-color: #fff;
   color: #2f3033;
+}
+
+/* seacrh */
+.notfound{
+  font-size: 2rem;
+}
+.hint{
+  padding: 5rem 3rem;
+  text-align: center;
 }
