@@ -25,7 +25,8 @@ def register(request):
         password2 = ls.get('password2')
 
         if password != password2:
-            return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
+            return render(request, 'register.html',
+                          {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
         # if password != password2:
         #     return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
         try:
@@ -55,7 +56,7 @@ def login(request):
 
 
 def forgot(request):
-    passwordFefault = "5ghfE$Dg"
+    passwordDefault = "5ghfE$Dg"
 
     if request.method == 'POST':
         phone = request.POST['phone']
@@ -66,6 +67,7 @@ def forgot(request):
             return render(request, 'forgot.html', {'result': 'notFound'})
 
     return render(request, 'forgot.html', {'result': 'getPhone'})
+
 
 def search(request):
     if request.method == 'GET':
@@ -79,8 +81,6 @@ def search(request):
                     if text in product.productName.lower():
                         result.append(product)
                         break
-                
-            
 
             return render(request, 'search.html', {'result': result})
         except:

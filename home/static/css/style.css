@@ -23,7 +23,7 @@ ul {
   background-color: black;
   position: fixed ;
   z-index: 1;
-width: 100%;
+  width: 100%;
 }
 .myNavbar li,
 .myNavbar ul,
