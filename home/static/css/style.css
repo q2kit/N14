@@ -45,7 +45,7 @@ ul {
 }
 
 .myNavbar img {
-  width: 100%;
+  width: 70%;
 }
 .menu .bg {
   height: 2rem;
@@ -174,7 +174,7 @@ text-align: center;
   color: #838891;
 }
 .footer img{
-  width: 30%;
+  width: 20%;
 }
 /* product detail */
 .productDetail .productName{
