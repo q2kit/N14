@@ -42,40 +42,37 @@
             <div class="searchForm">
                 <form class="" action="/search/" method="get">
                     <input
+                            id="search"
                             autocomplete="off"
                             name="q"
                             class="searchInput"
                             type="search"
                             placeholder="Bạn tìm gì..."
                             aria-label="Search"
+                            onblur="document.getElementById('closeSearch').click();"
                     />
-                    {% comment %}
-              <button
-                class="btn pl-2 btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </button>
-              {% endcomment %}
                 </form>
-                <i class="fal fa-times"></i>
+                <i id="closeSearch" class="fal fa-times"></i>
             </div>
             <div class="main">
                 <ul class="d-flex">
                     <li class="d-flex align-items-center">
-                        <a href="">iPhone</a>
+                        <a href="/iphone/">iPhone</a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="">Mac</a>
+                        <a href="/mac/">Mac</a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="">iPad</a>
+                        <a href="/ipad/">iPad</a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="">Watch</a>
+                        <a href="/watch/">Watch</a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="">Blog</a>
+                        <a href="/phu-kien/">Phụ kiện</a>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <a href="/news/">Tin tức</a>
                     </li>
                 </ul>
             </div>
@@ -89,7 +86,7 @@
                         </div>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="">
+                        <a href="/cart/">
                             <div class="bg">
                                 <i class="far fa-shopping-bag"></i>
                             </div>

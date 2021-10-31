@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}iPhone{% endblock title %}
+{% block content %}
+
+    {% for product in products %}
+        <div class="product">
+            <img src="{{product.showcasedImg.url}}" alt="{{product.name}}">
+            <p>{{ product.price}}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

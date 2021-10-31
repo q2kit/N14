@@ -15,8 +15,9 @@ def index(request):
     Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
-
 def productDetail(request, id):
+    if id is None:
+        return redirect('/')
     Data = {'product': Product.objects.get(id=id)}
     return render(request, 'productDetail.html', Data)
 
@@ -52,7 +53,7 @@ def login(request):
     try:
         phone = request.session['customer']
         return redirect('/')
-    except:
+    except KeyError:
         pass
     if request.method == 'POST':
         phone = request.POST['phone']
@@ -71,7 +72,7 @@ def forgot(request):
     try:
         phone = request.session['customer']
         return redirect('/')
-    except:
+    except KeyError:
         pass
     passwordDefault = "5ghfE$Dg"
 
@@ -110,6 +111,40 @@ def account(request):
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
-    except:
+    except KeyError:
         return redirect('/login')
     return render(request, 'account.html')
+
+def logout(request):
+    try:
+        del request.session['customer']
+    except KeyError:
+        pass
+    return redirect('/')
+
+def iphone(request):
+    products = Product.objects.filter(type='iphone')
+    return render(request, 'iphone.html', {'products': products})
+    pass
+
+def ipad(request):
+    products = Product.objects.filter(type='ipad')
+    return render(request, 'ipad.html',{'products': products})
+    pass
+
+def mac(request):
+    products = Product.objects.filter(type='mac')
+    return render(request, 'mac.html', {'products': products})
+    pass
+
+def watch(request):
+    products = Product.objects.filter(type='watch')
+    return render(request, 'watch.html', {'products': products})
+    pass
+
+def page_not_found_view(request, exception):
+    return redirect('/')
+    
+def cart(request):
+    return HttpResponse('cart')
+    pass
