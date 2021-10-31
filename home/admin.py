@@ -7,6 +7,7 @@ from .models import *
 
 class CustomerController(admin.ModelAdmin):
     list_display = ['phone', 'name', 'password']
+    list_filter = ['phone', 'name', 'password']
 
 
 class ProductController(admin.ModelAdmin):
@@ -14,6 +15,11 @@ class ProductController(admin.ModelAdmin):
                     'showcasedImg', 'quantityInStock', 'type']
 
 
+class OrderController(admin.ModelAdmin):
+    list_display = ['product', 'customer', 'quantity']
+
+
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
 admin.site.register(Product_img)
+admin.site.register(Order, OrderController)

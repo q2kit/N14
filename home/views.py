@@ -1,4 +1,3 @@
-# import phone as phone
 from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -11,7 +10,7 @@ def index(request):
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
-    except:
+    except KeyError:
         customer = None
     Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
@@ -26,7 +25,7 @@ def register(request):
     try:
         phone = request.session['customer']
         return redirect('/')
-    except:
+    except KeyError:
         pass
 
     if request.method == 'POST':
@@ -96,7 +95,7 @@ def search(request):
             for product in products:
                 ok = False
                 for text in q:
-                    if text in product.productName.lower():
+                    if text in product.name.lower():
                         result.append(product)
                         break
 

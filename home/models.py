@@ -26,3 +26,12 @@ class Product(models.Model):
 class Product_img(models.Model):
     productID = models.IntegerField()
     image = models.ImageField(null=True)
+
+
+class Order(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.CharField(max_length=10)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.product.name
