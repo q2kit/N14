@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} {{type}} {% endblock title %} 
+{% block content %}
+<div class="row pt-5">
+        <div class="col-sm-12 sessionTitle">
+            <i class="fab fa-apple"></i> <span>{{type}}</span>
+        </div>
+    </div>
+<div class="row padding-lg  pb-5">
+        {% for product   in products %}
+    
+            {% if product.type == type %}
+                <div class="col-6  col-sm-4 mt-3">
+                    <div class="product">
+                        <a href="/product/{{ product.id }}">
+                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
+                            <p class="productName">{{ product.name }}</p>
+                        </a>
+                        <p class="productPrice">{{ product.price }} ₫</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

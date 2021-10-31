@@ -9,6 +9,7 @@ urlpatterns = [
     path('forgot/', views.forgot, name='forgot'),
     path('news/', include('news.urls')),
     path('product/<str:id>', views.productDetail),
+    path('<str:category>', views.category),
     path('search/', views.search, name='search'),
     path('account/', views.account, name='account'),
 ]

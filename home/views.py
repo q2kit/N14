@@ -21,6 +21,14 @@ def productDetail(request, id):
     return render(request, 'productDetail.html', Data)
 
 
+def category(request, category):
+    Data = {
+        'products': Product.objects.filter(type=category),
+        'type': category
+    }
+    return render(request, 'category.html', Data)
+
+
 def register(request):
     try:
         phone = request.session['customer']
