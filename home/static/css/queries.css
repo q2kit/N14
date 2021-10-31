@@ -5,6 +5,9 @@
 .space{
   padding-top: 3.5rem;
 }
+.addtocart,.installment{
+  display: block;
+}
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
   html {
@@ -12,6 +15,9 @@
   }
 .space{
   padding-top: 3.5rem;
+}
+.addtocart,.installment{
+  display: block;
 }
 }
 
@@ -22,6 +28,9 @@
   .space{
   padding-top: 1.5rem;
 }
+.addtocart,.installment{
+  display: block;
+}
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -30,6 +39,9 @@
   }
    .space{
   padding-top: 2rem;
+}
+.addtocart,.installment{
+ padding: 1rem 2rem;
 }
 }
 

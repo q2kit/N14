@@ -1,7 +1,7 @@
 $(".searchIcon").click(function () {
   $(".searchForm").css("display", "block");
   $(".searchInput").focus();
-  $(".searchForm").css("width", "90%");
+  $(".searchForm").css("width", "100%");
   $(".main").css("display", "none");
   $(".menu").css("display", "none");
 });

@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('news/', include('news.urls')),
     path('product/<str:id>', views.productDetail),
+    path('<str:category>', views.category),
     path('search/', views.search, name='search'),
     path('iphone/', views.iphone, name='iphone'),
     path('ipad/', views.ipad, name='ipad'),
