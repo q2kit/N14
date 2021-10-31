@@ -10,7 +10,7 @@ def index(request):
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
-    except:
+    except KeyError:
         customer = None
     Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
@@ -25,7 +25,7 @@ def register(request):
     try:
         phone = request.session['customer']
         return redirect('/')
-    except:
+    except KeyError:
         pass
 
     if request.method == 'POST':
