@@ -12,13 +12,9 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('news/', include('news.urls')),
     path('product/<str:id>', views.productDetail),
-    path('<str:category>', views.category),
     path('search/', views.search, name='search'),
-    path('iphone/', views.iphone, name='iphone'),
-    path('ipad/', views.ipad, name='ipad'),
-    path('mac/', views.mac, name='mac'),
-    path('watch/', views.watch, name='watch'),
     path('cart/', views.cart, name='cart'),
+    path('<str:category>/', views.category),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

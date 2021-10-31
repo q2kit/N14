@@ -23,6 +23,9 @@ def productDetail(request, id):
 
 
 def category(request, category):
+    types = ['iphone','ipad','mac','watch']
+    if category not in types:
+        return redirect('/')
     Data = {
         'products': Product.objects.filter(type=category),
         'type': category
@@ -129,26 +132,6 @@ def logout(request):
     except KeyError:
         pass
     return redirect('/')
-
-def iphone(request):
-    products = Product.objects.filter(type='iphone')
-    return render(request, 'iphone.html', {'products': products})
-    pass
-
-def ipad(request):
-    products = Product.objects.filter(type='ipad')
-    return render(request, 'ipad.html',{'products': products})
-    pass
-
-def mac(request):
-    products = Product.objects.filter(type='mac')
-    return render(request, 'mac.html', {'products': products})
-    pass
-
-def watch(request):
-    products = Product.objects.filter(type='watch')
-    return render(request, 'watch.html', {'products': products})
-    pass
 
 def page_not_found_view(request, exception):
     return redirect('/')
