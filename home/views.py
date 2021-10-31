@@ -1,4 +1,3 @@
-import phone as phone
 from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -96,7 +95,7 @@ def search(request):
             for product in products:
                 ok = False
                 for text in q:
-                    if text in product.productName.lower():
+                    if text in product.name.lower():
                         result.append(product)
                         break
 
