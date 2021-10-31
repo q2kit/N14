@@ -1,13 +1,19 @@
+# import phone as phone
 from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Customer, Product
+from .models import *
 
 
 # Create your views here.
 
 def index(request):
-    Data = {'products': Product.objects.all()}
+    try:
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except:
+        customer = None
+    Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
 
@@ -17,12 +23,17 @@ def productDetail(request, id):
 
 
 def register(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
+
     if request.method == 'POST':
-        ls = request.POST.dict()
-        name = ls.get('name')
-        phone = ls.get('phone')
-        password = ls.get('password')
-        password2 = ls.get('password2')
+        name = request.POST['name']
+        phone = request.POST['phone']
+        password = request.POST['password']
+        password2 = request.POST['password2']
 
         if password != password2:
             return render(request, 'register.html',
@@ -39,29 +50,36 @@ def register(request):
 
 
 def login(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
     if request.method == 'POST':
         phone = request.POST['phone']
         password = request.POST['password']
         try:
-            obj = Customer.objects.get(phone=phone, password=password)
-        except Customer.DoesNotExist:
-            obj = None
-
-        if obj:
+            customer = Customer.objects.get(phone=phone, password=password)
+            request.session['customer'] = customer.phone
             return redirect('/')
-        else:
+        except Customer.DoesNotExist:
             return render(request, 'login.html', {'result': 'incorrect'})
 
     return render(request, 'login.html', {'result': None})
 
 
 def forgot(request):
+    try:
+        phone = request.session['customer']
+        return redirect('/')
+    except:
+        pass
     passwordDefault = "5ghfE$Dg"
 
     if request.method == 'POST':
         phone = request.POST['phone']
         try:
-            obj = Customer.objects.get(phone=phone)
+            user = Customer.objects.get(phone=phone)
 
         except Customer.DoesNotExist:
             return render(request, 'forgot.html', {'result': 'notFound'})
@@ -87,3 +105,12 @@ def search(request):
             return render(request, 'search.html', {'result': None})
 
     return render(request, 'search.html', {'result': None})
+
+
+def account(request):
+    try:
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except:
+        return redirect('/login')
+    return render(request, 'account.html')
