@@ -144,7 +144,7 @@
     <div class="row padding-lg">
         {% for product   in products|slice:":8" %}
             {% if product.type == 'iphone' %}
-                <div class="col-6  col-sm-3 mt-3">
+                <div class="col-6  col-sm-3 mt-5">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
