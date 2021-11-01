@@ -15,6 +15,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('cart/', views.cart, name='cart'),
     path('<str:category>/', views.category),
+    path('review/', views.product_review, name='review'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

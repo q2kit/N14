@@ -2,11 +2,13 @@ from django.http.response import *
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import *
+import logging
 
 
 # Create your views here.
 
 def index(request):
+
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
@@ -14,6 +16,7 @@ def index(request):
         customer = None
     Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
+
 
 def productDetail(request, id):
     if id is None:
@@ -23,7 +26,7 @@ def productDetail(request, id):
 
 
 def category(request, category):
-    types = ['iphone','ipad','mac','watch']
+    types = ['iphone', 'ipad', 'mac', 'watch']
     if category not in types:
         return redirect('/')
     Data = {
@@ -72,6 +75,7 @@ def login(request):
         try:
             customer = Customer.objects.get(phone=phone, password=password)
             request.session['customer'] = customer.phone
+            request.session['name'] = customer.name
             return redirect('/')
         except Customer.DoesNotExist:
             return render(request, 'login.html', {'result': 'incorrect'})
@@ -126,6 +130,7 @@ def account(request):
         return redirect('/login')
     return render(request, 'account.html')
 
+
 def logout(request):
     try:
         del request.session['customer']
@@ -133,9 +138,32 @@ def logout(request):
         pass
     return redirect('/')
 
+
 def page_not_found_view(request, exception):
     return redirect('/')
-    
+
+
 def cart(request):
     return HttpResponse('cart')
     pass
+
+
+def product_review(request):
+    logger = logging.getLogger("mylogger")
+    logger.info("Whatever to log")
+    if request.method == 'POST':
+        phone = "test"
+        name = "terst"
+        content = "copmnte"
+        productId = "produvyt"
+
+        # phone = request.session['customer']
+        # name = request.session['name']
+        # content = request.POST['content']
+        # productId = request.POST['productId']
+        logger = logging.getLogger("mylogger")
+        logger.info("Whatever to log")
+        Product_review.objects.create(
+            name=name, phone=phone, content=content, productId=productId)
+        return render(request, 'login.html')
+    return render(request, 'forgot.html')

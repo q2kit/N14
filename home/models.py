@@ -35,3 +35,13 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class Product_review(models.Model):
+    productId = models.CharField(max_length=32)
+    name = models.CharField(max_length=40)
+    phone = models.CharField(max_length=10)
+    content = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.content

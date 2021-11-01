@@ -19,7 +19,12 @@ class OrderController(admin.ModelAdmin):
     list_display = ['product', 'customer', 'quantity']
 
 
+class ProductReviewController(admin.ModelAdmin):
+    list_display = ['name', 'productId', 'content']
+
+
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
 admin.site.register(Product_img)
 admin.site.register(Order, OrderController)
+admin.site.register(Product_review, ProductReviewController)
