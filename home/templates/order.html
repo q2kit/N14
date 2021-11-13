@@ -1,0 +1,115 @@
+<div class="cart col">
+    <h1>Giỏ hàng</h1>
+    {% for order in cart %}
+    <div>
+
+        <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
+            style="display: inline-block;height: 200px;">
+
+        <div class="idCart">
+            <span>Mã đơn hàng:</span>
+            <span>{{order.id}}</span>
+        </div>
+
+        <div class="productName">
+            <span>Tên sản phẩm:</span>
+            <span>{{order.product}}</span>
+        </div>
+
+        <div class="quantity">
+            <span>Số lượng:</span>
+            <span>{{order.quantity}}</span>
+        </div>
+
+        <div class="productPrice">
+            <span>Giá:</span>
+            <span>{{order.product.price}}</span>
+        </div>
+
+        <a href="/remove/{{order.id}}">Xóa</a>
+        <br>
+        <a href="/sub/{{order.id}}">Bớt</a>
+        <br>
+        <a href="/add/{{order.id}}">Thêm</a>
+    </div>
+    {% endfor %}
+
+    {% if cart %}
+
+    <div id="total">
+        <span>Tổng tiền:</span>
+        <span>{{totalcart}}</span>
+    </div>
+    <div class="pay"><a href="#">Thanh toán</a></div>
+    {% endif %}
+</div>
+
+<div class="processing col">
+    <h1>Đang xử lý</h1>
+    {% for order in processing %}
+    <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
+        style="display: inline-block;height: 200px;">
+
+    <div class="idCart">
+        <span>Mã đơn hàng:</span>
+        <span>{{order.id}}</span>
+    </div>
+
+    <div class="productName">
+        <span>Tên sản phẩm:</span>
+        <span>{{order.product}}</span>
+    </div>
+
+    <div class="quantity">
+        <span>Số lượng:</span>
+        <span>{{order.quantity}}</span>
+    </div>
+
+    <div class="productPrice">
+        <span>Giá:</span>
+        <span>{{order.product.price}}</span>
+    </div>
+
+    <a href="/cancel/{{order.id}}">Hủy</a>
+    {% endfor %}
+</div>
+
+<div class="done col">
+    <h1>Hoàn thành</h1>
+    {% for order in done %}
+        <div>
+            <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
+            style="display: inline-block;height: 200px;">
+            
+            <div class="idCart">
+                <span>Mã đơn hàng:</span>
+                <span>{{order.id}}</span>
+            </div>
+            
+            <div class="productName">
+                <span>Tên sản phẩm:</span>
+                <span>{{order.product}}</span>
+            </div>
+            
+            <div class="quantity">
+                <span>Số lượng:</span>
+                <span>{{order.quantity}}</span>
+            </div>
+            
+            <div class="productPrice">
+                <span>Giá:</span>
+                <span>{{order.product.price}}</span>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
+<style>
+    .col{
+        display: inline-block;
+        width: 30%;
+    }
+</style>

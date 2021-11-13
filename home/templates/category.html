@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
+{% block title %} {{type}} {% endblock title %}
 {% load static %} 
-{% block title %} {{type}} {% endblock title %} 
 {% block content %}
 <div class="row pt-5">
         <div class="col-sm-12 sessionTitle">
@@ -8,9 +8,8 @@
         </div>
     </div>
 <div class="row padding-lg  pb-5">
-        {% for product   in products %}
+        {% for product in products %}
     
-            {% if product.type == type %}
                 <div class="col-6  col-sm-4 mt-5">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
@@ -20,7 +19,6 @@
                         <p class="productPrice">{{ product.price }} ₫</p>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
 {% endblock content %}

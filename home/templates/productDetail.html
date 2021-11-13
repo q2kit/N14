@@ -1,7 +1,7 @@
 
 {% extends 'base.html' %}
  {% load static %} 
-{% block title %}{{product.productName}}{% endblock title %}
+{% block title %}{{product.name}}{% endblock title %}
 {% block content %}
 <div class="row productDetail pt-5 pb-5">
     
@@ -26,7 +26,7 @@
             <div class="color" style="background-color:  #262626;"></div>
             <div class="color" style="background-color:  #b7afe6;"></div>
         </div>
-        <a href="">
+        <a href="/addtocart/{{product.id}}">
             <div class="addtocart mr-lg-3">Mua ngay</div>
              
         </a>

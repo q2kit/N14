@@ -6,7 +6,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=40)
     phone = models.CharField(max_length=10, primary_key=True)
     password = models.CharField(max_length=100)
-
+    
     def __str__(self):
         return self.name
 
@@ -24,7 +24,8 @@ class Product(models.Model):
 
 
 class Product_img(models.Model):
-    productID = models.IntegerField()
+    id = models.AutoField(primary_key=True)
+    productID = models.ForeignKey(Product, on_delete=models.CASCADE, default=None)
     image = models.ImageField(null=True)
 
 
@@ -34,11 +35,11 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     stt = (
-        ('done', 'Đã hoàn thành'),
         ('incart','Trong giỏ hàng'),
-        ('xxx', 'xxx')
+        ('processing', 'Đang xử lý'),
+        ('done', 'Đã hoàn thành'),
     )
     status = models.CharField(max_length=20,choices=stt,default='inCart')
 
     def __str__(self):
-        return self.product.name
+        return str(self.id)

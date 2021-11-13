@@ -16,7 +16,7 @@ class ProductController(admin.ModelAdmin):
 
 
 class OrderController(admin.ModelAdmin):
-    list_display = ['id', 'product', 'customer', 'quantity']
+    list_display = ['id', 'product', 'customer', 'quantity', 'status']
 
 
 admin.site.register(Customer, CustomerController)

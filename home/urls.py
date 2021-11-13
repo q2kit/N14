@@ -12,9 +12,14 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('news/', include('news.urls')),
     path('product/<str:id>', views.productDetail),
+    path('addtocart/<str:id>', views.addToCart),
+    path('remove/<str:id>', views.removeFromCart),
+    path('add/<str:id>', views.add),
+    path('sub/<str:id>', views.sub),
     path('search/', views.search, name='search'),
-    path('cart/', views.cart, name='cart'),
+    path('order/', views.order, name='order'),
     path('<str:category>/', views.category),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
