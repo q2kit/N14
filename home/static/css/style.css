@@ -4,6 +4,10 @@ body {
   background-color: #3e3e3f;
   color: white;
 }
+.grid {
+  display: grid;
+  place-items: center;
+}
 a, a:hover{
   color: white;
 }
@@ -240,4 +244,7 @@ border-radius: 1rem;
 .hint{
   padding: 5rem 1rem;
   text-align: center;
+}
+.cart img{
+  width: 10rem;
 }
