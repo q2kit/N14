@@ -11,8 +11,8 @@ class CustomerController(admin.ModelAdmin):
 
 
 class ProductController(admin.ModelAdmin):
-    list_display = ['id', 'name', 'price',
-                    'showcasedImg', 'quantityInStock', 'type']
+    list_display = ['id', 'name', 'price', 'showcasedImg', 'quantityInStock', 'type']
+    list_filter = ['type']
 
 
 class OrderController(admin.ModelAdmin):

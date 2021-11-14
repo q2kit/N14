@@ -12,9 +12,9 @@ class Customer(models.Model):
 
 
 class Product(models.Model):
-    type = models.CharField(max_length=100)
+    type = models.CharField(max_length=100, choices=[('iphone', 'iphone'), ('ipad', 'ipad'), ('mac', 'mac'), ('watch', 'watch'),], default='iphone')
     name = models.CharField(max_length=100)
-    price = models.IntegerField()
+    price = models.IntegerField(max_length=32)
     quantityInStock = models.IntegerField()
     showcasedImg = models.ImageField(null=True)
     id = models.CharField(max_length=32, primary_key=True)
