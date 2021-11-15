@@ -230,7 +230,7 @@ text-align: center;
   margin-top: 1rem;
 font-size: 1.5rem;
 font-weight: 700;
-border-radius: 1rem;
+border-radius: 0.8rem;
 }
 .installment{
   background-color: #fff;
@@ -253,4 +253,7 @@ border-radius: 1rem;
 }
 #total span{
   font-size: 1.3rem;
+}
+.sl{
+  text-align: center!important;
 }
