@@ -78,7 +78,7 @@
             <th scope="col">Sản phẩm</th>
             <th class="sl" scope="col">Số lượng</th>
             <th scope="col">Giá</th>
-            <th scope="col">Hủy</th>
+           
             </tr>
         </thead>
         <tbody>
@@ -102,11 +102,7 @@
                          <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
                         </div>
                        </td>
-                    <td>   
-                          <div style="height: 10rem;"  class="d-flex align-items-center"> <a href="/cancel/{{order.id}}"><i class="fad fa-trash-alt"></i></a></div>
-                         
-                        
-                    </td>
+                  
                 </tr>
              {% endfor %}
             
