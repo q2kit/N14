@@ -154,14 +154,14 @@
                 </div>
         {% endfor %}
     </div>
-    <div class="row pt-3">
+    <div class="row pt-5 pb-5">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>Mac</span>
         </div>
     </div>
     <div class="row padding-lg">
         {% for product   in mac|slice:":8" %}
-                <div class="col-6 col-sm-3 mt-3 ">
+                <div class="col-6 col-sm-3 mt-3 pb-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
@@ -172,14 +172,14 @@
                 </div>
         {% endfor %}
     </div>
-    <div class="row p-3">
+    <div class="row pt-5 pb-5">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>iPad</span>
         </div>
     </div>
     <div class="row padding-lg">
         {% for product   in iPad|slice:":8" %}
-                <div class="col-6 col-sm-3 mt-3 ">
+                <div class="col-6 col-sm-3 mt-3 pb-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
@@ -190,14 +190,14 @@
                 </div>
         {% endfor %}
     </div>
-    <div class="row p-3">
+    <div class="row pt-5 pb-5">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>Watch</span>
         </div>
     </div>
     <div class="row pb-5 padding-lg">
         {% for product   in watch|slice:":8" %}
-                <div class="col-6 col-sm-3 mt-3 ">
+                <div class="col-6 col-sm-3 mt-3 pb-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
