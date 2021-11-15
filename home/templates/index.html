@@ -142,8 +142,7 @@
         </div>
     </div>
     <div class="row padding-lg">
-        {% for product   in products|slice:":8" %}
-            {% if product.type == 'iphone' %}
+        {% for product   in iPhone|slice:":8" %}
                 <div class="col-6  col-sm-3 mt-5">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
@@ -153,17 +152,15 @@
                         <p class="productPrice">{{ product.price }} ₫</p>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
-    <div class="row">
+    <div class="row pt-3">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>Mac</span>
         </div>
     </div>
     <div class="row padding-lg">
-        {% for product   in products|slice:":8" %}
-            {% if product.type == 'mac' %}
+        {% for product   in mac|slice:":8" %}
                 <div class="col-6 col-sm-3 mt-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
@@ -173,17 +170,15 @@
                         <p class="productPrice">{{ product.price }} ₫</p>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
-    <div class="row">
+    <div class="row p-3">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>iPad</span>
         </div>
     </div>
     <div class="row padding-lg">
-        {% for product   in products|slice:":8" %}
-            {% if product.type == 'ipad' %}
+        {% for product   in iPad|slice:":8" %}
                 <div class="col-6 col-sm-3 mt-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
@@ -193,17 +188,15 @@
                         <p class="productPrice">{{ product.price }} ₫</p>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
-    <div class="row">
+    <div class="row p-3">
         <div class="col-sm-12 sessionTitle">
             <i class="fab fa-apple"></i> <span>Watch</span>
         </div>
     </div>
-    <div class="row padding-lg">
-        {% for product   in products|slice:":8" %}
-            {% if product.type == 'watch' %}
+    <div class="row pb-5 padding-lg">
+        {% for product   in watch|slice:":8" %}
                 <div class="col-6 col-sm-3 mt-3 ">
                     <div class="product">
                         <a href="/product/{{ product.id }}">
@@ -213,7 +206,6 @@
                         <p class="productPrice">{{ product.price }} ₫</p>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </div>
 {% endblock content %}

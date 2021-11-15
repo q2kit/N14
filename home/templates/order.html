@@ -4,7 +4,9 @@
 
 <div class="cart col-12 pt-5 padding-0">
     <h1>Giỏ hàng</h1>
-    <table class="table table-striped table-dark w-100">
+
+    {% if cart|length != 0 %}
+        <table class="table table-striped table-dark w-100">
         <thead>
             <tr>
             <th scope="col">Mã đơn</th>
@@ -22,7 +24,7 @@
                        </th>
                     <td>   
                         <div class="d-sm-flex align-items-center">
-                            <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                            <img class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
                             <p>{{order.product}}</p>
                         </div>
                     </td>
@@ -53,53 +55,67 @@
             
         </tbody>
     </table>
-    {% for order in cart %}
-    <div>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
 
-        <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
-            style="display: inline-block;height: 200px;">
-
-        <div class="idCart">
-            <span>Mã đơn hàng:</span>
-            <span>{{order.id}}</span>
-        </div>
-
-        <div class="productName">
-            <span>Tên sản phẩm:</span>
-            <span>{{order.product}}</span>
-        </div>
-
-        <div class="quantity">
-            <span>Số lượng:</span>
-            <span>{{order.quantity}}</span>
-        </div>
-
-        <div class="productPrice">
-            <span>Giá:</span>
-            <span>{{order.product.price}}</span>
-        </div>
-
-        <a href="/remove/{{order.id}}">Xóa</a>
-        <br>
-        <a href="/sub/{{order.id}}">Bớt</a>
-        <br>
-        <a href="/add/{{order.id}}">Thêm</a>
-    </div>
-    {% endfor %}
-
-    {% if cart %}
-
+    {% if cart|length != 0 %}
     <div id="total">
-        <span>Tổng tiền:</span>
+        <span><strong>Tổng tiền:</strong></span>
         <span>{{totalcart}}</span>
     </div>
     <div class="pay"><a href="#">Thanh toán</a></div>
     {% endif %}
 </div>
 
-<div class="processing col-12 pt-5">
+<div class="processing col-12 p-0 pt-5">
     <h1>Đang xử lý</h1>
-    {% for order in processing %}
+     {% if processing|length != 0 %}
+        <table class="table table-striped table-dark w-100">
+        <thead>
+            <tr>
+            <th scope="col">Mã đơn</th>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Hủy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in processing %}
+                <tr>
+                    <th scope="row " >
+                              <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
+                       </th>
+                    <td>   
+                        <div class="d-sm-flex align-items-center">
+                            <img  class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                            <p>{{order.product}}</p>
+                        </div>
+                    </td>
+                    <td class="p-0">
+                        <div style="height: 10rem;"  class="d-flex align-items-center">
+                            <p>{{order.quantity}}</p>
+                         </div>
+                    </td>
+                    <td>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
+                        </div>
+                       </td>
+                    <td>   
+                          <div style="height: 10rem;"  class="d-flex align-items-center"> <a href="/cancel/{{order.id}}"><i class="fad fa-trash-alt"></i></a></div>
+                         
+                        
+                    </td>
+                </tr>
+             {% endfor %}
+            
+        </tbody>
+    </table>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
+    <!-- {% for order in processing %}
     <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
         style="display: inline-block;height: 200px;">
 
@@ -124,12 +140,53 @@
     </div>
 
     <a href="/cancel/{{order.id}}">Hủy</a>
-    {% endfor %}
+    {% endfor %} -->
 </div>
 
-<div class="done col-12 pt-5">
+<div class="done col-12 p-0 pt-5">
     <h1>Hoàn thành</h1>
-    {% for order in done %}
+     {% if done|length != 0 %}
+        <table class="table table-striped table-dark w-100">
+        <thead>
+            <tr>
+            <th scope="col">Mã đơn</th>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Giá</th>
+          
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in done %}
+                <tr>
+                    <th scope="row " >
+                              <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
+                       </th>
+                    <td>   
+                        <div class="d-sm-flex align-items-center">
+                            <img  class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                            <p>{{order.product}}</p>
+                        </div>
+                    </td>
+                    <td class="p-0">
+                        <div style="height: 10rem;"  class="d-flex align-items-center">
+                            <p>{{order.quantity}}</p>
+                         </div>
+                    </td>
+                    <td>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
+                        </div>
+                       </td>
+                  
+                </tr>
+             {% endfor %}
+            
+        </tbody>
+    </table>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
+    <!-- {% for order in done %}
         <div>
             <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
             style="display: inline-block;height: 200px;">
@@ -154,7 +211,7 @@
                 <span>{{order.product.price}}</span>
             </div>
         </div>
-    {% endfor %}
+    {% endfor %} -->
 
 </div>
 

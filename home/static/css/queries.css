@@ -8,8 +8,11 @@
 .addtocart,.installment{
   display: block;
 }
-.cart img{
+.orderImg{
   width: 5rem;
+}
+.navLogo{
+  padding: 0;
 }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
@@ -22,7 +25,7 @@
 .addtocart,.installment{
   display: block;
 }
-.cart img{
+.orderImg{
   width: 10rem;
 }
 }

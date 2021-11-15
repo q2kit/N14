@@ -245,6 +245,12 @@ border-radius: 1rem;
   padding: 5rem 1rem;
   text-align: center;
 }
-.cart img{
+
+
+/* order */
+.orderImg{
   width: 10rem;
+}
+#total span{
+  font-size: 1.3rem;
 }

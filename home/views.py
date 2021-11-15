@@ -13,7 +13,18 @@ def index(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         customer = None
-    Data = {'products': Product.objects.all(), 'customer': customer}
+    iPhone = Product.objects.filter(type='iphone')
+    mac = Product.objects.filter(type='mac')
+    watch = Product.objects.filter(type='watch')
+    iPad = Product.objects.filter(type='ipad')
+    Data = {
+        'iPhone': iPhone,
+        'mac': mac,
+        'watch': watch,
+        'iPad': iPad,
+        'customer': customer
+    }
+    # Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
 
@@ -21,19 +32,21 @@ def addToCart(request, id):
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
-    except KeyError: # not login
+    except KeyError:  # not login
         return redirect('/login')
     try:
         product = Product.objects.get(id=id)
-    except: # error id
+    except:  # error id
         return HttpResponseBadRequest("<h1>Sản phẩm không tồn tại</h1>")
 
     try:
-        order = Order.objects.get(customer=customer, product_id=id, status='incart')
+        order = Order.objects.get(
+            customer=customer, product_id=id, status='incart')
         order.quantity += 1
         order.save()
-    except: # order not found
-        Order.objects.create(customer=customer, product_id=id, quantity=1, status='incart')
+    except:  # order not found
+        Order.objects.create(customer=customer, product_id=id,
+                             quantity=1, status='incart')
 
     return redirect('/product/'+id)
 
@@ -42,14 +55,15 @@ def removeFromCart(request, id):
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
-    except KeyError: # not login
+    except KeyError:  # not login
         return redirect('/login')
     try:
         order = Order.objects.get(id=int(id))
         order.delete()
         return redirect('/order')
-    except: # order not found
+    except:  # order not found
         return redirect('/')
+
 
 def add(request, id):
     print(id)
@@ -74,6 +88,7 @@ def sub(request, id):
         return redirect('/order')
     except:
         return redirect('/')
+
 
 def productDetail(request, id):
     if id is None:
@@ -163,7 +178,8 @@ def forgot(request):
         otp = request.POST['otp']
         try:
             user = Customer.objects.get(phone=phone)
-            user.password = hashlib.sha256(passwordDefault.encode()).hexdigest()
+            user.password = hashlib.sha256(
+                passwordDefault.encode()).hexdigest()
             user.save()
         except Customer.DoesNotExist:
             return render(request, 'forgot.html', {'result': 'notFound'})
@@ -226,11 +242,11 @@ def order(request):
 
     orders = Order.objects.filter(customer=customer)
     data = {
-        'cart': filter(lambda x: x.status == 'incart', orders),
+        'cart': list(filter(lambda x: x.status == 'incart', orders)),
         'totalcart': sum([x.product.price*x.quantity for x in orders if x.status == 'incart']),
-        'done': filter(lambda x: x.status == 'done', orders),
+        'done': list(filter(lambda x: x.status == 'done', orders)),
         'totaldone': sum([x.product.price*x.quantity for x in orders if x.status == 'done']),
-        'processing': filter(lambda x: x.status == 'processing', orders),
+        'processing': list(filter(lambda x: x.status == 'processing', orders)),
         'totalprocessing': sum([x.product.price*x.quantity for x in orders if x.status == 'processing'])
     }
 
