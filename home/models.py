@@ -6,15 +6,6 @@ class Customer(models.Model):
     name = models.CharField(max_length=40)
     phone = models.CharField(max_length=10, primary_key=True)
     password = models.CharField(max_length=100)
-    
-    def __str__(self):
-        return self.name
-
-
-class Customer(models.Model):
-    name = models.CharField(max_length=40)
-    phone = models.CharField(max_length=10, primary_key=True)
-    password = models.CharField(max_length=100)
     address = models.CharField(max_length=400, default="")
     
     def numCart(self):
@@ -23,6 +14,18 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
+
+
+class Product(models.Model):
+    type = models.CharField(max_length=100, choices=[('iphone', 'iphone'), ('ipad', 'ipad'), ('mac', 'mac'), ('watch', 'watch'),], default='iphone')
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    quantityInStock = models.IntegerField()
+    showcasedImg = models.ImageField(null=True)
+    id = models.CharField(max_length=32, primary_key=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Product_img(models.Model):
