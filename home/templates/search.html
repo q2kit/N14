@@ -2,13 +2,13 @@
 {% load static %} 
 {% block title %}Home{% endblock title %}
 {% block content %}
-<div class="row pt-4 ">
-    <div class="col-sm-12">
-         <p>Kết quả tìm kiếm cho: <strong>{{request.GET.q}}</strong> </p>
+<div class="row pt-5 ">
+    <div class="col-sm-12 d-flex justify-content-center ">
+         <p style="font-size: 1.5rem;">Kết quả tìm kiếm cho: <strong>{{request.GET.q}}</strong> </p>
     </div>
 </div>
     {% if result %}
-        <div class="row pt-5 pb-5">
+        <div class="row pt-2 pb-5">
             {% for product in result %}
                <div class="col-6 col-sm-3 mt-5 ">
                     <div class="product">

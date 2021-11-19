@@ -2,93 +2,113 @@
   html {
     font-size: 12px;
   }
-.space{
-  padding-top: 3.5rem;
-}
-.addtocart,.installment{
-  display: block;
-}
-.orderImg{
-  width: 5rem;
-}
-.navLogo{
-  padding: 0;
-}
+  .space {
+    padding-top: 5rem;
+  }
+  .addtocart,
+  .installment {
+    display: block;
+  }
+  .orderImg {
+    width: 5rem;
+  }
+  .navLogo {
+    padding: 0;
+  }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
   html {
     font-size: 13px;
   }
-.space{
-  padding-top: 3.5rem;
-}
-.addtocart,.installment{
-  display: block;
-}
-.orderImg{
-  width: 10rem;
-}
+  .space {
+    padding-top: 3.5rem;
+  }
+  .addtocart,
+  .installment {
+    display: block;
+  }
+  .orderImg {
+    width: 10rem;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
   html {
     font-size: 14px;
   }
-  .space{
-  padding-top: 1.5rem;
-}
-.addtocart,.installment{
-  display: block;
-}
+  .space {
+    padding-top: 1.5rem;
+  }
+  .addtocart,
+  .installment {
+    display: block;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
   html {
     font-size: 15px;
   }
-   .space{
-  padding-top: 2rem;
-}
-.addtocart,.installment{
- padding: 1rem 2rem;
-}
+  .space {
+    padding-top: 2rem;
+  }
+  .addtocart,
+  .installment {
+    padding: 1rem 2rem;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1340.98px) {
   html {
     font-size: 16px;
   }
- .main a{
+  .main a {
     padding: 1rem 1.5rem;
-}
-
- .space{
-  padding-top: 3.5rem;
-}
-.padding-lg {
-  padding-right: 3rem;
-  padding-left: 3rem;
-}
-.addtocart,.installment{
- padding: 1rem 2rem;
-}
-}
-
-@media (min-width: 1341px) {
-  html {
-    font-size: 18px;
   }
- 
-.main a{
+
+  .space {
+    padding-top: 3.5rem;
+  }
+  .padding-lg {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+  .addtocart,
+  .installment {
+    padding: 1rem 2rem;
+  }
+}
+@media (min-width: 1341px) and (max-width: 2505px) {
+  html {
+    font-size: 20px;
+  }
+
+  .main a {
     padding: 1rem 1.5rem;
-}
- .space{
-  padding-top: 3.5rem;
-}
+  }
+  .space {
+    padding-top: 4.5rem;
+  }
 
-.padding-lg {
-  padding-right: 4rem;
-  padding-left: 4rem;
+  .padding-lg {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
 }
+@media (min-width: 2506px) {
+  html {
+    font-size: 22px;
+  }
 
+  .main a {
+    padding: 1rem 1.5rem;
+  }
+  .space {
+    padding-top: 5rem;
+  }
+
+  .padding-lg {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
 }
