@@ -7,16 +7,17 @@ from .models import *
 
 class CustomerController(admin.ModelAdmin):
     list_display = ['phone', 'name', 'password']
-    list_filter = ['phone', 'name', 'password']
 
 
 class ProductController(admin.ModelAdmin):
-    list_display = ['id', 'name', 'price', 'showcasedImg', 'quantityInStock', 'type']
+    list_display = ['id', 'name', 'price',
+                    'showcasedImg', 'quantityInStock', 'type']
     list_filter = ['type']
 
 
 class OrderController(admin.ModelAdmin):
     list_display = ['id', 'product', 'customer', 'quantity', 'status']
+    list_filter = ['status', 'customer', 'product', ]
 
 
 admin.site.register(Customer, CustomerController)
