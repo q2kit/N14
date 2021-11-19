@@ -1,5 +1,5 @@
 $(".searchIcon").click(function () {
-  $(".searchForm").css("display", "block");
+  $(".searchForm").css("display", "flex");
   $(".searchInput").focus();
   $(".searchForm").css("width", "100%");
   $(".main").css("display", "none");
@@ -7,6 +7,6 @@ $(".searchIcon").click(function () {
 });
 $(".myNavbar .fa-times").click(function () {
   $(".searchForm").css("display", "none");
-  $(".main").css("display", "block");
+  $(".main").css("display", "flex");
   $(".menu").css("display", "block");
 });

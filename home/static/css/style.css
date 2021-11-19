@@ -8,7 +8,8 @@ body {
   display: grid;
   place-items: center;
 }
-a, a:hover{
+a,
+a:hover {
   color: white;
 }
 .padding-0 {
@@ -26,10 +27,13 @@ ul {
 }
 .myNavbar {
   background-color: black;
-  position: fixed ;
+  position: fixed;
   z-index: 1;
   width: 100%;
   /* width: 80%; */
+}
+.myNavbar .main {
+  display: flex;
 }
 .myNavbar li,
 .myNavbar ul,
@@ -42,7 +46,7 @@ ul {
   font-size: 1rem;
   padding: 0.25rem 0.5rem;
 }
- a:hover {
+a:hover {
   text-decoration: none;
 }
 .main li:hover {
@@ -89,6 +93,7 @@ input:focus {
   transition: all 1s;
   width: 100%;
   position: relative;
+  height: 100%;
 }
 .myNavbar .fa-times {
   position: absolute;
@@ -102,100 +107,104 @@ input:focus {
 }
 
 /* policies */
-.policies{
+.policies {
   background-color: #2f3033;
 }
-.policy{
+.policy {
   width: 100%;
   text-align: center;
-   height: 9rem;
+  height: 9rem;
   background-color: #2f3033;
 }
-.policy i{
+.policy i {
   font-size: 3rem;
   font-weight: 300;
 }
 
-
 /* categories */
-.category{
+.category {
   width: 100%;
   background-color: #2f3033;
   height: 15rem;
   border-radius: 1rem;
-box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(139, 139, 139, 0.08) 0px 1px 0px inset;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(139, 139, 139, 0.08) 0px 1px 0px inset;
 }
-.category img{
+.category img {
   width: 50%;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.category p{
+.category p {
   position: absolute;
   bottom: -0.5rem;
   left: 50%;
   transform: translateX(-50%);
 }
-.category:hover,.product:hover{
+.category:hover,
+.product:hover {
   box-shadow: rgba(133, 129, 129, 0.35) 0px 5px 15px;
 }
 
 /* session */
-.sessionTitle i,.sessionTitle span{
+.sessionTitle i,
+.sessionTitle span {
   font-size: 2.5rem;
 }
-.sessionTitle{
-text-align: center;
+.sessionTitle {
+  text-align: center;
 }
-.product{
+.product {
   background-color: #2f3033;
-border-radius: 1rem;
-padding: 1.5rem 1rem;
-box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(116, 116, 116, 0.08) 0px 1px 0px inset;
+  border-radius: 1rem;
+  padding: 1.5rem 1rem;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(116, 116, 116, 0.08) 0px 1px 0px inset;
 }
-.product .productName{
+.product .productName {
   margin-top: 0.5rem;
   text-align: center;
   font-weight: 400;
   margin-bottom: 0.5rem;
 }
-.product .productPrice{
-text-align: center;
+.product .productPrice {
+  text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
   margin: 0;
 }
 
 /* footer */
-.footer{
+.footer {
   background-color: black;
-
 }
-.footer ul{
+.footer ul {
   list-style-type: none;
   color: #e5e5e5;
 }
 
-.footer .address{
+.footer .address {
   font-size: 0.7rem;
   color: #838891;
 }
-.footer img{
+.footer img {
   width: 20%;
 }
 /* product detail */
-.productDetail .productName{
+.productDetail .productName {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 2px;
 }
-.productDetail .productPrice{
+.productDetail .productPrice {
   font-size: 1.6rem;
   font-weight: 600;
 }
-.productDetail .capacity{
+.productDetail .capacity {
   background-color: #4f5155;
   /* width: 3rem; */
   text-align: center;
@@ -205,11 +214,10 @@ text-align: center;
   margin-right: 1rem;
   cursor: pointer;
 }
-.productDetail .capacity--active{
+.productDetail .capacity--active {
   background-color: rgb(26, 26, 26);
-
 }
-.productDetail .color{
+.productDetail .color {
   height: 2.5rem;
   width: 2.5rem;
   border-radius: 50%;
@@ -217,43 +225,43 @@ text-align: center;
   margin-right: 1rem;
   cursor: pointer;
 }
-.productDetail .color--active{
-   border: 3px solid  #e5e5e5;
-   box-shadow: #0071e3 0px 2px 4px 0px, #0071e3 0px 0px 0px 2px;
+.productDetail .color--active {
+  border: 3px solid #e5e5e5;
+  box-shadow: #0071e3 0px 2px 4px 0px, #0071e3 0px 0px 0px 2px;
 }
-.addtocart,.installment{
+.addtocart,
+.installment {
   background-color: #0071e3;
   text-align: center;
 
   display: inline;
   padding: 1.2rem 4rem;
   margin-top: 1rem;
-font-size: 1.5rem;
-font-weight: 700;
-border-radius: 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 0.8rem;
 }
-.installment{
+.installment {
   background-color: #fff;
   color: #2f3033;
 }
 
 /* seacrh */
-.notfound{
+.notfound {
   font-size: 2rem;
 }
-.hint{
+.hint {
   padding: 5rem 1rem;
   text-align: center;
 }
 
-
 /* order */
-.orderImg{
+.orderImg {
   width: 10rem;
 }
-#total span{
+#total span {
   font-size: 1.3rem;
 }
-.sl{
-  text-align: center!important;
+.sl {
+  text-align: center !important;
 }
