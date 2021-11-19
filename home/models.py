@@ -11,16 +11,18 @@ class Customer(models.Model):
         return self.name
 
 
-class Product(models.Model):
-    type = models.CharField(max_length=100, choices=[('iphone', 'iphone'), ('ipad', 'ipad'), ('mac', 'mac'), ('watch', 'watch'),], default='iphone')
-    name = models.CharField(max_length=100)
-    price = models.IntegerField(max_length=32)
-    quantityInStock = models.IntegerField()
-    showcasedImg = models.ImageField(null=True)
-    id = models.CharField(max_length=32, primary_key=True)
+class Customer(models.Model):
+    name = models.CharField(max_length=40)
+    phone = models.CharField(max_length=10, primary_key=True)
+    password = models.CharField(max_length=100)
+    address = models.CharField(max_length=400, default="")
+    
+    def numCart(self):
+        return len(Order.objects.filter(customer=self, status="incart"))
 
     def __str__(self):
         return self.name
+
 
 
 class Product_img(models.Model):
