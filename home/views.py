@@ -221,6 +221,34 @@ def account(request):
     return render(request, 'account.html')
 
 
+def edit(request):
+    try:
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except KeyError:
+        return redirect('/')
+    if request.method == 'POST':
+        phone = request.POST['phone']
+        name = request.POST['name']
+        password1 = request.POST['password']
+        password2 = request.POST['password2']
+        
+        if password != password2:
+            return render(request, 'edit.html', {'result': 'notMatch'})
+
+        return render(request, 'edit.html', {'result': 'done'})
+
+
+    data={
+        'list_tinh' :Tinh.objects.all(),
+        'list_huyen' :Huyen.objects.all(),
+        'list_xa' :Xa.objects.all(),
+        'customer': customer,
+        'result': None
+    }
+
+    return render(request, 'edit.html', data)
+
 def logout(request):
     try:
         del request.session['customer']

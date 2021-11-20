@@ -20,7 +20,21 @@ class OrderController(admin.ModelAdmin):
     list_filter = ['status', 'customer', 'product', ]
 
 
+class TinhController(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+class HuyenController(admin.ModelAdmin):
+    list_display = ['id', 'name', 'tinh']
+    list_filter = ['tinh']
+
+class XaController(admin.ModelAdmin):
+    list_display = ['id', 'name', 'huyen']
+    list_filter = ['huyen']
+
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
 admin.site.register(Product_img)
 admin.site.register(Order, OrderController)
+admin.site.register(Tinh, TinhController)
+admin.site.register(Huyen, HuyenController)
+admin.site.register(Xa, XaController)

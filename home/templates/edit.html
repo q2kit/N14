@@ -1,0 +1,41 @@
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/edit/style.css' %}">
+<script src="{% static '/edit/script.js' %}"></script>
+
+
+<form action="/edit" method="post">
+
+    <label for="">Số điện thoại:</label>
+    <input type="number" name="phone">
+    <label for="">Họ tên:</label>
+    <input type="text" name="name">
+    <label for="">Mật khẩu:</label>
+    <input type="password" name="password">
+    <label for="">Nhập lại mật khẩu:</label>
+    <input type="password" name="password2">
+    <label for="">Tỉnh/Tp</label>
+    <select name="tinh" id="tinh" onchange="showHuyen()">
+        <option value="none">--Chọn Tỉnh--</option>
+        {% for tinh in list_tinh %}
+        <option value="{{tinh.id}}">{{tinh.name}}</option>
+        {% endfor %}
+    </select>
+    <label for="">Quận/Huyện/Tp:</label>
+    <select name="huyen" id="huyen" onchange="showXa()">
+        <option value="none">--Chọn Huyện--</option>
+        {% for huyen in list_huyen %}
+        <option value="{{huyen.id}}" class="{{huyen.tinh.id}} huyen">{{huyen.name}}</option>
+        {% endfor %}
+    </select>
+    <label for="">Phường/Xã/Thị trấn:</label>
+    <select name="xa" id="xa">
+        <option value="none">--Chọn Xã--</option>
+        {% for xa in list_xa %}
+        <option value="{{xa.id}}" class="{{xa.huyen.id}} xa">{{xa.name}}</option>
+        {% endfor %}
+    </select>
+    <label for="">Số nhà, thôn/xóm...</label>
+    <input type="text" name='detail' id="detail">
+
+</form>
