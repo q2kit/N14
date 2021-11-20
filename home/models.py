@@ -33,7 +33,7 @@ class Customer(models.Model):
     tinh = models.ForeignKey(Tinh, on_delete=models.SET_NULL, null=True)
     huyen = models.ForeignKey(Huyen, on_delete=models.SET_NULL, null=True)
     xa = models.ForeignKey(Xa, on_delete=models.SET_NULL, null=True)
-
+    xom = models.CharField(max_length=100, null=True)
     def add(self):
         return self.xa.name + ' ' + self.huyen.name + ' ' + self.tinh.name
     

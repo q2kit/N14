@@ -232,10 +232,22 @@ def edit(request):
         name = request.POST['name']
         password1 = request.POST['password']
         password2 = request.POST['password2']
+        tinh = request.POST['tinh']
+        huyen = request.POST['huyen']
+        xa = request.POST['xa']
+        xom = request.POST['detail']
         
-        if password != password2:
+        if password1 != password2:
             return render(request, 'edit.html', {'result': 'notMatch'})
-
+        
+        customer.phone = phone
+        customer.name = name
+        customer.password = hashlib.sha256(password1.encode()).hexdigest()
+        customer.tinh = Tinh.objects.get(id=tinh)
+        customer.huyen = Huyen.objects.get(id=huyen)
+        customer.xa = Xa.objects.get(id=xa)
+        customer.xom = xom
+        customer.save()
         return render(request, 'edit.html', {'result': 'done'})
 
 
