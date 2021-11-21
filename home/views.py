@@ -7,6 +7,34 @@ import hashlib
 
 # Create your views here.
 
+# def index(request):
+#     f = open('D:/Desktop/f.txt','r',encoding='utf-8')
+#     for line in f.readlines():
+#         xa,huyen,tinh=line.split('/')
+#         xaid,xa=xa.split(',')
+#         huyenid,huyen=huyen.split(',')
+#         tinhid,tinh=tinh.split(',')
+#         xaid=xaid.strip()
+#         huyenid=huyenid.strip()
+#         tinhid=tinhid.strip()
+#         xa=xa.strip()
+#         huyen=huyen.strip()
+#         tinh=tinh.strip()
+#         try:
+#             City.objects.get(id=tinhid)
+#         except:
+#             City.objects.create(id=tinhid,name=tinh)
+#         try:
+#             District.objects.get(id=huyenid)
+#         except:
+#             District.objects.create(id=huyenid,name=huyen,city_id=tinhid)
+#         try:
+#             Ward.objects.get(id=xaid)
+#         except:
+#             Ward.objects.create(id=xaid,name=xa,district_id=huyenid)
+#     f.close()
+#     return HttpResponse("<h1>Done</h1>")
+
 def index(request):
     try:
         phone = request.session['customer']
@@ -232,10 +260,10 @@ def edit(request):
         name = request.POST['name']
         password1 = request.POST['password']
         password2 = request.POST['password2']
-        tinh = request.POST['tinh']
-        huyen = request.POST['huyen']
-        xa = request.POST['xa']
-        xom = request.POST['detail']
+        city = request.POST['city']
+        district = request.POST['district']
+        ward = request.POST['ward']
+        street = request.POST['street']
         
         if password1 != password2:
             return render(request, 'edit.html', {'result': 'notMatch'})
@@ -243,18 +271,18 @@ def edit(request):
         customer.phone = phone
         customer.name = name
         customer.password = hashlib.sha256(password1.encode()).hexdigest()
-        customer.tinh = Tinh.objects.get(id=tinh)
-        customer.huyen = Huyen.objects.get(id=huyen)
-        customer.xa = Xa.objects.get(id=xa)
-        customer.xom = xom
+        customer.city = City.objects.get(id=city)
+        customer.district = District.objects.get(id=district)
+        customer.ward = Ward.objects.get(id=ward)
+        customer.street = street
         customer.save()
         return render(request, 'edit.html', {'result': 'done'})
 
 
     data={
-        'list_tinh' :Tinh.objects.all(),
-        'list_huyen' :Huyen.objects.all(),
-        'list_xa' :Xa.objects.all(),
+        'list_city' :City.objects.all(),
+        'list_district' :District.objects.all(),
+        'list_ward' :Ward.objects.all(),
         'customer': customer,
         'result': None
     }
@@ -292,3 +320,4 @@ def order(request):
 
     return render(request, 'order.html', data)
     pass
+

@@ -25,17 +25,41 @@ class Xa(models.Model):
     def __str__(self):
         return self.name
 
+class City(models.Model):
+    name = models.CharField(max_length=100)
+    id = models.CharField(max_length=100, primary_key=True)
+
+    def __str__(self):
+        return self.name
+
+class District(models.Model):
+    name = models.CharField(max_length=100)
+    id = models.CharField(max_length=100, primary_key=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Ward(models.Model):
+    name = models.CharField(max_length=100)
+    id = models.CharField(max_length=100, primary_key=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Customer(models.Model):
     name = models.CharField(max_length=40)
     phone = models.CharField(max_length=10, primary_key=True)
     password = models.CharField(max_length=100)
-    tinh = models.ForeignKey(Tinh, on_delete=models.SET_NULL, null=True)
-    huyen = models.ForeignKey(Huyen, on_delete=models.SET_NULL, null=True)
-    xa = models.ForeignKey(Xa, on_delete=models.SET_NULL, null=True)
-    xom = models.CharField(max_length=100, null=True)
-    def add(self):
-        return self.xa.name + ' ' + self.huyen.name + ' ' + self.tinh.name
+
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True)
+    ward = models.ForeignKey(Ward, on_delete=models.SET_NULL, null=True)
+    street = models.CharField(max_length=400, null=True)
+
+    def getAddress(self):
+        return self.street + ', ' + self.ward.name + ', ' + self.district.name + ', ' + self.city.name
     
     def numCart(self):
         return len(Order.objects.filter(customer=self, status="incart"))

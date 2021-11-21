@@ -20,21 +20,22 @@ class OrderController(admin.ModelAdmin):
     list_filter = ['status', 'customer', 'product', ]
 
 
-class TinhController(admin.ModelAdmin):
+class CityController(admin.ModelAdmin):
     list_display = ['id', 'name']
 
-class HuyenController(admin.ModelAdmin):
-    list_display = ['id', 'name', 'tinh']
-    list_filter = ['tinh']
+class DistrictController(admin.ModelAdmin):
+    list_display = ['id', 'name', 'city']
+    list_filter = ['city']
 
-class XaController(admin.ModelAdmin):
-    list_display = ['id', 'name', 'huyen']
-    list_filter = ['huyen']
+class WardController(admin.ModelAdmin):
+    list_display = ['id', 'name', 'district']
+    list_filter = ['district']
+
 
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
 admin.site.register(Product_img)
 admin.site.register(Order, OrderController)
-admin.site.register(Tinh, TinhController)
-admin.site.register(Huyen, HuyenController)
-admin.site.register(Xa, XaController)
+admin.site.register(City, CityController)
+admin.site.register(District, DistrictController)
+admin.site.register(Ward, WardController)

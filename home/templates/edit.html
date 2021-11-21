@@ -15,27 +15,27 @@
     <label for="">Nhập lại mật khẩu:</label>
     <input type="password" name="password2">
     <label for="">Tỉnh/Tp</label>
-    <select name="tinh" id="tinh" onchange="showHuyen()">
+    <select name="city" id="city" onchange="showDistrict()">
         <option value="none">--Chọn Tỉnh--</option>
-        {% for tinh in list_tinh %}
-        <option value="{{tinh.id}}">{{tinh.name}}</option>
+        {% for city in list_city %}
+        <option value="{{city.id}}">{{city.name}}</option>
         {% endfor %}
     </select>
     <label for="">Quận/Huyện/Tp:</label>
-    <select name="huyen" id="huyen" onchange="showXa()">
+    <select name="district" id="district" onchange="showWard()">
         <option value="none">--Chọn Huyện--</option>
-        {% for huyen in list_huyen %}
-        <option value="{{huyen.id}}" class="{{huyen.tinh.id}} huyen">{{huyen.name}}</option>
+        {% for district in list_district %}
+        <option value="{{district.id}}" class="{{district.city.id}} district">{{district.name}}</option>
         {% endfor %}
     </select>
     <label for="">Phường/Xã/Thị trấn:</label>
-    <select name="xa" id="xa">
+    <select name="ward" id="ward">
         <option value="none">--Chọn Xã--</option>
-        {% for xa in list_xa %}
-        <option value="{{xa.id}}" class="{{xa.huyen.id}} xa">{{xa.name}}</option>
+        {% for ward in list_ward %}
+        <option value="{{ward.id}}" class="{{ward.district.id}} ward">{{ward.name}}</option>
         {% endfor %}
     </select>
-    <label for="">Số nhà, Thôn/Xóm...</label>
-    <input type="text" name='detail' id="detail">
+    <label for="">Địa chỉ chi tiết...</label>
+    <input type="text" name='street' id="street">
     <input type="submit" value="Lưu">
 </form>

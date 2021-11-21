@@ -1,27 +1,27 @@
 
-function showHuyen(){
-    let tinhid = document.getElementById('tinh').value;
-    let arr = document.getElementsByClassName('huyen');
+function showDistrict(){
+    let cityid = document.getElementById('city').value;
+    let arr = document.getElementsByClassName('district');
     for (let i = 0; i < arr.length; i++){
         arr[i].style.display = 'none';
     }
-    arr = document.getElementsByClassName(tinhid);
+    arr = document.getElementsByClassName(cityid);
     for (let i = 0; i < arr.length; i++) {
         arr[i].style.display = 'inline-block';
     }
-    document.getElementById('huyen').value='none';
-    document.getElementById('xa').value='none';
+    document.getElementById('district').value='none';
+    document.getElementById('ward').value='none';
 }
 
-function showXa(){
-    let huyenid = document.getElementById('huyen').value;
-    let arr = document.getElementsByClassName('xa');
+function showWard(){
+    let districtid = document.getElementById('district').value;
+    let arr = document.getElementsByClassName('ward');
     for (let i = 0; i < arr.length; i++){
         arr[i].style.display = 'none';
     }
-    arr = document.getElementsByClassName(huyenid);
+    arr = document.getElementsByClassName(districtid);
     for (let i = 0; i < arr.length; i++) {
         arr[i].style.display = 'inline-block';
     }
-    document.getElementById('xa').value='none';
+    document.getElementById('ward').value='none';
 }
