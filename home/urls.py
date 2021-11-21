@@ -18,6 +18,7 @@ urlpatterns = [
     path('sub/<str:id>', views.sub),
     path('search/', views.search, name='search'),
     path('order/', views.order, name='order'),
+    path('pay/', views.pay, name='pay'),
     path('<str:category>/', views.category),
 ]
 

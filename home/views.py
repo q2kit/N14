@@ -188,7 +188,7 @@ def login(request):
             request.session['customer'] = customer.phone
             return redirect('/')
         except Customer.DoesNotExist:
-            return render(request, 'login.html', {'result': 'incorrect'})
+            return render(request, 'login.html', {'result': 'incorrect', 'phone': phone})
 
     return render(request, 'login.html', {'result': None})
 
@@ -321,3 +321,15 @@ def order(request):
     return render(request, 'order.html', data)
     pass
 
+def pay(request):
+    try:
+        phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except KeyError:
+        return redirect('/')
+
+    for order in Order.objects.filter(customer=customer, status='incart'):
+        order.status = 'processing'
+        order.save()
+    
+    return redirect('/order')

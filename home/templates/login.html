@@ -21,7 +21,7 @@
         <form id="form" action="/login/" method="post">
             {% csrf_token %}
             <div class="user-box">
-                <input type="number" autocomplete="off" name="phone" inputmode="numeric" required>
+                <input type="number" autocomplete="off" name="phone" inputmode="numeric" required id="phone">
                 <label>Số điện thoại</label>
             </div>
             <div class="user-box">
@@ -33,6 +33,9 @@
                 <p>Sai tài khoản hoặc mật khẩu.</p>
                 Vui lòng thử lại.
             </div>
+            <script>
+                document.getElementById("phone").value = "{{phone}}";
+            </script>
             {% endif %}
             <a href="#" onclick="document.getElementById('form').submit()">
                 <span></span>
