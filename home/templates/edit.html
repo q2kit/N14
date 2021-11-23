@@ -12,10 +12,11 @@
             
 <form style="width: 70%;" action="/edit/" method="post">
     {% csrf_token %}
-    <label for="">Số điện thoại:</label>
-    <input type="number" name="phone" value="{{customer.phone}}">
+    
     <label for="">Họ tên:</label>
     <input type="text" name="name" value="{{customer.name}}">
+    <label for="">Số điện thoại:</label>
+    <input type="number" name="phone" value="{{customer.phone}}">
     <label for="">Mật khẩu:</label>
     <input type="password" name="password">
     <label for="">Nhập lại mật khẩu:</label>
