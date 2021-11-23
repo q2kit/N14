@@ -1,10 +1,16 @@
 
+{% extends 'base.html' %}
 {% load static %}
+{% block content %}
 <link rel="stylesheet" type="text/css" href="{% static '/edit/style.css' %}">
 <script src="{% static '/edit/script.js' %}"></script>
 
 
-<form action="/edit/" method="post">
+<div class="row pt-5 pb-5 editAccount">
+    <div class="col-sm-12">
+        <div class="grid">
+            
+<form style="width: 70%;" action="/edit/" method="post">
     {% csrf_token %}
     <label for="">Số điện thoại:</label>
     <input type="number" name="phone" value="{{customer.phone}}">
@@ -14,28 +20,38 @@
     <input type="password" name="password">
     <label for="">Nhập lại mật khẩu:</label>
     <input type="password" name="password2">
-    <label for="">Tỉnh/Tp</label>
+    <label for="">Tỉnh/Tp</label> <br>
     <select name="city" id="city" onchange="showDistrict()">
         <option value="none">--Chọn Tỉnh--</option>
         {% for city in list_city %}
         <option value="{{city.id}}">{{city.name}}</option>
         {% endfor %}
     </select>
-    <label for="">Quận/Huyện/Tp:</label>
+    <br>
+    <label for="">Quận/Huyện/Tp:</label> <br>
     <select name="district" id="district" onchange="showWard()">
         <option value="none">--Chọn Huyện--</option>
         {% for district in list_district %}
         <option value="{{district.id}}" class="{{district.city.id}} district">{{district.name}}</option>
         {% endfor %}
     </select>
-    <label for="">Phường/Xã/Thị trấn:</label>
+    <br>
+
+   
+    <label for="">Phường/Xã/Thị trấn:</label> <br>
     <select name="ward" id="ward">
         <option value="none">--Chọn Xã--</option>
         {% for ward in list_ward %}
         <option value="{{ward.id}}" class="{{ward.district.id}} ward">{{ward.name}}</option>
         {% endfor %}
     </select>
+     <br>
     <label for="">Địa chỉ chi tiết...</label>
     <input type="text" name='street' id="street">
-    <input type="submit" value="Lưu">
+    <!-- <input type="submit" value="Lưu"> -->
+    <button class="btn btn-success" type="submit"> Lưu</button>
 </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 
