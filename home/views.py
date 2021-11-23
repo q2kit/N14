@@ -64,6 +64,10 @@ def addToCart(request, id):
         return redirect('/login')
     try:
         product = Product.objects.get(id=id)
+        if(product.quantityInStock == 0):
+            return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
+        product.quantityInStock -= 1
+        product.save()
     except:  # error id
         return HttpResponseBadRequest("<h1>Sản phẩm không tồn tại</h1>")
 
@@ -87,6 +91,9 @@ def removeFromCart(request, id):
         return redirect('/login')
     try:
         order = Order.objects.get(id=int(id))
+        product = Product.objects.get(id=order.product_id)
+        product.quantityInStock += order.quantity
+        product.save()
         order.delete()
         return redirect('/order')
     except:  # order not found
@@ -94,10 +101,15 @@ def removeFromCart(request, id):
 
 
 def add(request, id):
-    print(id)
     try:
         phone = request.session['customer']
         order = Order.objects.get(id=int(id))
+        product = Product.objects.get(id=order.product_id)
+        if(product.quantityInStock == 0):
+            return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
+        else:
+            product.quantityInStock -= 1
+            product.save()
         order.quantity += 1
         order.save()
         return redirect('/order')
@@ -109,6 +121,9 @@ def sub(request, id):
     try:
         phone = request.session['customer']
         order = Order.objects.get(id=int(id))
+        product = Product.objects.get(id=order.product_id)
+        product.quantityInStock += 1
+        product.save()
         order.quantity -= 1
         order.save()
         if order.quantity == 0:

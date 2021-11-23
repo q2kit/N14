@@ -265,3 +265,12 @@ input:focus {
 .sl {
   text-align: center !important;
 }
+
+.editAccount input {
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: 2px gray solid;
+  width: 100%;
+  margin-bottom: 2rem;
+  color: white;
+}
