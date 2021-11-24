@@ -3,9 +3,9 @@
 <script src="{% static '/edit/script.js' %}"></script>
 
 <div class="row pt-5 pb-5 editAccount">
-  <div style="width: 70%" class="col-sm-12">
+  <div  class="col-sm-12">
     <div class="grid">
-      <form style="width: 70%;" action="/edit/" method="post">
+      <form style="width: 20rem;" action="/edit/" method="post">
         {% csrf_token %}
         <label for="phone">Số điện thoại: {{customer.phone}}</label>
         <p style="color:rgb(255, 110, 110);">Nếu muốn thay đổi số điện thoại, vui lòng tạo tài khoản mới!</p>

@@ -132,14 +132,15 @@ input:focus {
     rgba(139, 139, 139, 0.08) 0px 1px 0px inset;
 }
 .category img {
-  width: 50%;
+  width: 40%;
   position: relative;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 .category p {
   position: absolute;
+  font-size: 1rem;
   bottom: -0.5rem;
   left: 50%;
   transform: translateX(-50%);
@@ -267,10 +268,11 @@ input:focus {
 }
 
 .editAccount input {
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   background-color: transparent;
   border: 2px gray solid;
   width: 100%;
   margin-bottom: 2rem;
   color: white;
+border-radius: 1rem;
 }
