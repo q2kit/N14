@@ -1,30 +1,30 @@
 
-function load() {
-    let cityid = document.getElementById('city').value;
-    let arr = document.getElementsByClassName('district');
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].dataset.city == cityid) {
-            arr[i].style.display = 'block';
-        }
-        else {
-            arr[i].style.display = 'none';
-        }
-    }
-    let districtid = document.getElementById('district').value;
-    arr = document.getElementsByClassName('ward');
-    for (let i = 0; i < arr.length; i++) {
-        if(arr[i].dataset.district == districtid) {
-            arr[i].style.display = 'block';
-        }
-        else {
-            arr[i].style.display = 'none';
-        }
-    }
+// function load() {
+//     let cityid = document.getElementById('city').value;
+//     let arr = document.getElementsByClassName('district');
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i].dataset.city == cityid) {
+//             arr[i].style.display = 'block';
+//         }
+//         else {
+//             arr[i].style.display = 'none';
+//         }
+//     }
+//     let districtid = document.getElementById('district').value;
+//     arr = document.getElementsByClassName('ward');
+//     for (let i = 0; i < arr.length; i++) {
+//         if(arr[i].dataset.district == districtid) {
+//             arr[i].style.display = 'block';
+//         }
+//         else {
+//             arr[i].style.display = 'none';
+//         }
+//     }
     
 
     
-    console.log('load ok');
-}
+//     console.log('load ok');
+// }
 
 
 function showDistrict() {
