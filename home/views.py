@@ -261,7 +261,7 @@ def account(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/login')
-    return render(request, 'account.html')
+    return render(request, 'account.html',{'customer': customer})
 
 
 def edit(request):
@@ -270,10 +270,19 @@ def edit(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/')
+
+    data={
+        'list_city' :City.objects.all(),
+        'list_district' :District.objects.all(),
+        'list_ward' :Ward.objects.all(),
+        'customer': customer,
+        'result': None
+    }
+
+
     if request.method == 'POST':
-        phone = request.POST['phone']
         name = request.POST['name']
-        password1 = request.POST['password']
+        password1 = request.POST['password1']
         password2 = request.POST['password2']
         city = request.POST['city']
         district = request.POST['district']
@@ -283,24 +292,17 @@ def edit(request):
         if password1 != password2:
             return render(request, 'edit.html', {'result': 'notMatch'})
         
-        customer.phone = phone
         customer.name = name
-        customer.password = hashlib.sha256(password1.encode()).hexdigest()
+        if password1 != '':
+            customer.password = hashlib.sha256(password1.encode()).hexdigest()
         customer.city = City.objects.get(id=city)
         customer.district = District.objects.get(id=district)
         customer.ward = Ward.objects.get(id=ward)
         customer.street = street
         customer.save()
-        return render(request, 'edit.html', {'result': 'done'})
+        data['result']='done'
+        return render(request, 'edit.html', data)
 
-
-    data={
-        'list_city' :City.objects.all(),
-        'list_district' :District.objects.all(),
-        'list_ward' :Ward.objects.all(),
-        'customer': customer,
-        'result': None
-    }
 
     return render(request, 'edit.html', data)
 
