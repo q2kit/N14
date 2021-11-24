@@ -196,6 +196,8 @@ def login(request):
         pass
     if request.method == 'POST':
         phone = request.POST['phone']
+        if(phone[0] != '0' and len(phone) != 10):
+            phone = '0'+phone
         password = request.POST['password']
         password = hashlib.sha256(password.encode()).hexdigest()
         try:
@@ -226,7 +228,8 @@ def forgot(request):
             user.save()
         except Customer.DoesNotExist:
             return render(request, 'forgot.html', {'result': 'notFound'})
-        return render(request, '')
+        # return HttpResponse("<h1>Đổi mật khẩu thành công</h1><h1>Mật khẩu mới là "+passwordDefault+"</h1>")
+        return render(request, 'login.html', {'result': 'resetpw', 'newpw': passwordDefault})
 
     return render(request, 'forgot.html', {'result': 'getPhone'})
 
@@ -261,7 +264,7 @@ def account(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/login')
-    return render(request, 'account.html')
+    return render(request, 'account.html', {'customer': customer})
 
 
 def edit(request):
@@ -270,39 +273,40 @@ def edit(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/')
+
+    data = {
+        'list_city': City.objects.all(),
+        'list_district': District.objects.all(),
+        'list_ward': Ward.objects.all(),
+        'customer': customer,
+        'result': None
+    }
+
     if request.method == 'POST':
-        phone = request.POST['phone']
         name = request.POST['name']
-        password1 = request.POST['password']
+        password1 = request.POST['password1']
         password2 = request.POST['password2']
         city = request.POST['city']
         district = request.POST['district']
         ward = request.POST['ward']
         street = request.POST['street']
-        
+
         if password1 != password2:
             return render(request, 'edit.html', {'result': 'notMatch'})
-        
-        customer.phone = phone
+
         customer.name = name
-        customer.password = hashlib.sha256(password1.encode()).hexdigest()
+        if password1 != '':
+            customer.password = hashlib.sha256(password1.encode()).hexdigest()
         customer.city = City.objects.get(id=city)
         customer.district = District.objects.get(id=district)
         customer.ward = Ward.objects.get(id=ward)
         customer.street = street
         customer.save()
-        return render(request, 'edit.html', {'result': 'done'})
-
-
-    data={
-        'list_city' :City.objects.all(),
-        'list_district' :District.objects.all(),
-        'list_ward' :Ward.objects.all(),
-        'customer': customer,
-        'result': None
-    }
+        data['result'] = 'done'
+        return render(request, 'edit.html', data)
 
     return render(request, 'edit.html', data)
+
 
 def logout(request):
     try:
@@ -336,6 +340,7 @@ def order(request):
     return render(request, 'order.html', data)
     pass
 
+
 def pay(request):
     try:
         phone = request.session['customer']
@@ -346,5 +351,5 @@ def pay(request):
     for order in Order.objects.filter(customer=customer, status='incart'):
         order.status = 'processing'
         order.save()
-    
+
     return redirect('/order')

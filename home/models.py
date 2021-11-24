@@ -3,27 +3,6 @@ from django.db import models
 
 # Create your models here.
 
-class Tinh(models.Model):
-    name = models.CharField(max_length=100)
-    id = models.CharField(max_length=100, primary_key=True)
-
-    def __str__(self):
-        return self.name
-class Huyen(models.Model):
-    name = models.CharField(max_length=100)
-    id = models.CharField(max_length=100, primary_key=True)
-    tinh = models.ForeignKey(Tinh, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-class Xa(models.Model):
-    name = models.CharField(max_length=100)
-    id = models.CharField(max_length=100, primary_key=True)
-    huyen = models.ForeignKey(Huyen, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
 
 class City(models.Model):
     name = models.CharField(max_length=100)

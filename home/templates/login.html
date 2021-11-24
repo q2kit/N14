@@ -17,6 +17,8 @@
         <a id="home" href="/"><img src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg" alt="Home"></a>
         {% if result == 'completeRegistration' %}
         <p id="completeRegistration">Đăng ký thành công. Vui lòng đăng nhập.</p>
+        {% elif result == 'resetpw' %}
+        <p id="completeRegistration">Lất mật khẩu thành công. Vui lòng đăng nhập!<br>Mật khẩu mới là {{newpw}}</p>
         {% endif %}
         <form id="form" action="/login/" method="post">
             {% csrf_token %}
