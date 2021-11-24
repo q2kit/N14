@@ -196,6 +196,8 @@ def login(request):
         pass
     if request.method == 'POST':
         phone = request.POST['phone']
+        if(phone[0] != '0' and len(phone) != 10):
+            phone = '0'+phone
         password = request.POST['password']
         password = hashlib.sha256(password.encode()).hexdigest()
         try:
