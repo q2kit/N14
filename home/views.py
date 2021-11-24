@@ -228,7 +228,8 @@ def forgot(request):
             user.save()
         except Customer.DoesNotExist:
             return render(request, 'forgot.html', {'result': 'notFound'})
-        return render(request, '')
+        # return HttpResponse("<h1>Đổi mật khẩu thành công</h1><h1>Mật khẩu mới là "+passwordDefault+"</h1>")
+        return render(request, 'login.html', {'result': 'resetpw', 'newpw': passwordDefault})
 
     return render(request, 'forgot.html', {'result': 'getPhone'})
 
@@ -263,7 +264,7 @@ def account(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/login')
-    return render(request, 'account.html',{'customer': customer})
+    return render(request, 'account.html', {'customer': customer})
 
 
 def edit(request):
@@ -273,14 +274,13 @@ def edit(request):
     except KeyError:
         return redirect('/')
 
-    data={
-        'list_city' :City.objects.all(),
-        'list_district' :District.objects.all(),
-        'list_ward' :Ward.objects.all(),
+    data = {
+        'list_city': City.objects.all(),
+        'list_district': District.objects.all(),
+        'list_ward': Ward.objects.all(),
         'customer': customer,
         'result': None
     }
-
 
     if request.method == 'POST':
         name = request.POST['name']
@@ -290,10 +290,10 @@ def edit(request):
         district = request.POST['district']
         ward = request.POST['ward']
         street = request.POST['street']
-        
+
         if password1 != password2:
             return render(request, 'edit.html', {'result': 'notMatch'})
-        
+
         customer.name = name
         if password1 != '':
             customer.password = hashlib.sha256(password1.encode()).hexdigest()
@@ -302,11 +302,11 @@ def edit(request):
         customer.ward = Ward.objects.get(id=ward)
         customer.street = street
         customer.save()
-        data['result']='done'
+        data['result'] = 'done'
         return render(request, 'edit.html', data)
 
-
     return render(request, 'edit.html', data)
+
 
 def logout(request):
     try:
@@ -340,6 +340,7 @@ def order(request):
     return render(request, 'order.html', data)
     pass
 
+
 def pay(request):
     try:
         phone = request.session['customer']
@@ -350,5 +351,5 @@ def pay(request):
     for order in Order.objects.filter(customer=customer, status='incart'):
         order.status = 'processing'
         order.save()
-    
+
     return redirect('/order')
