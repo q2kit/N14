@@ -26,13 +26,17 @@
             <div class="color" style="background-color:  #262626;"></div>
             <div class="color" style="background-color:  #b7afe6;"></div>
         </div>
+        {% if product.quantityInStock > 0 %}
         <a href="/addtocart/{{product.id}}">
             <div class="addtocart mr-lg-3">Thêm vào giỏ</div>
-             
         </a>
         <!-- <a href="">
            <div class="installment">Trả góp</div>
         </a> -->
+        {% else %}
+        <br>
+        <h4 style="color: rgb(228, 25, 211);">Sản phẩm tạm thời hết hàng!</h4>
+        {% endif %}
        
     </div>
 </div>
