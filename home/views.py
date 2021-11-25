@@ -169,8 +169,7 @@ def register(request):
         phone = request.POST['phone']
         password = request.POST['password']
         password2 = request.POST['password2']
-
-        if phone[0] != '0' or len(phone) != 10:
+        if phone[0] != '0' or len(phone) != 10 or not(all([(x<='9' and x>='0') for x in phone])) :
             return render(request, 'register.html', {'result': 'Số điện thoại không hợp lệ!', 'name': name, 'phone': phone})
 
         if password != password2:
