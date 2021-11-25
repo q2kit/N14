@@ -267,6 +267,10 @@ input:focus {
 .cart p{
   margin: 0;
 }
+.cart a:hover, .processing a:hover, .done a:hover{
+  transition: all 0.2s;
+  color: #0071e3;
+}
 td{
   height: 100%;
 }

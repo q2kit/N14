@@ -24,8 +24,13 @@
                        </th>
                     <td>   
                         <div class="d-sm-flex align-items-center">
-                            <img class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
-                            <p>{{order.product}}</p>
+                          
+                           <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                           </a>
                         </div>
                     </td>
                     <td class=" pl-0 pr-0">
@@ -93,8 +98,12 @@
                        </th>
                     <td>   
                         <div class="d-sm-flex align-items-center">
-                            <img  class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
-                            <p>{{order.product}}</p>
+                            <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                           </a>
                         </div>
                     </td>
                     <td class=" ">
@@ -115,32 +124,7 @@
     {% else %}
        <h5>Không có sản phẩm nào</h5>
     {% endif %}
-    <!-- {% for order in processing %}
-    <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
-        style="display: inline-block;height: 200px;">
-
-    <div class="idCart">
-        <span>Mã đơn hàng:</span>
-        <span>{{order.id}}</span>
-    </div>
-
-    <div class="productName">
-        <span>Tên sản phẩm:</span>
-        <span>{{order.product}}</span>
-    </div>
-
-    <div class="quantity">
-        <span>Số lượng:</span>
-        <span>{{order.quantity}}</span>
-    </div>
-
-    <div class="productPrice">
-        <span>Giá:</span>
-        <span>{{order.product.price}}</span>
-    </div>
-
-    <a href="/cancel/{{order.id}}">Hủy</a>
-    {% endfor %} -->
+   
 </div>
 
 <div class="done col-12 p-0 pt-5">
@@ -164,8 +148,12 @@
                        </th>
                     <td>   
                         <div class="d-sm-flex align-items-center">
-                            <img  class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
-                            <p>{{order.product}}</p>
+                            <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                           </a>
                         </div>
                     </td>
                     <td class="">
