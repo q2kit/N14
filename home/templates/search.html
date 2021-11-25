@@ -8,7 +8,7 @@
   </div>
 </div>
 {% if result %}
-<div class="row p-5">
+<div class="row p-lg-5">
   {% for product in page_obj %}
   <div class="col-6 col-sm-4 mt-5">
     <div class="product">
@@ -43,7 +43,7 @@
       <a
         class="ml-3 next"
         href="?q={{request.GET.q}}&page={{ page_obj.next_page_number }}"
-        >next&raquo;
+        >next &raquo;
       </a>
 
       {% endif %}
