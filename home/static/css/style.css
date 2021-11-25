@@ -248,7 +248,15 @@ input:focus {
   color: #2f3033;
 }
 
-/* seacrh */
+/* search */
+.step-links {
+  font-weight: 600;
+}
+.next:hover,
+.pre:hover {
+  color: #0071e3;
+  transition: all 0.2s;
+}
 .notfound {
   font-size: 2rem;
 }
@@ -264,10 +272,10 @@ input:focus {
 #total span {
   font-size: 1.3rem;
 }
-.cart p{
+.cart p {
   margin: 0;
 }
-td{
+td {
   height: 100%;
 }
 .sl {
@@ -281,5 +289,5 @@ td{
   width: 100%;
   margin-bottom: 2rem;
   color: white;
-border-radius: 1rem;
+  border-radius: 1rem;
 }

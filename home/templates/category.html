@@ -1,24 +1,47 @@
-{% extends 'base.html' %} 
-{% block title %} {{type}} {% endblock title %}
-{% load static %} 
-{% block content %}
+{% extends 'base.html' %} {% block title %} {{type}} {% endblock title %} {%
+load static %} {% block content %}
 <div class="row pt-5">
-        <div class="col-sm-12 sessionTitle">
-            <i class="fab fa-apple"></i> <span>{{type}}</span>
-        </div>
+  <div class="col-sm-12 sessionTitle">
+    <i class="fab fa-apple"></i> <span>{{type}}</span>
+  </div>
+</div>
+
+<div class="row padding-lg pb-5">
+  {% for product in page_obj %}
+
+  <div class="col-6 col-sm-4 mt-5">
+    <div class="product">
+      <a href="/product/{{ product.id }}">
+        <img
+          class="productImg"
+          width="100%"
+          src="{{ product.showcasedImg.url }}"
+          alt=""
+        />
+        <p class="productName">{{ product.name }}</p>
+      </a>
+      <p class="productPrice">{{ product.price }} ₫</p>
     </div>
-<div class="row padding-lg  pb-5">
-        {% for product in products %}
-    
-                <div class="col-6  col-sm-4 mt-5">
-                    <div class="product">
-                        <a href="/product/{{ product.id }}">
-                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
-                            <p class="productName">{{ product.name }}</p>
-                        </a>
-                        <p class="productPrice">{{ product.price }} ₫</p>
-                    </div>
-                </div>
-        {% endfor %}
-    </div>
+  </div>
+  {% endfor %}
+  <div class="col-sm-12 pt-5">
+    <span class="step-links d-flex justify-content-center">
+      {% if page_obj.has_previous %}
+      <a class="mr-3 pre" href="?page={{ page_obj.previous_page_number }}"
+        >&laquo; previous</a
+      >
+      {% endif %}
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+      <a class="ml-3 next" href="?page={{ page_obj.next_page_number }}"
+        >next &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+
 {% endblock content %}

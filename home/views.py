@@ -1,5 +1,6 @@
 from django.http.response import *
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from .models import *
 import hashlib
@@ -149,9 +150,14 @@ def category(request, category):
     if category not in types:
         return redirect('/')
 
+    paginator = Paginator(Product.objects.filter(type=category), 9)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     Data = {
-        'products': Product.objects.filter(type=category),
-        'type': types[category]
+
+        'type': types[category],
+        'page_obj': page_obj
     }
 
     return render(request, 'category.html', Data)
@@ -169,7 +175,7 @@ def register(request):
         phone = request.POST['phone']
         password = request.POST['password']
         password2 = request.POST['password2']
-        if phone[0] != '0' or len(phone) != 10 or not(all([(x<='9' and x>='0') for x in phone])) :
+        if phone[0] != '0' or len(phone) != 10 or not(all([(x <= '9' and x >= '0') for x in phone])):
             return render(request, 'register.html', {'result': 'Số điện thoại không hợp lệ!', 'name': name, 'phone': phone})
 
         if password != password2:
@@ -249,8 +255,11 @@ def search(request):
 
             result = sorted(result.items(), key=lambda x: x[1], reverse=True)
             result = [x[0] for x in result]
+            paginator = Paginator(result, 9)
 
-            return render(request, 'search.html', {'result': result})
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, 'search.html', {'result': result, 'page_obj': page_obj})
         except:
             return render(request, 'search.html', {'result': None})
 
