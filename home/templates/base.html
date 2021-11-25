@@ -93,8 +93,12 @@
               <li class="d-flex align-items-center">
                 <a href="/order/">
                   <div class="bg">
-                    <p>{% number_in_cart request %}</p>
-                    <i class="far fa-shopping-bag"></i>
+                   <div class="grid" style=" background-color: brown;border-radius: 50%;
+                   
+                   width: 1.3rem; height: 1.3rem; z-index: 2; position: relative; right: 5px; ">
+                      <p style="font-size: 0.8rem; font-weight: 600;">{% number_in_cart request %}</p>
+                   </div>
+                    <i  class="far fa-shopping-bag"></i>
                   </div>
                 </a>
               </li>

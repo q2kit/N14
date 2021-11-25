@@ -57,9 +57,9 @@ a:hover {
   width: 70%;
 }
 .menu .bg {
-  height: 2rem;
+  height: 2.5rem;
   position: relative;
-  width: 2rem;
+  width: 2.5rem;
   background-color: #2f3033;
   border-radius: 50%;
 }
@@ -67,6 +67,7 @@ a:hover {
   position: absolute;
   top: 50%;
   left: 50%;
+  font-weight: 300;
   transform: translate(-50%, -50%);
 }
 .menu .bg:hover {
