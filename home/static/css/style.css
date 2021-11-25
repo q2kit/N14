@@ -264,6 +264,12 @@ input:focus {
 #total span {
   font-size: 1.3rem;
 }
+.cart p{
+  margin: 0;
+}
+td{
+  height: 100%;
+}
 .sl {
   text-align: center !important;
 }
