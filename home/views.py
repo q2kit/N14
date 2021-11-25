@@ -91,7 +91,7 @@ def removeFromCart(request, id):
     except KeyError:  # not login
         return redirect('/login')
     try:
-        order = Order.objects.get(id=int(id))
+        order = Order.objects.get(id=int(id), status='incart')
         product = Product.objects.get(id=order.product_id)
         product.quantityInStock += order.quantity
         product.save()
