@@ -6,8 +6,9 @@
 <div class="row productDetail pt-5 pb-5">
     
     <div class="col-sm-6">
+      
         <div class="">
-            <img class="productImg" width="100%" src="{{product.showcasedImg.url}}" alt="">
+            <img class="productImg" width="100%" src="{{productImg.img.url}}" alt="">
         
         </div>
     </div>
@@ -20,11 +21,17 @@
         <div class="capacity">256GB</div>
         <p class="mt-3">Màu</p>
         <div class="colors mb-5">
-            <div class="color color--active" style="background-color:  #3c4870;"></div>
-            <div class="color " style="background-color:  #b90b2d;"></div>
-            <div class="color " style="background-color:  #ebebe3;"></div>
-            <div class="color" style="background-color:  #262626;"></div>
-            <div class="color" style="background-color:  #b7afe6;"></div>
+            {% for color in colors %}
+                {% if selectedcolor == color.color %}
+                <a href="?color={{color.color}}">
+                    <div class="color color--active " style="background-color:#{{color.color}}"></div>
+                </a>
+                {% else %}
+                      <a href="?color={{color.color}}"><div class="color " style="background-color:#{{color.color}}"></div></a>
+                {% endif %}
+            {% endfor %}
+       
+           
         </div>
         {% if product.quantityInStock > 0 %}
         <a href="/addtocart/{{product.id}}">

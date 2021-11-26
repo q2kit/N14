@@ -138,7 +138,18 @@ def productDetail(request, id):
     if id is None:
         return redirect('/')
     try:
-        Data = {'product': Product.objects.get(id=id)}
+        colors = Product_color.objects.all().filter(productID=id)
+        selectedcolor = request.GET.get('color')
+        if selectedcolor == None:
+            selectedcolor = list(colors)[0].color
+
+        productImg = Product_img.objects.get(color=selectedcolor)
+        Data = {
+            'product': Product.objects.get(id=id),
+            'selectedcolor': selectedcolor,
+            'colors': colors,
+            'productImg': productImg
+        }
     except:
         return redirect('/')
     return render(request, 'productDetail.html', Data)
