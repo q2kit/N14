@@ -144,11 +144,17 @@ def productDetail(request, id):
             selectedcolor = list(colors)[0].color
 
         productImg = Product_img.objects.get(color=selectedcolor)
+        capacityList = Product_Capacity.objects.all().filter(productID=id)
+        selectedcapacity = request.GET.get('capacity')
+        if selectedcapacity == None:
+            selectedcapacity = list(capacityList)[0].capacity
         Data = {
             'product': Product.objects.get(id=id),
             'selectedcolor': selectedcolor,
             'colors': colors,
-            'productImg': productImg
+            'productImg': productImg,
+            'capacityList': capacityList,
+            "selectedcapacity": selectedcapacity
         }
     except:
         return redirect('/')

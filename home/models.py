@@ -77,6 +77,12 @@ class Product_color(models.Model):
     color = models.CharField(max_length=10)
 
 
+class Product_Capacity(models.Model):
+    id = models.AutoField(primary_key=True)
+    productID = models.CharField(max_length=32)
+    capacity = models.CharField(max_length=10)
+
+
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

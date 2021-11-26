@@ -52,6 +52,12 @@ class Product_ImgController(admin.ModelAdmin):
     search_fields = ['productID']
 
 
+class Product_CapacityController(admin.ModelAdmin):
+    list_display = ['id', 'productID', 'capacity']
+    list_filter = ['productID']
+    search_fields = ['productID']
+
+
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
 admin.site.register(Product_img, Product_ImgController)
@@ -60,3 +66,4 @@ admin.site.register(City, CityController)
 admin.site.register(District, DistrictController)
 admin.site.register(Ward, WardController)
 admin.site.register(Product_color, Product_ColorController)
+admin.site.register(Product_Capacity, Product_CapacityController)

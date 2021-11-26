@@ -16,18 +16,27 @@
         <p class="productName">{{product.name}}</p>
         <p class="productPrice">{{product.price}} ₫</p> 
         <p>Dung lượng</p>
-        <div class="capacity capacity--active">64GB</div>
-        <div class="capacity">128GB</div>
-        <div class="capacity">256GB</div>
+         {% for capacity in capacityList %}
+    
+          {% if capacity.capacity == selectedcapacity %}
+                <a href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
+                    <div class="capacity capacity--active " >{{capacity.capacity}}</div>
+                </a>
+                {% else %}
+                       <a  href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
+                       <div class="capacity ">{{capacity.capacity}}</div></a>
+                {% endif %} 
+            {% endfor %}
+       
         <p class="mt-3">Màu</p>
         <div class="colors mb-5">
             {% for color in colors %}
                 {% if selectedcolor == color.color %}
-                <a href="?color={{color.color}}">
+                <a href="?color={{color.color}}&capacity={{selectedcapacity}}">
                     <div class="color color--active " style="background-color:#{{color.color}}"></div>
                 </a>
                 {% else %}
-                      <a href="?color={{color.color}}"><div class="color " style="background-color:#{{color.color}}"></div></a>
+                      <a href="?color={{color.color}}&capacity={{selectedcapacity}}"><div class="color " style="background-color:#{{color.color}}"></div></a>
                 {% endif %}
             {% endfor %}
        
