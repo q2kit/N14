@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% block title %} {{type}} {% endblock title %} {%
 load static %} {% block content %}
+{% load tags %}
+
 <div class="row pt-5">
   <div class="col-sm-12 sessionTitle">
     <i class="fab fa-apple"></i> <span>{{type}}</span>
@@ -20,7 +22,13 @@ load static %} {% block content %}
         />
         <p class="productName">{{ product.name }}</p>
       </a>
-      <p class="productPrice">{{ product.price }} ₫</p>
+     <div class="d-flex justify-content-center">
+            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+        {% if product.sale != None and  product.sale != 0 %} 
+            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+        {% endif %}
+            
+    </div>
     </div>
   </div>
   {% endfor %}
