@@ -41,13 +41,13 @@ class WardController(admin.ModelAdmin):
     search_fields = ['name']
 
 
-class Product_ColorController(admin.ModelAdmin):
-    list_display = ['id', 'productID', 'color']
-    list_filter = ['productID']
-    search_fields = ['productID']
+# class Product_ColorController(admin.ModelAdmin):
+#     list_display = ['id', 'productID', 'color']
+#     list_filter = ['productID']
+#     search_fields = ['productID']
 
 
-class Product_ImgController(admin.ModelAdmin):
+class Product_Img_ColorController(admin.ModelAdmin):
     list_display = ['id', 'productID', 'img', 'color']
     list_filter = ['productID']
     search_fields = ['productID']
@@ -61,10 +61,9 @@ class Product_CapacityController(admin.ModelAdmin):
 
 admin.site.register(Customer, CustomerController)
 admin.site.register(Product, ProductController)
-admin.site.register(Product_img, Product_ImgController)
 admin.site.register(Order, OrderController)
 admin.site.register(City, CityController)
 admin.site.register(District, DistrictController)
 admin.site.register(Ward, WardController)
-admin.site.register(Product_color, Product_ColorController)
+admin.site.register(Product_img_color, Product_Img_ColorController)
 admin.site.register(Product_Capacity, Product_CapacityController)

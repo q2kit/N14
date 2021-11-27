@@ -68,14 +68,14 @@ def addToCart(request, id):
         product = Product.objects.get(id=id)
 
         # lấy danh sách màu của sản phẩm đc chọn
-        colors = Product_color.objects.all().filter(productID=id)
+        colors = Product_img_color.objects.all().filter(productID=id)
         # lấy giá trị màu mà user chọn
         selectedcolor = request.GET.get('color')
         # mặc định màu là màu đầu tiên
         if selectedcolor == None:
             selectedcolor = list(colors)[0].color
         # lấy link ảnh từ màu đc chọn
-        productImg = Product_img.objects.get(color=selectedcolor).img.url
+        productImg = Product_img_color.objects.get(color=selectedcolor).img.url
         # lấy danh sách dung lượng của sản phẩm đc chọn
         capacityList = Product_Capacity.objects.all().filter(productID=id)
         selectedcapacity = request.GET.get('capacity')
@@ -155,12 +155,13 @@ def productDetail(request, id):
     if id is None:
         return redirect('/')
     try:
-        colors = Product_color.objects.all().filter(productID=id)
+        colors = Product_img_color.objects.all().filter(productID=id)
         selectedcolor = request.GET.get('color')
         if selectedcolor == None:
             selectedcolor = list(colors)[0].color
 
-        productImg = Product_img.objects.get(color=selectedcolor)
+        productImg = Product_img_color.objects.get(
+            color=selectedcolor, productID=id)
         capacityList = Product_Capacity.objects.all().filter(productID=id)
         selectedcapacity = request.GET.get('capacity')
         if selectedcapacity == None:

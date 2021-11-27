@@ -68,17 +68,17 @@ class Product(models.Model):
         return self.name
 
 
-class Product_img(models.Model):
+class Product_img_color(models.Model):
     id = models.AutoField(primary_key=True)
     productID = models.CharField(max_length=32)
     img = models.ImageField(null=True)
     color = models.CharField(max_length=10, null=True)
 
 
-class Product_color(models.Model):
-    id = models.AutoField(primary_key=True)
-    productID = models.CharField(max_length=32)
-    color = models.CharField(max_length=10)
+# class Product_color(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     productID = models.CharField(max_length=32)
+#     color = models.CharField(max_length=10)
 
 
 class Product_Capacity(models.Model):
