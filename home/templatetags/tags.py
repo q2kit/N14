@@ -14,3 +14,11 @@ def number_in_cart(request):
     except:
         num = 0
     return num
+
+
+@register.simple_tag()
+def multiply(sale, unit_price, *args, **kwargs):
+    # you would need to do any localization of the result here
+    if(sale == None):
+        sale = 0
+    return int((1-sale)*unit_price)

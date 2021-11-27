@@ -179,7 +179,12 @@ input:focus {
   font-size: 1.2rem;
   margin: 0;
 }
-
+.product .productPrice--sale{
+  font-size: 1rem;
+  margin: 0;
+     text-decoration-line: line-through; 
+     font-weight: 300;
+}
 /* footer */
 .footer {
   background-color: black;

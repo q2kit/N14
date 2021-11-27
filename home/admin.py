@@ -12,7 +12,7 @@ class CustomerController(admin.ModelAdmin):
 
 class ProductController(admin.ModelAdmin):
     list_display = ['id', 'name', 'price',
-                    'showcasedImg', 'quantityInStock', 'type']
+                    'showcasedImg', 'quantityInStock', 'type', 'sale']
     list_filter = ['type']
     search_fields = ['name']
 
