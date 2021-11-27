@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -58,7 +58,10 @@ class Product(models.Model):
     price = models.IntegerField()
     quantityInStock = models.IntegerField()
     showcasedImg = models.ImageField(null=True)
-    sale = models.FloatField(null=True)
+    sale = models.FloatField(
+        null=True,
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)],
+    )
     id = models.CharField(max_length=32, primary_key=True)
 
     def __str__(self):
