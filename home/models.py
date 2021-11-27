@@ -81,7 +81,7 @@ class Product_color(models.Model):
 class Product_Capacity(models.Model):
     id = models.AutoField(primary_key=True)
     productID = models.CharField(max_length=32)
-    capacity = models.CharField(max_length=10)
+    capacity = models.CharField(max_length=30)
 
 
 class Order(models.Model):
