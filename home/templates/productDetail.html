@@ -3,6 +3,8 @@
  {% load static %} 
 {% block title %}{{product.name}}{% endblock title %}
 {% block content %}
+{% load tags %}
+
 <div class="row productDetail pt-5 pb-5">
     
     <div class="col-sm-6">
@@ -14,7 +16,13 @@
     </div>
     <div class="col-sm-6 pt-5">
         <p class="productName">{{product.name}}</p>
-        <p class="productPrice">{{product.price}} ₫</p> 
+        <div class="d-flex ">
+            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+        {% if product.sale != None and  product.sale != 0 %} 
+            <p class="  productPrice--sale">{{ product.price }} ₫</p>
+        {% endif %}
+                           
+        </div>
         <p>Dung lượng</p>
          {% for capacity in capacityList %}
     

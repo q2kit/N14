@@ -211,6 +211,12 @@ input:focus {
   font-size: 1.6rem;
   font-weight: 600;
 }
+.productDetail .productPrice--sale{
+  font-size: 1.3rem;
+  margin: 0;
+     text-decoration-line: line-through; 
+     font-weight: 400;
+}
 .productDetail .capacity {
   background-color: #4f5155;
   /* width: 3rem; */
