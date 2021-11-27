@@ -1,5 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block title %}Kết quả tìm kiếm
 {{request.GET.q}} {% endblock title %} {% block content %}
+{% load tags %}
+
 <div class="row pt-5">
   <div class="col-sm-12 d-flex justify-content-center">
     <p style="font-size: 1.5rem">
@@ -21,7 +23,13 @@
         />
         <p class="productName">{{product.name}}</p>
       </a>
-      <p class="productPrice">{{product.price}} ₫</p>
+      <div class="d-flex justify-content-center">
+                <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+            {% if product.sale != None and  product.sale != 0 %} 
+                <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+            {% endif %}
+                      
+      </div>
     </div>
   </div>
   {% endfor %}

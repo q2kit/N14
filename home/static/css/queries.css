@@ -15,6 +15,9 @@
   .navLogo {
     padding: 0;
   }
+  .product .productPrice--sale{
+    font-size: 0.8rem;
+  }
 }
 @media (min-width: 350px) and (max-width: 575.99px) {
   html {
