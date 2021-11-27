@@ -90,6 +90,8 @@ class Product_Capacity(models.Model):
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    productImg = models.CharField(max_length=100, null=True)
+    productCapacity = models.CharField(max_length=100, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     stt = (

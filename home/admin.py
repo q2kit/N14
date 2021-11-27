@@ -18,7 +18,8 @@ class ProductController(admin.ModelAdmin):
 
 
 class OrderController(admin.ModelAdmin):
-    list_display = ['id', 'product', 'customer', 'quantity', 'status']
+    list_display = ['id', 'product', 'productImg',
+                    'productCapacity', 'customer', 'quantity', 'status']
     list_filter = ['status', 'customer', 'product', ]
     search_fields = ['id', 'customer', 'product']
 

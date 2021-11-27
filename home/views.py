@@ -64,7 +64,24 @@ def addToCart(request, id):
     except KeyError:  # not login
         return redirect('/login')
     try:
+
         product = Product.objects.get(id=id)
+
+        # lấy danh sách màu của sản phẩm đc chọn
+        colors = Product_color.objects.all().filter(productID=id)
+        # lấy giá trị màu mà user chọn
+        selectedcolor = request.GET.get('color')
+        # mặc định màu là màu đầu tiên
+        if selectedcolor == None:
+            selectedcolor = list(colors)[0].color
+        # lấy link ảnh từ màu đc chọn
+        productImg = Product_img.objects.get(color=selectedcolor).img.url
+        # lấy danh sách dung lượng của sản phẩm đc chọn
+        capacityList = Product_Capacity.objects.all().filter(productID=id)
+        selectedcapacity = request.GET.get('capacity')
+        if selectedcapacity == None:
+            selectedcapacity = list(capacityList)[0].capacity
+
         if(product.quantityInStock == 0):
             return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
         product.quantityInStock -= 1
@@ -74,14 +91,14 @@ def addToCart(request, id):
 
     try:
         order = Order.objects.get(
-            customer=customer, product_id=id, status='incart')
+            customer=customer, product_id=id, productImg=productImg, productCapacity=selectedcapacity, status='incart')
         order.quantity += 1
         order.save()
     except:  # order not found
-        Order.objects.create(customer=customer, product_id=id,
+        Order.objects.create(customer=customer, product_id=id, productImg=productImg, productCapacity=selectedcapacity,
                              quantity=1, status='incart')
 
-    return redirect('/product/'+id)
+    return redirect('/product/'+id+f'?color={selectedcolor}&capacity={selectedcapacity}')
 
 
 def removeFromCart(request, id):
