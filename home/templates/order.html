@@ -1,6 +1,7 @@
 {% extends 'base.html' %} 
 {% block title %} Đơn hàng của bạn {% endblock title %}
 {% block content %}
+{% load tags %}
 
 <div class="cart col-12 pt-5 padding-0">
     <h1>Giỏ hàng</h1>
@@ -49,7 +50,14 @@
                          </div></div>
                     </td>
                     <td>
-                         <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
+                         <div style="height: 10rem;"  class="d-flex align-items-center">
+                                <div class="d-lg-flex justify-content-center">
+                                    <p class="productPrice mr-2"> {%multiply order.product.sale order.product.price   %}₫</p>
+                                {% if order.product.sale != None and  order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                {% endif %}
+                           
+                             </div>
                         </div>
                        </td>
                     <td>   
@@ -112,7 +120,14 @@
                          </div>
                     </td>
                     <td>
-                         <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> 
+                            <div class="d-lg-flex justify-content-center">
+                                    <p class="productPrice mr-2"> {%multiply order.product.sale order.product.price   %}₫</p>
+                                {% if order.product.sale != None and  order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                {% endif %}
+                           
+                             </div>
                         </div>
                        </td>
                   
@@ -162,7 +177,14 @@
                          </div>
                     </td>
                     <td>
-                         <div style="height: 10rem;"  class="d-flex align-items-center"> <p>{{order.product.price}}</p>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> 
+                            <div class="d-lg-flex justify-content-center">
+                                    <p class="productPrice mr-2"> {%multiply order.product.sale order.product.price   %}₫</p>
+                                {% if order.product.sale != None and  order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                {% endif %}
+                           
+                             </div>
                         </div>
                        </td>
                   

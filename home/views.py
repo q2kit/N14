@@ -355,11 +355,11 @@ def order(request):
     orders = Order.objects.filter(customer=customer)
     data = {
         'cart': list(filter(lambda x: x.status == 'incart', orders)),
-        'totalcart': sum([x.product.price*x.quantity for x in orders if x.status == 'incart']),
+        'totalcart': sum([int((1-x.product.sale if x.product.sale != None else 1)*x.product.price*x.quantity) for x in orders if x.status == 'incart']),
         'done': list(filter(lambda x: x.status == 'done', orders)),
-        'totaldone': sum([x.product.price*x.quantity for x in orders if x.status == 'done']),
+        'totaldone': sum([int((1-x.product.sale if x.product.sale != None else 1)*x.product.price*x.quantity) for x in orders if x.status == 'done']),
         'processing': list(filter(lambda x: x.status == 'processing', orders)),
-        'totalprocessing': sum([x.product.price*x.quantity for x in orders if x.status == 'processing'])
+        'totalprocessing': sum([int((1-x.product.sale if x.product.sale != None else 1)*x.product.price*x.quantity) for x in orders if x.status == 'processing'])
     }
 
     return render(request, 'order.html', data)
