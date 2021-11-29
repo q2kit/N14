@@ -5,65 +5,65 @@ from .models import *
 # Register your models here.
 
 
-class CustomerController(admin.ModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     list_display = ['phone', 'name', 'password']
     search_fields = ['phone', 'name']
 
 
-class ProductController(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'price',
                     'showcasedImg', 'quantityInStock', 'type', 'sale']
     list_filter = ['type']
     search_fields = ['name']
 
 
-class OrderController(admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'product', 'productImg',
                     'productCapacity', 'customer', 'quantity', 'status']
     list_filter = ['status', 'customer', 'product', ]
     search_fields = ['id', 'customer', 'product']
 
 
-class CityController(admin.ModelAdmin):
+class CityAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
     search_fields = ['name']
 
 
-class DistrictController(admin.ModelAdmin):
+class DistrictAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'city']
     list_filter = ['city']
     search_fields = ['name']
 
 
-class WardController(admin.ModelAdmin):
+class WardAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'district']
     list_filter = ['district']
     search_fields = ['name']
 
 
-# class Product_ColorController(admin.ModelAdmin):
+# class Product_ColorAdmin(admin.ModelAdmin):
 #     list_display = ['id', 'productID', 'color']
 #     list_filter = ['productID']
 #     search_fields = ['productID']
 
 
-class Product_Img_ColorController(admin.ModelAdmin):
+class Product_Img_ColorAdmin(admin.ModelAdmin):
     list_display = ['id', 'productID', 'img', 'color']
     list_filter = ['productID']
     search_fields = ['productID']
 
 
-class Product_CapacityController(admin.ModelAdmin):
+class Product_CapacityAdmin(admin.ModelAdmin):
     list_display = ['id', 'productID', 'capacity']
     list_filter = ['productID']
     search_fields = ['productID']
 
 
-admin.site.register(Customer, CustomerController)
-admin.site.register(Product, ProductController)
-admin.site.register(Order, OrderController)
-admin.site.register(City, CityController)
-admin.site.register(District, DistrictController)
-admin.site.register(Ward, WardController)
-admin.site.register(Product_img_color, Product_Img_ColorController)
-admin.site.register(Product_Capacity, Product_CapacityController)
+admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(City, CityAdmin)
+admin.site.register(District, DistrictAdmin)
+admin.site.register(Ward, WardAdmin)
+admin.site.register(Product_img_color, Product_Img_ColorAdmin)
+admin.site.register(Product_Capacity, Product_CapacityAdmin)
