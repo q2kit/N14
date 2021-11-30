@@ -102,22 +102,46 @@ def addToCart(request, id):
     return redirect('/product/'+id+f'?color={selectedcolor}&capacity={selectedcapacity}')
 
 
-def removeFromCart(request, id):
-    try:
-        phone = request.session['customer']
-        customer = Customer.objects.get(phone=phone)
-    except KeyError:  # not login
-        return redirect('/login')
-    try:
-        order = Order.objects.get(id=int(id), status='incart')
-        product = Product.objects.get(id=order.product_id)
-        product.quantityInStock += order.quantity
-        product.save()
-        order.delete()
-        return redirect('/order')
-    except:  # order not found
-        return redirect('/')
+# def removeFromCart(request, id):
+#     try:
+#         phone = request.session['customer']
+#         customer = Customer.objects.get(phone=phone)
+#     except KeyError:  # not login
+#         return redirect('/login')
+#     try:
+#         order = Order.objects.get(id=int(id), status='incart')
+#         product = Product.objects.get(id=order.product_id)
+#         product.quantityInStock += order.quantity
+#         product.save()
+#         order.delete()
+#         return redirect('/order')
+#     except:  # order not found
+#         return redirect('/')
 
+
+def removeFromCart(request):
+    if request.is_ajax() and request.method == 'POST':
+        try:
+            phone = request.session['customer']
+            customer = Customer.objects.get(phone=phone)
+        except KeyError:
+            return redirect('/')
+        
+        id = request.POST.get('id')
+        try:
+            order = Order.objects.get(id=int(id), status='incart')
+            product = Product.objects.get(id=order.product_id)
+            product.quantityInStock += order.quantity
+            product.save()
+            order.delete()
+            return JsonResponse({
+                'status': 'success',
+                'message': 'Xóa thành công',
+                'numInCart': Order.objects.filter(customer=customer, status='incart').count()
+            })
+        except:
+            return redirect('/')
+    return redirect('/')
 
 # def add(request, id):
 #     try:
@@ -188,7 +212,13 @@ def sub(request):
         order.save()
         if order.quantity == 0:
             order.delete()
-        return JsonResponse({'status': 'success', 'message': 'Bớt sản phẩm thành công', 'num': order.quantity})
+        numInCart = Order.objects.filter(customer=customer, status='incart').count()
+        return JsonResponse({
+            'status': 'success', 
+            'message': 'Bớt sản phẩm thành công', 
+            'num': order.quantity,
+            'numInCart': numInCart
+        })
     except:
         return redirect('/')
 

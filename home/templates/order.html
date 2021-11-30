@@ -9,7 +9,7 @@
 {% load tags %}
 
 
-<div class="cart col-12 pt-5 padding-0">
+<div id="cart" class="cart col-12 pt-5 padding-0">
     <h1>Giỏ hàng</h1>
 
     {% if cart|length != 0 %}
@@ -47,12 +47,14 @@
                         type: "POST",
                         dataType: "JSON",
                         url: "/add/",
-                        timeout: 3000,
+                        timeout: 5000,
                         data: payload,
                         success: function(data){
-                            $j('#'+id).text(data['num']);// update quantity
-                            total = +$j('#total-num').text().slice(0, -1) + (+$j('#price-'+id).text().slice(0, -1));
-                            $j('#total-num').text(total+'₫');// update total
+                            if(data.status == "success"){
+                                $j('#'+id).text(data['num']);// update quantity
+                                total = +$j('#total-num').text().slice(0, -1) + (+$j('#price-'+id).text().slice(0, -1));
+                                $j('#total-num').text(total+'₫');// update total
+                            }
 
                         },
                         error: function(data){
@@ -70,24 +72,67 @@
                         type: "POST",
                         dataType: "json",
                         url: "/sub/",
-                        timeout: 3000,
+                        timeout: 5000,
                         data: payload,
                         success: function(data){
-                            // console.log(id);
-                            // console.log(data);
-                            $j('#'+id).text(data['num']);// update quantity
-                            total = $j('#total-num').text().slice(0, -1) - $j('#price-'+id).text().slice(0, -1);
-                            $j('#total-num').text(total+'₫');// update total
+                            if(data['status'] == 'success'){
+                                if(data['num'] == 0){
+                                    
+                                    $j('#order-'+id).remove();
+                                    // $j('#order-'+id).remove();
+                                    if(data['numInCart'] == 0){
+                                        $j('#total').remove();
+                                        $j('#pay').remove();
+                                        $j('#cart').empty();
+                                        $j('#cart').append('<h1>Giỏ hàng</h1><h5>Không có sản phẩm nào</h5>');
+
+                                    }
+                                }else{
+                                    $j('#'+id).text(data['num']);// update quantity
+                                    total = $j('#total-num').text().slice(0, -1) - $j('#price-'+id).text().slice(0, -1);
+                                    $j('#total-num').text(total+'₫');// update total
+                                }
+                            }
 
                         },
                         error: function(data){
-                            console.log(data);
+                            console.log('error');
                         }
                     })
                 }
+
+                function deleteOrder(id){
+                    $j.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: '/remove/',
+                        timeout: 5000,
+                        data: {
+                            "csrfmiddlewaretoken": "{{csrf_token}}",
+                            'id': id
+                        },
+                        success: function(data){
+                            console.log(id);
+                            if (data['status'] == 'success'){
+                                $j('#order-'+id).remove();
+                                // $j('#order-'+id).remove();
+                                if(data['numInCart'] == 0){
+                                    $j('#total').remove();
+                                    $j('#pay').remove();
+                                    $j('#cart').empty();
+                                    $j('#cart').append('<h1>Giỏ hàng</h1><h5>Không có sản phẩm nào</h5>');
+
+                                }
+                                console.log(data);
+
+                            }
+                        }
+                    })
+                }
+
             </script>
             {% for order in cart %}
-                <tr>
+                <tr id="order-{{order.id}}">
                     <th scope="row " >
                               <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
                        </th>
@@ -137,7 +182,10 @@
                         </div>
                        </td>
                     <td>   
-                          <div style="height: 10rem;"  class="d-flex align-items-center"> <a href="/remove/{{order.id}}"><i class="fad fa-trash-alt"></i></a></div>
+                        <div style="height: 10rem;"  class="d-flex align-items-center">
+                            <!-- <a href="/remove/{{order.id}}"><i class="fad fa-trash-alt"></i></a> -->
+                            <a onclick="deleteOrder('{{order.id}}')"><i class="fad fa-trash-alt"></i></a>
+                        </div>
                          
                         
                     </td>
@@ -146,19 +194,17 @@
             
         </tbody>
     </table>
-    {% else %}
-       <h5>Không có sản phẩm nào</h5>
-    {% endif %}
-
-    {% if cart|length != 0 %}
     <div id="total">
         <span><strong>Tổng tiền:</strong></span>
         <span id="total-num">{{totalcart}}₫</span>
     </div>
-    <div class="pay">
+    <div id="pay" class="pay">
         <button type="button" class="btn btn-primary"><a href="/pay">Thanh toán</a></button>
     </div>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
     {% endif %}
+
 </div>
 
 <div class="processing col-12 p-0 pt-5">
