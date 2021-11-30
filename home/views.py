@@ -12,7 +12,14 @@ import hashlib
 # def index(request):
 #     if Product_Capacity.objects.all().count() > 0:
 #         return HttpResponse("<h1>Done</h1>")
-#     products = Product.objects.filter(type='iphone' or 'ipad')
+#     products = Product.objects.filter(type='iphone')
+#     for product in products:
+#         Product_Capacity.objects.create(product=product, capacity='64GB')
+#         Product_Capacity.objects.create(product=product, capacity='128GB')
+#         Product_Capacity.objects.create(product=product, capacity='512GB')
+#         Product_Capacity.objects.create(product=product, capacity='1TB')
+
+#     products = Product.objects.filter(type='ipad')
 #     for product in products:
 #         Product_Capacity.objects.create(product=product, capacity='64GB')
 #         Product_Capacity.objects.create(product=product, capacity='128GB')
@@ -21,17 +28,15 @@ import hashlib
 
 #     products = Product.objects.filter(type='mac')
 #     for product in products:
-#         Product_Capacity.objects.create(product=product, capacity='RAM 16GB + SSD 256GB')
-#         Product_Capacity.objects.create(product=product, capacity='RAM 32GB + SSD 512GB')
-#         # Product_Capacity.objects.create(product=product, capacity='RAM 32GB + SSD 256GB')
-#         # Product_Capacity.objects.create(product=product, capacity='RAM 16GB + SSD 256GB')
+#         Product_Capacity.objects.create(product=product, capacity='RAM 16GB - SSD 256GB')
+#         Product_Capacity.objects.create(product=product, capacity='RAM 32GB - SSD 512GB')
 
 #     products = Product.objects.filter(type='watch')
 #     for product in products:
 #         Product_Capacity.objects.create(product=product, capacity='41mm')
 #         Product_Capacity.objects.create(product=product, capacity='45mm')
 
-#     return HttpResponse("<h1>Done</h1>")
+    # return HttpResponse("<h1>Done</h1>")
 
 # def index(request):
 #     f = open('D:/Desktop/f.txt','r',encoding='utf-8')
@@ -99,7 +104,7 @@ def addToCart(request, id):
         if selectedcolor == None:
             selectedcolor = list(colors)[0].color
         # lấy link ảnh từ màu đc chọn
-        productImg = Product_img_color.objects.get(color=selectedcolor).img.url
+        productImg = Product_img_color.objects.get(color=selectedcolor, product=product).img.url
         # lấy danh sách dung lượng của sản phẩm đc chọn
         capacityList = Product_Capacity.objects.all().filter(product=product)
         selectedcapacity = request.GET.get('capacity')
@@ -204,29 +209,29 @@ def productDetail(request, id):
         return redirect('/')
     # try:
     product = Product.objects.get(id=id)
-    colors = Product_img_color.objects.all().filter(product=product)
+    colors = Product_img_color.objects.filter(product=product)
     selectedcolor = request.GET.get('color')
     if selectedcolor == None:
         selectedcolor = list(colors)[0].color
-    try:
-        productImg = Product_img_color.objects.get(
-            color=selectedcolor, product=product)
-        capacityList = Product_Capacity.objects.all().filter(product=product)
-        # for capacity in capacityList:
-        #     print(capacity.capacity)
-        selectedcapacity = request.GET.get('capacity')
-        if selectedcapacity == None:
-            selectedcapacity = list(capacityList)[0].capacity
-        Data = {
-            'product': Product.objects.get(id=id),
-            'selectedcolor': selectedcolor,
-            'colors': colors,
-            'productImg': productImg,
-            'capacityList': capacityList,
-            "selectedcapacity": selectedcapacity
-        }
-    except:
-        return redirect('/')
+    # try:
+    productImg = Product_img_color.objects.get(
+        color=selectedcolor, product=product)
+    capacityList = Product_Capacity.objects.filter(product=product)
+    # for capacity in capacityList:
+    #     print(capacity.capacity)
+    selectedcapacity = request.GET.get('capacity')
+    if selectedcapacity == None:
+        selectedcapacity = list(capacityList)[0].capacity
+    Data = {
+        'product': Product.objects.get(id=id),
+        'selectedcolor': selectedcolor,
+        'colors': colors,
+        'productImg': productImg,
+        'capacityList': capacityList,
+        "selectedcapacity": selectedcapacity
+    }
+    # except:
+        # return redirect('/')
     return render(request, 'productDetail.html', Data)
 
 

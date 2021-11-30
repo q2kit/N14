@@ -50,13 +50,13 @@ class WardAdmin(admin.ModelAdmin):
 class Product_Img_ColorAdmin(admin.ModelAdmin):
     list_display = ['id', 'product', 'img', 'color']
     list_filter = ['product']
-    search_fields = ['product']
+    search_fields = ['product__name']
 
 
 class Product_CapacityAdmin(admin.ModelAdmin):
     list_display = ['id', 'product', 'capacity']
     list_filter = ['product']
-    search_fields = ['product', 'id']
+    search_fields = ['product__name', 'id']
 
 
 admin.site.register(Customer, CustomerAdmin)

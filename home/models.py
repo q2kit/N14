@@ -83,7 +83,7 @@ class Product_img_color(models.Model):
 
 class Product_Capacity(models.Model):
     id = models.AutoField(primary_key=True)
-    product = models.CharField(max_length=32)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     capacity = models.CharField(max_length=30)
 
 
