@@ -1,4 +1,5 @@
 from django.http.response import *
+from django.http import *
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
@@ -118,26 +119,67 @@ def removeFromCart(request, id):
         return redirect('/')
 
 
-def add(request, id):
+# def add(request, id):
+#     try:
+#         phone = request.session['customer']
+#         order = Order.objects.get(id=int(id))
+#         product = Product.objects.get(id=order.product_id)
+#         if(product.quantityInStock == 0):
+#             return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
+#         else:
+#             product.quantityInStock -= 1
+#             product.save()
+#         order.quantity += 1
+#         order.save()
+#         return redirect('/order')
+#     except:
+#         return redirect('/')
+
+def add(request):
     try:
         phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except KeyError:  # not login
+        return redirect('/login')
+    try:
+        id = request.POST.get('id')
         order = Order.objects.get(id=int(id))
         product = Product.objects.get(id=order.product_id)
         if(product.quantityInStock == 0):
-            return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
+            return JsonResponse({'status': 'error', 'message': 'Sản phẩm đã hết hàng'})
         else:
             product.quantityInStock -= 1
             product.save()
         order.quantity += 1
         order.save()
-        return redirect('/order')
+        return JsonResponse({'status': 'success', 'message': 'Thêm sản phẩm thành công', 'num': order.quantity})
     except:
         return redirect('/')
 
+# def sub(request, id):
+#     try:
+#         phone = request.session['customer']
+#         order = Order.objects.get(id=int(id))
+#         product = Product.objects.get(id=order.product_id)
+#         product.quantityInStock += 1
+#         product.save()
+#         order.quantity -= 1
+#         order.save()
+#         if order.quantity == 0:
+#             order.delete()
+#         return redirect('/order')
+#     except:
+#         return redirect('/')
 
-def sub(request, id):
+
+def sub(request):
     try:
         phone = request.session['customer']
+        customer = Customer.objects.get(phone=phone)
+    except KeyError:  # not login
+        return redirect('/login')
+    try:
+        id = request.POST.get('id')
         order = Order.objects.get(id=int(id))
         product = Product.objects.get(id=order.product_id)
         product.quantityInStock += 1
@@ -146,10 +188,9 @@ def sub(request, id):
         order.save()
         if order.quantity == 0:
             order.delete()
-        return redirect('/order')
+        return JsonResponse({'status': 'success', 'message': 'Bớt sản phẩm thành công', 'num': order.quantity})
     except:
         return redirect('/')
-
 
 def productDetail(request, id):
     if id is None:
