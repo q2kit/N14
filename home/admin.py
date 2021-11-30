@@ -14,7 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'price',
                     'showcasedImg', 'quantityInStock', 'type', 'sale']
     list_filter = ['type']
-    search_fields = ['name']
+    search_fields = ['name', 'id']
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -48,15 +48,15 @@ class WardAdmin(admin.ModelAdmin):
 
 
 class Product_Img_ColorAdmin(admin.ModelAdmin):
-    list_display = ['id', 'productID', 'img', 'color']
-    list_filter = ['productID']
-    search_fields = ['productID']
+    list_display = ['id', 'product', 'img', 'color']
+    list_filter = ['product']
+    search_fields = ['product']
 
 
 class Product_CapacityAdmin(admin.ModelAdmin):
-    list_display = ['id', 'productID', 'capacity']
-    list_filter = ['productID']
-    search_fields = ['productID']
+    list_display = ['id', 'product', 'capacity']
+    list_filter = ['product']
+    search_fields = ['product', 'id']
 
 
 admin.site.register(Customer, CustomerAdmin)

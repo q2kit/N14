@@ -10,6 +10,30 @@ import hashlib
 # Create your views here.
 
 # def index(request):
+#     if Product_Capacity.objects.all().count() > 0:
+#         return HttpResponse("<h1>Done</h1>")
+#     products = Product.objects.filter(type='iphone' or 'ipad')
+#     for product in products:
+#         Product_Capacity.objects.create(product=product, capacity='64GB')
+#         Product_Capacity.objects.create(product=product, capacity='128GB')
+#         Product_Capacity.objects.create(product=product, capacity='512GB')
+#         Product_Capacity.objects.create(product=product, capacity='1TB')
+
+#     products = Product.objects.filter(type='mac')
+#     for product in products:
+#         Product_Capacity.objects.create(product=product, capacity='RAM 16GB + SSD 256GB')
+#         Product_Capacity.objects.create(product=product, capacity='RAM 32GB + SSD 512GB')
+#         # Product_Capacity.objects.create(product=product, capacity='RAM 32GB + SSD 256GB')
+#         # Product_Capacity.objects.create(product=product, capacity='RAM 16GB + SSD 256GB')
+
+#     products = Product.objects.filter(type='watch')
+#     for product in products:
+#         Product_Capacity.objects.create(product=product, capacity='41mm')
+#         Product_Capacity.objects.create(product=product, capacity='45mm')
+
+#     return HttpResponse("<h1>Done</h1>")
+
+# def index(request):
 #     f = open('D:/Desktop/f.txt','r',encoding='utf-8')
 #     for line in f.readlines():
 #         xa,huyen,tinh=line.split('/')
@@ -54,7 +78,6 @@ def index(request):
         'iPad': iPad,
         'customer': customer
     }
-    # Data = {'products': Product.objects.all(), 'customer': customer}
     return render(request, 'index.html', Data)
 
 
@@ -69,7 +92,7 @@ def addToCart(request, id):
         product = Product.objects.get(id=id)
 
         # lấy danh sách màu của sản phẩm đc chọn
-        colors = Product_img_color.objects.all().filter(productID=id)
+        colors = Product_img_color.objects.all().filter(product=product)
         # lấy giá trị màu mà user chọn
         selectedcolor = request.GET.get('color')
         # mặc định màu là màu đầu tiên
@@ -78,7 +101,7 @@ def addToCart(request, id):
         # lấy link ảnh từ màu đc chọn
         productImg = Product_img_color.objects.get(color=selectedcolor).img.url
         # lấy danh sách dung lượng của sản phẩm đc chọn
-        capacityList = Product_Capacity.objects.all().filter(productID=id)
+        capacityList = Product_Capacity.objects.all().filter(product=product)
         selectedcapacity = request.GET.get('capacity')
         if selectedcapacity == None:
             selectedcapacity = list(capacityList)[0].capacity
@@ -100,23 +123,6 @@ def addToCart(request, id):
                              quantity=1, status='incart')
 
     return redirect('/product/'+id+f'?color={selectedcolor}&capacity={selectedcapacity}')
-
-
-# def removeFromCart(request, id):
-#     try:
-#         phone = request.session['customer']
-#         customer = Customer.objects.get(phone=phone)
-#     except KeyError:  # not login
-#         return redirect('/login')
-#     try:
-#         order = Order.objects.get(id=int(id), status='incart')
-#         product = Product.objects.get(id=order.product_id)
-#         product.quantityInStock += order.quantity
-#         product.save()
-#         order.delete()
-#         return redirect('/order')
-#     except:  # order not found
-#         return redirect('/')
 
 
 def removeFromCart(request):
@@ -143,21 +149,6 @@ def removeFromCart(request):
             return redirect('/')
     return redirect('/')
 
-# def add(request, id):
-#     try:
-#         phone = request.session['customer']
-#         order = Order.objects.get(id=int(id))
-#         product = Product.objects.get(id=order.product_id)
-#         if(product.quantityInStock == 0):
-#             return HttpResponse("<h1>Sản phẩm đã hết hàng</h1>")
-#         else:
-#             product.quantityInStock -= 1
-#             product.save()
-#         order.quantity += 1
-#         order.save()
-#         return redirect('/order')
-#     except:
-#         return redirect('/')
 
 def add(request):
     try:
@@ -179,21 +170,6 @@ def add(request):
         return JsonResponse({'status': 'success', 'message': 'Thêm sản phẩm thành công', 'num': order.quantity})
     except:
         return redirect('/')
-
-# def sub(request, id):
-#     try:
-#         phone = request.session['customer']
-#         order = Order.objects.get(id=int(id))
-#         product = Product.objects.get(id=order.product_id)
-#         product.quantityInStock += 1
-#         product.save()
-#         order.quantity -= 1
-#         order.save()
-#         if order.quantity == 0:
-#             order.delete()
-#         return redirect('/order')
-#     except:
-#         return redirect('/')
 
 
 def sub(request):
@@ -223,17 +199,21 @@ def sub(request):
         return redirect('/')
 
 def productDetail(request, id):
+
     if id is None:
         return redirect('/')
+    # try:
+    product = Product.objects.get(id=id)
+    colors = Product_img_color.objects.all().filter(product=product)
+    selectedcolor = request.GET.get('color')
+    if selectedcolor == None:
+        selectedcolor = list(colors)[0].color
     try:
-        colors = Product_img_color.objects.all().filter(productID=id)
-        selectedcolor = request.GET.get('color')
-        if selectedcolor == None:
-            selectedcolor = list(colors)[0].color
-
         productImg = Product_img_color.objects.get(
-            color=selectedcolor, productID=id)
-        capacityList = Product_Capacity.objects.all().filter(productID=id)
+            color=selectedcolor, product=product)
+        capacityList = Product_Capacity.objects.all().filter(product=product)
+        # for capacity in capacityList:
+        #     print(capacity.capacity)
         selectedcapacity = request.GET.get('capacity')
         if selectedcapacity == None:
             selectedcapacity = list(capacityList)[0].capacity
