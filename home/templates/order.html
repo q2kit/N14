@@ -81,6 +81,7 @@
                                 $j('#total-num').text(total+'₫');// update total
 
                                 if(data['num'] == 0){
+                                    $j('#number_in_cart').text($j('#number_in_cart').text()-1);
                                     $j('#order-'+id).remove();
                                     // $j('#order-'+id).remove();
                                     if(data['numInCart'] == 0){
@@ -118,6 +119,7 @@
                             console.log(id);
                             if (data['status'] == 'success'){
                                 $j('#order-'+id).remove();
+                                $j('#number_in_cart').text($j('#number_in_cart').text()-1);
                                 // $j('#order-'+id).remove();
                                 if(data['numInCart'] == 0){
                                     $j('#total').remove();
