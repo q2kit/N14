@@ -166,6 +166,15 @@ input:focus {
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(116, 116, 116, 0.08) 0px 1px 0px inset;
+   min-height: 100%;
+
+}
+.hehe{
+  display: flex;
+  align-items: stretch;
+}
+.test{
+   min-height: 100%;
 }
 .product .productName {
   margin-top: 0.5rem;
@@ -231,6 +240,7 @@ input:focus {
 .productDetail .capacity--active {
   background-color: rgb(26, 26, 26);
 }
+
 .productDetail .color {
   height: 2.5rem;
   width: 2.5rem;
