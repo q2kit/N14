@@ -227,6 +227,7 @@ input:focus {
   margin-right: 1rem;
   cursor: pointer;
 }
+.productDetail .capacity__name{display: inline-block;}
 .productDetail .capacity--active {
   background-color: rgb(26, 26, 26);
 }
@@ -292,6 +293,14 @@ input:focus {
 .done a:hover {
   transition: all 0.2s;
   color: #0071e3;
+}
+.cart i:hover,
+.processing i:hover,
+.done i:hover {
+  cursor: pointer;
+}
+.pay a:hover{
+color: white!important;
 }
 td {
   height: 100%;

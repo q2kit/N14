@@ -76,8 +76,12 @@
                         data: payload,
                         success: function(data){
                             if(data['status'] == 'success'){
+                                $j('#'+id).text(data['num']);// update quantity
+                                total = $j('#total-num').text().slice(0, -1) - $j('#price-'+id).text().slice(0, -1);
+                                $j('#total-num').text(total+'₫');// update total
+
                                 if(data['num'] == 0){
-                                    
+                                    $j('#number_in_cart').text($j('#number_in_cart').text()-1);
                                     $j('#order-'+id).remove();
                                     // $j('#order-'+id).remove();
                                     if(data['numInCart'] == 0){
@@ -87,10 +91,6 @@
                                         $j('#cart').append('<h1>Giỏ hàng</h1><h5>Không có sản phẩm nào</h5>');
 
                                     }
-                                }else{
-                                    $j('#'+id).text(data['num']);// update quantity
-                                    total = $j('#total-num').text().slice(0, -1) - $j('#price-'+id).text().slice(0, -1);
-                                    $j('#total-num').text(total+'₫');// update total
                                 }
                             }
 
@@ -102,6 +102,10 @@
                 }
 
                 function deleteOrder(id){
+                    
+                    total = $j('#total-num').text().slice(0, -1) - 1*$j('#price-'+id).text().slice(0, -1)*$j('#'+id).text();
+                    $j('#total-num').text(total+'₫');// update total
+
                     $j.ajax({
                         type: 'POST',
                         dataType: 'json',
@@ -115,6 +119,7 @@
                             console.log(id);
                             if (data['status'] == 'success'){
                                 $j('#order-'+id).remove();
+                                $j('#number_in_cart').text($j('#number_in_cart').text()-1);
                                 // $j('#order-'+id).remove();
                                 if(data['numInCart'] == 0){
                                     $j('#total').remove();

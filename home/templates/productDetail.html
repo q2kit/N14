@@ -27,12 +27,12 @@
          {% for capacity in capacityList %}
     
           {% if capacity.capacity == selectedcapacity %}
-                <a href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
-                    <div class="capacity capacity--active " >{{capacity.capacity}}</div>
+                <a  href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
+                    <div class="capacity capacity--active " ><p class="capacity__name">{{capacity.capacity}}</p></div>
                 </a>
                 {% else %}
                        <a  href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
-                       <div class="capacity ">{{capacity.capacity}}</div></a>
+                       <div class="capacity "><p class="capacity__name">{{capacity.capacity}}</p></div></a>
                 {% endif %} 
             {% endfor %}
        
