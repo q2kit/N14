@@ -149,7 +149,7 @@
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
                             <p class="productName">{{ product.name }}</p>
                         </a>
-                       <div class="d-flex justify-content-center">
+                       <div class="d-flex price w-100 justify-content-center">
                             <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
                         {% if product.sale != None and  product.sale != 0 %} 
                             <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
@@ -165,15 +165,15 @@
             <i class="fab fa-apple"></i> <span>Mac</span>
         </div>
     </div>
-    <div class="row hehe padding-lg">
+    <div class="row  padding-lg">
         {% for product   in mac|slice:":8" %}
                 <div class="col-6 col-sm-4 col-md-3  mt-3 pb-3 ">
                     <div class="product">
                         <a  href="/product/{{ product.id }}">
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
-                            <p class="productName test">{{ product.name }}</p>
+                            <p class="productName ">{{ product.name }}</p>
                         </a>
-                         <div class="d-flex justify-content-center">
+                         <div class="d-flex price w-100 justify-content-center">
                             <p class="productPrice  mr-2"> {%multiply product.sale product.price   %}₫</p>
                         {% if product.sale != None and  product.sale != 0 %} 
                             <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
@@ -197,7 +197,7 @@
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
                             <p class="productName">{{ product.name }}</p>
                         </a>
-                         <div class="d-flex justify-content-center">
+                         <div class="d-flex price w-100 justify-content-center">
                             <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
                         {% if product.sale != None and  product.sale != 0 %} 
                             <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
@@ -221,7 +221,7 @@
                             <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
                             <p class="productName">{{ product.name }}</p>
                         </a>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex price w-100 justify-content-center">
                             <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
                         {% if product.sale != None and  product.sale != 0 %} 
                             <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>

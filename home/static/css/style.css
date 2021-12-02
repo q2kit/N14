@@ -167,6 +167,7 @@ input:focus {
     rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
     rgba(116, 116, 116, 0.08) 0px 1px 0px inset;
    min-height: 100%;
+   position: relative;
 
 }
 
@@ -174,17 +175,25 @@ input:focus {
   margin-top: 0.5rem;
   text-align: center;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 .product .productPrice {
   text-align: center;
   font-weight: 600;
   font-size: 1.2rem;
   margin: 0;
+  
+}
+.product .price{
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .productPrice--sale{
   font-size: 1rem;
   margin: 0;
+  display: block;
      text-decoration-line: line-through; 
      font-weight: 300;
 }
