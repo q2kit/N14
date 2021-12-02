@@ -169,13 +169,7 @@ input:focus {
    min-height: 100%;
 
 }
-.hehe{
-  display: flex;
-  align-items: stretch;
-}
-.test{
-   min-height: 100%;
-}
+
 .product .productName {
   margin-top: 0.5rem;
   text-align: center;
