@@ -30,6 +30,16 @@ class Ward(models.Model):
         return self.name
 
 
+class Address(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+    ward = models.ForeignKey(Ward, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.ward.name + " " + self.district.name + " " + self.city.name
+
+
+
 class Customer(models.Model):
     name = models.CharField(max_length=40)
     phone = models.CharField(max_length=10, primary_key=True)
@@ -40,6 +50,7 @@ class Customer(models.Model):
         District, on_delete=models.SET_NULL, null=True)
     ward = models.ForeignKey(Ward, on_delete=models.SET_NULL, null=True)
     street = models.CharField(max_length=400, null=True)
+    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
 
     def getAddress(self):
         return self.street + ', ' + self.ward.name + ', ' + self.district.name + ', ' + self.city.name

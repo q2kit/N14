@@ -59,6 +59,10 @@ class Product_CapacityAdmin(admin.ModelAdmin):
     search_fields = ['product__name', 'id']
 
 
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ['id', 'city', 'district', 'ward']
+    list_filter = ['city']
+
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
@@ -67,3 +71,4 @@ admin.site.register(District, DistrictAdmin)
 admin.site.register(Ward, WardAdmin)
 admin.site.register(Product_img_color, Product_Img_ColorAdmin)
 admin.site.register(Product_Capacity, Product_CapacityAdmin)
+admin.site.register(Address, AddressAdmin)
