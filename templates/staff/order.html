@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn hàng</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'logo.svg' %}" />
+</head>
+
+<body>
+    <img src="/media/back.jpg" alt="Back to manage"
+        style="position: absolute;left:20px;top:20px;width: 50px; height: 50px; cursor: pointer"
+        onclick="window.location.href='/manage/'">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% load tags %}
+    <table>
+        <thead>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Khách hàng</th>
+            <th>Tên sản phẩm</th>
+            <th>Ảnh sản phẩm</th>
+            <th>Thông tin sản phẩm</th>
+            <th>Ngày tạo đơn</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <!-- <th>Trạng thái</th> -->
+            <th id="status">
+                <div style="width:fit-content;margin-left: calc(50% - 38px);">
+                    Trạng thái
+                    <img style="height:20px;" src="/media/dropdown.png" alt="">
+                </div>
+                <ul>
+                    <li id="all" onclick="display('all')">Tất cả</li>
+                    <li id="incart" onclick="display('incart')">Trong giỏ hàng</li>
+                    <li id="processing" onclick="display('processing')">Đang xử lý</li>
+                    <li id="shipping" onclick="display('shipping')">Đang giao hàng</li>
+                    <li id="done" onclick="display('done')">Đã hoàn thành</li>
+                </ul>
+            </th>
+            <th>Thao tác</th>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr class="order {{ order.status }}">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.id }}</td>
+                <td>
+                    <p>Tên: {{ order.customer.name }}</p>
+                    <p>Sđt: {{ order.customer.phone }}</p>
+                </td>
+                <td>{{ order.product.name }}</td>
+                <td><img src="{{ order.productImg }}" alt="{{order.product.name}}" width="150px"></td>
+                <td>{{order.productCapacity}}</td>
+                <td>{{ order.created_at|date:"d/m/Y H:i:s" }}</td>
+                <td>{% multiply order.product.sale order.product.price %}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{% total order.id %}</td>
+
+                {% if order.status == 'incart' %}
+                <td>Trong giỏ hàng</td>
+                <td><a href="javascript:void(0);">#</a></td>
+                {% elif order.status == 'processing' %}
+                <td>Đang xử lý</td>
+                <td><a href="javascript:void(0);" onclick="shipping('{{order.id}}')">Giao hàng</a></td>
+                {% elif order.status == 'shipping' %}
+                <td>Đang giao hàng</td>
+                <td><a href="javascript:void(0);" onclick="done('{{order.id}}')">Giao hàng thành công</a></td>
+                {% elif order.status == 'done' %}
+                <td>Đã hoàn thành</td>
+                <td><a href="javascript:void(0);">#</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        body {
+            /* background-color: #f5f5f5; */
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            cursor: default;
+        }
+
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th>ul {
+            margin-top: 1px;
+            display: none;
+            position: absolute;
+            background-color: #f5f5f5;
+            width: 159px;
+        }
+
+        ul>li {
+            list-style: none;
+            border: 1px solid black;
+            margin: 10px 15%;
+            width: 70%;
+            cursor: pointer;
+            background-color: #dad2d2;
+        }
+
+        #status:hover>ul {
+            display: block;
+        }
+
+        td>a {
+            color: #000;
+            text-decoration: none;
+            border: 1px solid black;
+            background-color: rgb(215, 248, 237);
+            cursor: pointer;
+        }
+
+        td>a:hover {
+            color: red;
+        }
+    </style>
+
+    <script>
+
+        function display(status) {
+
+            if (status == 'all') {
+                $('.order').show();
+            }
+            else {
+                $('.order').hide();
+                $('.order.' + status).show();
+            }
+        }
+
+        function shipping(id) {
+            if (confirm('Vui lòng xác nhận giao hàng')) {
+                $.ajax({
+                    url: '/manage/order/shipping/' + id,
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status == 'success') {
+                            alert('Đang giao hàng');
+                            window.location.reload();
+                        } else {
+                            alert('Có lỗi xảy ra, vui lòng thử lại!');
+                        }
+                    }
+                });
+            }
+        }
+
+        function done(id) {
+            if (confirm('Vui lòng xác nhận giao hàng')) {
+                $.ajax({
+                    url: '/manage/order/done/' + id,
+                    type: 'GET',
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status == 'success') {
+                            alert('Thành công!');
+                            window.location.reload();
+                        } else {
+                            alert('Có lỗi xảy ra, vui lòng thử lại!');
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>

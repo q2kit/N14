@@ -1,0 +1,77 @@
+
+{% extends 'home/base.html' %}
+ {% load static %} 
+{% block title %}{{product.name}}{% endblock title %}
+{% block content %}
+{% load tags %}
+
+<div class="row productDetail pt-5 pb-5">
+    
+    <div class="col-sm-6">
+      
+        <div class="">
+            <img class="productImg" width="100%" src="{{productImg.img.url}}" alt="">
+        
+        </div>
+    </div>
+    <div class="col-sm-6 pt-5">
+        <p class="productName">{{product.name}}</p>
+        <div class="d-flex ">
+            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+        {% if product.sale != None and  product.sale != 0 %} 
+            <p class="  productPrice--sale">{{ product.price }} ₫</p>
+        {% endif %}
+                           
+        </div>
+        <p>Dung lượng</p>
+         {% for capacity in capacityList %}
+    
+          {% if capacity.capacity == selectedcapacity %}
+                <a  href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
+                    <div class="capacity capacity--active " ><p class="capacity__name">{{capacity.capacity}}</p></div>
+                </a>
+                {% else %}
+                       <a  href="?color={{selectedcolor}}&capacity={{capacity.capacity}}">
+                       <div class="capacity "><p class="capacity__name">{{capacity.capacity}}</p></div></a>
+                {% endif %} 
+            {% endfor %}
+       
+        <p class="mt-3">Màu</p>
+        <div class="colors mb-5">
+            {% for color in colors %}
+                {% if selectedcolor == color.color %}
+                <a href="?color={{color.color}}&capacity={{selectedcapacity}}">
+                    <div class="color color--active" style="background-color: #{{color.color}}"></div>
+                </a>
+                {% else %}
+                      <a href="?color={{color.color}}&capacity={{selectedcapacity}}"><div class="color " style="background-color:#{{color.color}}"></div></a>
+                {% endif %}
+            {% endfor %}
+       
+           
+        </div>
+        {% if product.quantityInStock > 0 %}
+        <a href="/addtocart/{{product.id}}?color={{selectedcolor}}&capacity={{selectedcapacity}}">
+            <div class="addtocart mr-lg-3">Thêm vào giỏ</div>
+        </a>
+        <!-- <a href="">
+           <div class="installment">Trả góp</div>
+        </a> -->
+        {% else %}
+        <br>
+        <h4 style="color: rgb(228, 25, 211);">Sản phẩm tạm thời hết hàng!</h4>
+        {% endif %}
+       
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12 padding-0">
+        <img style="width: 100%;" src="{% static 'img/mota.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota2.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota3.jpg' %}" alt="">
+        <img style="width: 100%;" src="{% static 'img/mota4.jpg' %}" alt="">
+    </div>
+</div>
+
+{% endblock content %}

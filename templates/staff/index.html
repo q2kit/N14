@@ -1,0 +1,292 @@
+<title>Quản lý sản phẩm</title>
+{% load static %}
+<link rel="icon" href="{% static 'logo.svg' %}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<a style="font-size:50px;text-decoration: none;margin: 0 50px;" href="/manage/addProduct">Thêm sản phẩm</a>
+<a style="font-size:50px;text-decoration: none;margin: 0 50px;" href="/manage/order">Quản lý đơn hàng</a>
+
+<br>
+<br>
+<br>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th id="type">
+                <div style="width:fit-content;margin-left: calc(50% - 19px);">
+                    Loại
+                    <img style="height:20px;" src="/media/dropdown.png" alt="">
+                </div>
+                <ul>
+                    <li id="all" onclick="display('all')">Tất cả</li>
+                    <li id="iphone" onclick="display('iphone')">iPhone</li>
+                    <li id="ipad" onclick="display('ipad')">iPad</li>
+                    <li id="mac" onclick="display('mac')">Mac</li>
+                    <li id="watch" onclick="display('watch')">Watch</li>
+                </ul>
+            </th>
+            <th>Ảnh</th>
+            <th>Giá</th>
+            <th>Sale</th>
+            <th>Số lượng trong kho</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr class="{{ product.type }} product">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ product.id }}</td>
+            <td>
+                <p class="{{ product.id }}">{{ product.name }}</p>
+                <input type="text" id="{{ product.id }}name" placeholder="{{ product.name }}">
+            </td>
+            <td>
+                <p class="{{ product.id }}">
+                    {% if product.type == 'iphone' %}
+                    iPhone
+                    {% elif product.type == 'ipad' %}
+                    iPad
+                    {% elif product.type == 'mac' %}
+                    Mac
+                    {% else %}
+                    Watch
+                    {% endif %}
+                </p>
+                <select id="{{ product.id }}type">
+                    {% if product.type == 'iphone' %}
+                    <option value="iphone" selected>iPhone</option>
+                    <option value="ipad">iPad</option>
+                    <option value="mac">Mac</option>
+                    <option value="watch">Watch</option>
+                    {% elif product.type == 'ipad' %}
+                    <option value="iphone">iPhone</option>
+                    <option value="ipad" selected>iPad</option>
+                    <option value="mac">Mac</option>
+                    <option value="watch">Watch</option>
+                    {% elif product.type == 'mac' %}
+                    <option value="iphone">iPhone</option>
+                    <option value="ipad">iPad</option>
+                    <option value="mac" selected>Mac</option>
+                    <option value="watch">Watch</option>
+                    {% else %}
+                    <option value="iphone">iPhone</option>
+                    <option value="ipad">iPad</option>
+                    <option value="mac">Mac</option>
+                    <option value="watch" selected>Watch</option>
+                    {% endif %}
+                </select>
+            </td>
+            <td>
+                <img class="{{ product.id }}" src="/media/{{ product.showcasedImg }}" alt="">
+                <input type="file" id="{{ product.id }}img" accept=".jpg, .jpeg, .png">
+            </td>
+            <td>
+                <p class="{{ product.id }}">{{ product.price }} ₫</p>
+                <input type="text" id="{{ product.id }}price" placeholder="{{ product.price }}₫">
+            </td>
+            <td>
+                {% if product.sale %}
+                <p class="{{ product.id }}">{% widthratio product.sale 1 100 %}</p>
+                <input type="text" id="{{ product.id }}sale" placeholder="Sale {% widthratio product.sale 1 100 %}%">
+                {% else %}
+                <p class="{{ product.id }}">0</p>
+                <input type="text" id="{{ product.id }}sale" placeholder="Sale 0%">
+                {% endif %}
+            </td>
+            <td>
+                <p class="{{ product.id }}">{{ product.quantityInStock }}</p>
+                <input type="text" id="{{ product.id }}quantityInStock"
+                    placeholder="Còn lại {{ product.quantityInStock }} trong kho">
+            </td>
+            <td>
+                <a class="{{ product.id }}" href="javascript:void(0);" onclick="editProduct('{{ product.id }}')">Sửa</a>
+                <a class="{{ product.id }} product-delete" href="javascript:void(0);"
+                    onclick="deleteProduct('{{product.id}}');">Xóa</a>
+                <input id="{{ product.id}}save" type="button" value="Lưu" onclick="saveProduct('{{ product.id }}')"
+                    style="width:50%;text-align: center;margin-left: 25%;">
+            </td>
+            {% endfor %}
+    </tbody>
+</table>
+<style>
+    * {
+        font-size: 17px;
+        text-align: center;
+        cursor: default;
+    }
+
+    a {
+        cursor: pointer;
+        border: 1px solid blue !important;
+        background-color: lightblue !important;
+        color: chocolate;
+    }
+
+    td>img {
+        width: 150px;
+        height: 150px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    td {
+        padding: 10px;
+        height: 150px;
+    }
+
+    td>a {
+        color: rgb(0, 37, 46);
+        text-decoration: none;
+        background-color: wheat !important;
+        margin: 5px 5px;
+    }
+
+    td>a:hover {
+        background-color: rgb(0, 37, 46) !important;
+        color: rgb(94, 255, 0);
+    }
+
+    .product-delete:hover {
+        color: red;
+    }
+
+    th>ul {
+        margin: 2px 0 0 0;
+        padding: 0;
+        display: none;
+        /* position: fixed; */
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 207px;
+        /* width: 100%; */
+    }
+
+    ul>li {
+        list-style: none;
+        border: 1px solid black;
+        margin: 10px 15%;
+        width: 70%;
+        cursor: pointer;
+        background-color: #dad2d2;
+    }
+
+    #type:hover ul {
+        display: block;
+    }
+
+    input,
+    select {
+        outline: none;
+        text-align: left;
+        display: none;
+        width: 100%;
+    }
+</style>
+
+
+<script>
+    function display(type) {
+        if (type == 'all') {
+            let arr = document.getElementsByClassName('product');
+            for (let i = 0; i < arr.length; i++) {
+                arr[i].style.display = 'table-row';
+            }
+        }
+        else {
+            let arr = document.getElementsByClassName('product');
+            for (let i = 0; i < arr.length; i++) {
+                arr[i].style.display = 'none';
+            }
+            let arr2 = document.getElementsByClassName(type);
+            for (let i = 0; i < arr2.length; i++) {
+                arr2[i].style.display = 'table-row';
+            }
+        }
+    }
+
+    function deleteProduct(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+            $.ajax({
+                url: '/manage/deleteProduct/' + id,
+                type: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'success') {
+                        alert('Xóa thành công');
+                        location.reload();
+                    }
+                    else {
+                        alert('Xóa thất bại');
+                    }
+                }
+            });
+        }
+    }
+
+    function editProduct(id) {
+        let arr = document.getElementsByClassName(id);
+        for (let i = 0; i < arr.length; i++) {
+            arr[i].style.display = 'none';
+        }
+        document.getElementById(id + 'name').style.display = 'block';
+        document.getElementById(id + 'type').style.display = 'block';
+        document.getElementById(id + 'img').style.display = 'block';
+        document.getElementById(id + 'price').style.display = 'block';
+        document.getElementById(id + 'quantityInStock').style.display = 'block';
+        document.getElementById(id + 'save').style.display = 'block';
+        document.getElementById(id + 'sale').style.display = 'block';
+
+    }
+
+    function saveProduct(id) {
+
+        let payload = new FormData();
+        payload.append('name', document.getElementById(id + 'name').value);
+        payload.append('type', document.getElementById(id + 'type').value);
+        payload.append('price', document.getElementById(id + 'price').value);
+        payload.append('quantityInStock', document.getElementById(id + 'quantityInStock').value);
+        payload.append('sale', document.getElementById(id + 'sale').value);
+        payload.append('img', $('#' + id + 'img')[0].files[0]);
+        payload.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+        console.log(typeof payload);
+        console.log(payload);
+
+        $.ajax({
+            url: '/manage/editProduct/' + id,
+            type: 'POST',
+            data: payload,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                if (data.status == 'success') {
+                    alert('Sửa thành công');
+                    location.reload();
+                }
+                else {
+                    alert('Sửa thất bại');
+                }
+            }
+        });
+
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

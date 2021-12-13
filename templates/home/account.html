@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% block title %}Tài khoản - N14 Store{% endblock %}
+{% block content %}
+
+<div class="pt-5 pb-5 row">
+    <div style="height: 15rem;" class="col-sm-12">
+        <h1>Xin chào, {{customer.name}}</h1>
+        <button type="button" class="btn btn-danger">
+            <a href="/logout">Đăng xuất</a>
+        </button>
+        <br>
+        {% if customer.is_staff %}
+        <button type="button" class="btn btn-primary mt-2">
+            <a href="/manage">Quản lý</a>
+        </button>
+        <br>
+        {% endif %}
+        <button type="button" class="btn btn-primary mt-2">
+            <a href="/edit">Cập nhật thông tin tài khoản</a>
+        </button>
+
+    </div>
+</div>
+{% endblock %}

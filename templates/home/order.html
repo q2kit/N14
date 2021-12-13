@@ -1,0 +1,239 @@
+{% extends 'home/base.html' %} 
+{% block title %} Đơn hàng của bạn {% endblock title %}
+
+{% block templates%}
+{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+{% load tags %}
+<div id="cart" class="cart col-12 pt-5 padding-0">
+    <h1>Giỏ hàng</h1>
+    
+    {% if cart|length != 0 %}
+    <table class="table table-striped table-dark w-100">
+        <thead>
+            <tr>
+                <th scope="col">Mã đơn</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in cart %}
+                <tr id="order-{{order.id}}">
+                    <th scope="row " >
+                              <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
+                       </th>
+                    <td>   
+                        <div class="d-sm-flex align-items-center">
+                          
+                           <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.productImg}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                             <p class="ml-2"><strong>{{order.productCapacity}}</strong></p>
+                           </a>
+                          
+                        </div>
+                    </td>
+                    <td class=" pl-0 pr-0">
+                        <div style="height: 10rem;"  class="d-flex align-items-center">
+                            <div style="position: relative;">
+                                <div id="btn-sub-add{{order.id}}" style="
+                                height: 100%;
+                                width: 100%;
+                                background-color: #faebd721;
+                                position: absolute;
+                                display: none;
+                                "></div>
+                                <a name="" id="" class="btn btn-secondary  p-1 p-lg-2" onclick="subQuantity('{{order.id}}')" role="button">-</a>
+                                <span id="{{order.id}}">{{order.quantity}}</span>
+                                <a name="" id="" class="btn btn-secondary  p-1 p-lg-2" onclick="addQuantity('{{order.id}}')" role="button">+</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                         <div style="height: 10rem;"  class="d-flex align-items-center">
+                                <div class="d-lg-flex justify-content-center">
+                                    <p id="price-{{order.id}}" class="productPrice mr-2"> {% multiply order.product.sale order.product.price %}₫</p>
+                                    {% if order.product.sale != None and order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                    {% endif %}
+                           
+                             </div>
+                        </div>
+                       </td>
+                    <td>   
+                        <div style="height: 10rem;"  class="d-flex align-items-center">
+                            <a onclick="deleteOrder('{{order.id}}')"><i class="fad fa-trash-alt"></i></a>
+                        </div>
+                    </td>
+                </tr>
+             {% endfor %}
+            
+        </tbody>
+    </table>
+    <div id="total">
+        <span><strong>Tổng tiền:</strong></span>
+        <span id="total-num">{{totalcart}}₫</span>
+    </div>
+    <div id="pay" class="pay">
+        <button type="button" class="btn btn-primary"><a href="/pay">Thanh toán</a></button>
+    </div>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
+
+</div>
+
+<div class="processing col-12 p-0 pt-5">
+    <h1>Đang xử lý</h1>
+     {% if processing|length != 0 %}
+        <table class="table table-striped table-dark w-100">
+        <thead>
+            <tr>
+            <th scope="col">Mã đơn</th>
+            <th scope="col">Sản phẩm</th>
+            <th class="sl" scope="col">Số lượng</th>
+            <th scope="col">Giá</th>
+           
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in processing %}
+                <tr>
+                    <th scope="row " >
+                              <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
+                       </th>
+                    <td>   
+                        <div class="d-sm-flex align-items-center">
+                            <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.productImg}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                             <p class="ml-2"><strong>{{order.productCapacity}}</strong></p>
+                           </a>
+                        </div>
+                    </td>
+                    <td class=" ">
+                        <div style="height: 10rem;"  class="d-flex align-items-center justify-content-center">
+                            <p>{{order.quantity}}</p>
+                         </div>
+                    </td>
+                    <td>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> 
+                            <div class="d-lg-flex justify-content-center">
+                                    <p class="productPrice mr-2"> {%multiply order.product.sale order.product.price   %}₫</p>
+                                {% if order.product.sale != None and  order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                {% endif %}
+                           
+                             </div>
+                        </div>
+                       </td>
+                  
+                </tr>
+             {% endfor %}
+            
+        </tbody>
+    </table>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
+   
+</div>
+
+<div class="done col-12 p-0 pt-5">
+    <h1>Hoàn thành</h1>
+     {% if done|length != 0 %}
+        <table class="table table-striped table-dark w-100">
+        <thead>
+            <tr>
+            <th scope="col">Mã đơn</th>
+            <th scope="col">Sản phẩm</th>
+            <th class="sl"  scope="col">Số lượng</th>
+            <th scope="col">Giá</th>
+          
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in done %}
+                <tr>
+                    <th scope="row " >
+                              <div style="height: 10rem;"  class="d-flex align-items-center">   <p> {{order.id}}</p> </div>
+                       </th>
+                    <td>   
+                        <div class="d-sm-flex align-items-center">
+                            <a href=/product/{{order.product.id}}>
+                                <img class="orderImg" src="{{order.productImg}}" alt="{{order.product}}" />
+                           </a>
+                           <a href=/product/{{order.product.id}}>
+                            <p class="ml-2">{{order.product}}</p>
+                             <p class="ml-2"><strong>{{order.productCapacity}}</strong></p>
+                           </a>
+                        </div>
+                    </td>
+                    <td class="">
+                        <div style="height: 10rem;"  class="d-flex align-items-center justify-content-center">
+                            <p>{{order.quantity}}</p>
+                         </div>
+                    </td>
+                    <td>
+                         <div style="height: 10rem;"  class="d-flex align-items-center"> 
+                            <div class="d-lg-flex justify-content-center">
+                                    <p class="productPrice mr-2"> {%multiply order.product.sale order.product.price   %}₫</p>
+                                {% if order.product.sale != None and  order.product.sale != 0 %} 
+                                    <p class="productPrice  productPrice--sale">{{ order.product.price }} ₫</p>
+                                {% endif %}
+                           
+                             </div>
+                        </div>
+                       </td>
+                  
+                </tr>
+             {% endfor %}
+            
+        </tbody>
+    </table>
+    {% else %}
+       <h5>Không có sản phẩm nào</h5>
+    {% endif %}
+    <!-- {% for order in done %}
+        <div>
+            <img src="{{order.product.showcasedImg.url}}" alt="{{order.product}}" class="img"
+            style="display: inline-block;height: 200px;">
+            
+            <div class="idCart">
+                <span>Mã đơn hàng:</span>
+                <span>{{order.id}}</span>
+            </div>
+            
+            <div class="productName">
+                <span>Tên sản phẩm:</span>
+                <span>{{order.product}}</span>
+            </div>
+            
+            <div class="quantity">
+                <span>Số lượng:</span>
+                <span>{{order.quantity}}</span>
+            </div>
+            
+            <div class="productPrice">
+                <span>Giá:</span>
+                <span>{{order.product.price}}</span>
+            </div>
+        </div>
+    {% endfor %} -->
+
+</div>
+{% endblock content %}
+{% block loadjs %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/order.js' %}"></script>
+{% endblock %}

@@ -22,3 +22,24 @@ def multiply(sale, unit_price, *args, **kwargs):
     if(sale == None):
         sale = 0
     return int((1-sale)*unit_price)
+
+
+@register.simple_tag()
+def mul(*args, **kwargs):
+    # you would need to do any localization of the result here
+    try:
+        result = 1
+        for arg in args:
+            result *= arg
+        return int(result)
+    except:
+        return 0
+
+
+@register.simple_tag()
+def total(id):
+    try:
+        order = Order.objects.get(id=id)
+        return int(order.quantity*order.product.price*(1-order.product.sale))
+    except:
+        return int(order.quantity*order.product.price)

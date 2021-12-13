@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    {% load static %}
+    <link href="{% static '/logo.svg' %}" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static '/register/style.css' %}">
+    <script src="{% static '/register/script.js' %}"></script>
+</head>
+
+<body>
+    <div class="login-box">
+        <a id="home" href="/"><img src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg" alt="Home"></a>
+
+        <form id="form" action="/register/" method="post">
+            {% csrf_token %}
+            <div class="user-box">
+                <input id="input1" type="text" autocomplete="off" name="name" required value="{{name}}">
+                <label>Họ và tên</label>
+            </div>
+            <div class="user-box">
+                <input id="input2" type="text" autocomplete="off" name="phone" required value="{{phone}}">
+                <label>Số điện thoại</label>
+            </div>
+            <div class="user-box">
+                <input id="input3" type="password" name="password" required>
+                <label>Mật khẩu</label>
+            </div>
+            <div class="user-box">
+                <input id="input4" type="password" name="password2" required>
+                <label>Nhập lại mật khẩu</label>
+            </div>
+            <p id="error">{{result}}</p>
+            <a href="#" onclick="submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> Đăng ký
+            </a>
+            <input type="submit" hidden/>{# enter for submit #}
+        </form>
+        <p class="link">
+            <br>
+            <a href="/login">Đã có tài khoản?</a>
+        </p>
+    </div>
+</body>
+
+</html>

@@ -8,6 +8,12 @@ import hashlib
 
 
 # Create your views here.
+# import copy
+# def index(request):
+#     xx = Order.objects.all()
+#     for x in xx:
+#         copy.copy(x).save(using='dj')
+#     pass
 
 # def index(request):
 #     if Product_Capacity.objects.all().count() > 0:
@@ -67,6 +73,8 @@ import hashlib
 #     return HttpResponse("<h1>Done</h1>")
 
 def index(request):
+    # return JsonResponse({'status': 'success', 'message': 'Đăng nhập thành công','x':True})
+    # return JsonResponse(request.COOKIES)
     try:
         phone = request.session['customer']
         customer = Customer.objects.get(phone=phone)
@@ -83,7 +91,7 @@ def index(request):
         'iPad': iPad,
         'customer': customer
     }
-    return render(request, 'index.html', Data)
+    return render(request, 'home/index.html', Data)
 
 
 def addToCart(request, id):
@@ -232,7 +240,7 @@ def productDetail(request, id):
     }
     # except:
         # return redirect('/')
-    return render(request, 'productDetail.html', Data)
+    return render(request, 'home/productDetail.html', Data)
 
 
 def category(request, category):
@@ -251,7 +259,7 @@ def category(request, category):
         'page_obj': page_obj
     }
 
-    return render(request, 'category.html', Data)
+    return render(request, 'home/category.html', Data)
 
 
 def register(request):
@@ -267,21 +275,21 @@ def register(request):
         password = request.POST['password']
         password2 = request.POST['password2']
         if phone[0] != '0' or len(phone) != 10 or not(all([(x <= '9' and x >= '0') for x in phone])):
-            return render(request, 'register.html', {'result': 'Số điện thoại không hợp lệ!', 'name': name, 'phone': phone})
+            return render(request, 'home/register.html', {'result': 'Số điện thoại không hợp lệ!', 'name': name, 'phone': phone})
 
         if password != password2:
-            return render(request, 'register.html',
+            return render(request, 'home/register.html',
                           {'result': "Mật khẩu không trùng khớp.", 'name': name, 'phone': phone})
         # if password != password2:
         #     return render(request, 'register.html', {'result': "Mật khẩu không trùng khớp."})
         try:
             Customer.objects.get(phone=phone)
-            return render(request, 'register.html', {'result': "Tài khoản đã tồn tại."})
+            return render(request, 'home/register.html', {'result': "Tài khoản đã tồn tại."})
         except Customer.DoesNotExist:
             password = hashlib.sha256(password.encode()).hexdigest()
             Customer.objects.create(name=name, phone=phone, password=password)
-            return render(request, 'login.html', {'result': 'completeRegistration'})
-    return render(request, 'register.html', {'result': ''})
+            return render(request, 'home/login.html', {'result': 'completeRegistration'})
+    return render(request, 'home/register.html', {'result': ''})
 
 
 def login(request):
@@ -301,9 +309,9 @@ def login(request):
             request.session['customer'] = customer.phone
             return redirect('/')
         except Customer.DoesNotExist:
-            return render(request, 'login.html', {'result': 'incorrect', 'phone': phone})
+            return render(request, 'home/login.html', {'result': 'incorrect', 'phone': phone})
 
-    return render(request, 'login.html', {'result': None})
+    return render(request, 'home/login.html', {'result': None})
 
 
 def forgot(request):
@@ -323,17 +331,20 @@ def forgot(request):
                 passwordDefault.encode()).hexdigest()
             user.save()
         except Customer.DoesNotExist:
-            return render(request, 'forgot.html', {'result': 'notFound'})
+            return render(request, 'home/forgot.html', {'result': 'notFound'})
         # return HttpResponse("<h1>Đổi mật khẩu thành công</h1><h1>Mật khẩu mới là "+passwordDefault+"</h1>")
-        return render(request, 'login.html', {'result': 'resetpw', 'newpw': passwordDefault})
+        return render(request, 'home/login.html', {'result': 'resetpw', 'newpw': passwordDefault})
 
-    return render(request, 'forgot.html', {'result': 'getPhone'})
+    return render(request, 'home/forgot.html', {'result': 'getPhone'})
 
 
 def search(request):
+    print(request.GET)
     if request.method == 'GET':
         try:
             q = request.GET['q'].lower().split()
+            if q == []: # q is empty or q don't have any words / characters
+                return redirect('/')
             products = Product.objects.all()
             result = dict()
             for product in products:
@@ -350,11 +361,12 @@ def search(request):
 
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-            return render(request, 'search.html', {'result': result, 'page_obj': page_obj})
-        except:
-            return render(request, 'search.html', {'result': None})
+            return render(request, 'home/search.html', {'result': result, 'page_obj': page_obj})
 
-    return render(request, 'search.html', {'result': None})
+        except KeyError: # q don't exist in request.GET
+            return redirect('/')
+
+    return render(request, 'home/search.html', {'result': None})
 
 
 def account(request):
@@ -363,7 +375,7 @@ def account(request):
         customer = Customer.objects.get(phone=phone)
     except KeyError:
         return redirect('/login')
-    return render(request, 'account.html', {'customer': customer})
+    return render(request, 'home/account.html', {'customer': customer})
 
 
 def edit(request):
@@ -391,7 +403,7 @@ def edit(request):
         street = request.POST['street']
 
         if password1 != password2:
-            return render(request, 'edit.html', {'result': 'notMatch'})
+            return render(request, 'home/edit.html', {'result': 'notMatch'})
 
         customer.name = name
         if password1 != '':
@@ -402,9 +414,9 @@ def edit(request):
         customer.street = street
         customer.save()
         data['result'] = 'done'
-        return render(request, 'edit.html', data)
+        return render(request, 'home/edit.html', data)
 
-    return render(request, 'edit.html', data)
+    return render(request, 'home/edit.html', data)
 
 
 def logout(request):
@@ -436,7 +448,7 @@ def order(request):
         'totalprocessing': sum([int((1-x.product.sale if x.product.sale != None else 1)*x.product.price*x.quantity) for x in orders if x.status == 'processing'])
     }
 
-    return render(request, 'order.html', data)
+    return render(request, 'home/order.html', data)
     pass
 
 

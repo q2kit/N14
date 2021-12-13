@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'logo.svg' %}" />
+</head>
+
+<body>
+
+    <img src="/media/back.jpg" alt="Back to manage" style="width: 50px; height: 50px; cursor: pointer"
+        onclick="window.location.href='/manage/'">
+    <br>
+    <form action="/manage/addProduct" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <label for="id">ID sản phẩm</label>
+        <input type="text" name="id" placeholder="ID sản phẩm">
+        <label for="name">Tên sản phẩm</label>
+        <input type="text" name="name" placeholder="Tên sản phẩm">
+        <label for="type">Chọn loại sản phẩm</label>
+        <select name="type" id="type">
+            <option selected disabled>--Chọn loại--</option>
+            <option value="iphone">iPhone</option>
+            <option value="ipad">iPad</option>
+            <option value="mac">Mac</option>
+            <option value="watch">Apple Watch</option>
+        </select>
+        <label for="price">Giá sản phẩm</label>
+        <input type="text" name="price" placeholder="Giá">
+        <label for="quantity">Số lượng sản phẩm</label>
+        <input type="text" name="quantity" placeholder="Số lượng sẵn có">
+        <label for="sale">Giảm giá: ...(%)</label>
+        <input type="text" name="sale" placeholder="Sale: 0 - 100 %">
+        <label for="img">Ảnh sản phẩm</label>
+        <input type="file" name="img" accept=".jpg, .jpeg, .png" onchange="load(event)">
+        <input type="submit" value="Thêm">
+    </form>
+
+    <img id="preview" src="" alt="Preview" style="max-width: 400px; max-height: 400px;">
+
+    <script>
+        var load = function(event) {
+            console.log(event);
+            let img = document.getElementById('preview');
+            img.src = URL.createObjectURL(event.target.files[0]);
+            img.onload = function() {
+                URL.revokeObjectURL(img.src) // free memory
+            }
+        }
+    </script>
+
+    <style>
+        label,
+        input,
+        select {
+            display: block;
+        }
+
+        * {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        form {
+            display: inline-block;
+        }
+    </style>
+</body>
+
+</html>

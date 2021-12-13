@@ -1,0 +1,94 @@
+{% extends 'home/base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static '/edit/style.css' %}" />
+<script src="{% static '/edit/script.js' %}"></script>
+
+<div class="row pt-5 pb-5 editAccount">
+  <div  class="col-sm-12">
+    <div class="grid">
+      <form style="width: 20rem;" action="/edit/" method="post">
+        {% csrf_token %}
+        <label for="phone">Số điện thoại: {{customer.phone}}</label>
+        <p style="color:rgb(255, 110, 110);">Nếu muốn thay đổi số điện thoại, vui lòng tạo tài khoản mới!</p>
+        <!-- <input type="number" name="phone" value="{{customer.phone}}" required> -->
+        <label for="name">Họ tên:</label>
+        <input type="text" name="name" value="{{customer.name}}" required>
+        <label for="password">Mật khẩu mới:<p style="color:rgb(255, 110, 110);">Để trống nếu không thay đổi!</p></label>
+        <input type="password" name="password1" value="">
+        <label for="password2">Nhập lại mật khẩu:</label>
+        <input type="password" name="password2" value="">
+        <label for="city">Tỉnh/Tp</label> <br>
+        <select name="city" id="city" onchange="showDistrict()" required>
+          {% if customer.city %}
+          <option selected value="{{customer.city.id}}">{{customer.city}}</option>
+          {% else %}
+          <option selected disabled value="none">--Chọn Tỉnh--</option>
+          {% endif %}
+          {% for city in list_city %}
+          {% if customer.city != city %}
+          <option value="{{city.id}}">{{city.name}}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <br>
+        <br>
+        <label for="district">Quận/Huyện/Tp:</label>
+        <br>
+        <select name="district" id="district" onchange="showWard()" required>
+          {% if customer.district %}
+          <option value="none" disabled id="selectDistrict" style="display: none;">
+            --Chọn Huyện--</option>
+          <option value="{{customer.district.id}}" data-city="{{customer.city.id}}" class="district" selected>
+            {{customer.district}}
+          </option>
+          {% else %}
+          <option selected disabled value="none" data-city="{{district.city.id}}">--Chọn Huyện--</option>
+          {% endif %}
+          {% for district in list_district %}
+            {% if customer.district != district %}
+              {% if customer.city.id == district.city.id %}    
+              <option value="{{district.id}}" data-city="{{district.city.id}}" class="district">{{district.name}}</option>
+              {% else %}
+              <option value="{{district.id}}" data-city="{{district.city.id}}" class="district" style="display: none">{{district.name}}</option>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </select>
+        <br>
+        <br>
+        <label for="ward">Phường/Xã/Thị trấn:</label> <br>
+        <select name="ward" id="ward" required>
+          {% if customer.ward %}
+          <option id="selectWard" disabled value="none" class="ward" style="display: none">--Chọn Xã--
+          </option>
+          <option selected value="{{customer.ward.id}}" data-district="{{customer.district.id}}" class="ward">{{customer.ward}}</option>
+          {% else %}
+          <option selected disabled value="none" data-district="{{ward.district.id}}">--Chọn Xã--</option>
+          {% endif %}
+          {% for ward in list_ward %}
+            {% if customer.ward != ward %}
+              {% if customer.district.id == ward.district.id %}
+              <option value="{{ward.id}}" data-district="{{ward.district.id}}" class="ward">{{ward.name}}</option>
+              {% else %}
+              <option value="{{ward.id}}" data-district="{{ward.district.id}}" class="ward" style="display: none">{{ward.name}}</option>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </select>
+        <br />
+        <br />
+        <label for="street">Địa chỉ chi tiết...</label>
+        <input type="text" name='street' id="street" value="{% if customer.street %}{{customer.street}}{% endif %}"
+          required>
+        <!-- <input type="submit" value="Lưu"> -->
+        <button class="btn btn-success" type="submit">Lưu</button>
+        {% if result == 'done' %}
+        <p style="display:inline-block;margin-left: 50px;color:rgb(255, 110, 110);">Cập nhật thành công!</p>
+        {% endif %}
+      </form>
+      <!-- <script>
+        load();//after load form
+      </script> -->
+    </div>
+  </div>
+</div>
+{% endblock %}

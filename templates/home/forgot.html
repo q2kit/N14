@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quên mật khẩu</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/forgot/style.css' %}">
+    <link rel="icon" href="{% static 'smile.ico' %}">
+    <script src="{% static "forgot/script.js" %}"></script>
+</head>
+
+<body>
+<div class="login-box">
+    <a id="home" href="/"><img
+            src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg"
+            alt="Home"></a>
+    <form id="form" action="/forgot/" method="post">
+        {% csrf_token %}
+        <div class="user-box">
+            <input id="inputPhone" type="number" autocomplete="off" name="phone" inputmode="numeric" required>
+            <label>Số điện thoại</label>
+        </div>
+        <p id="invalid">Số điện thoại không hợp lệ.</p>
+        <div class="user-box" id="Otp">
+            <input id="inputOtp" type="number" autocomplete="off" name="otp" inputmode="numeric" required>
+            <label>Nhập mã OTP</label>
+        </div>
+        <a id="getOtp" href="#" onclick="unhide()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Lấy mã OTP
+        </a>
+        <a id="submitOtp" href="#" onclick="document.getElementById('form').submit()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Lấy mật khẩu
+        </a>
+        <input type="submit" hidden/>{# enter for submit #}
+    </form>
+    <p class="link">
+        <br>
+        <a href="/register">Chưa có tài khoản?</a>
+    </p>
+</div>
+
+</body>
+
+</html>

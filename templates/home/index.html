@@ -1,0 +1,236 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block content %}
+{% load tags %}
+    <div class="row">
+        <div class="col-sm-12  padding-0">
+            <div
+                    id="carouselExampleControls"
+                    class="carousel slide"
+                    data-ride="carousel"
+            >
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <a href="/product/iphone13prm">
+                            <img
+                                    class="d-block w-100"
+                                    src="{% static 'img/slide-home/iphone.png' %}"
+                                    alt="First slide"
+                            />
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/product/macprom116">
+                            <img
+                                    class="d-block w-100"
+                                    src="{% static 'img/slide-home/mac.png' %}"
+
+                                    alt="Second slide"
+                            />
+                        </a>
+                    </div>
+                    <div class="carousel-item">
+                        <a href="/product/watchs6lte40">
+                            <img
+                                    class="d-block w-100"
+                                    src="{% static 'img/slide-home/watch.png' %}"
+
+                                    alt="Third slide"
+                            />
+                        </a>
+                    </div>
+                </div>
+                <a
+                        class="carousel-control-prev"
+                        href="#carouselExampleControls"
+                        role="button"
+                        data-slide="prev"
+                >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a
+                        class="carousel-control-next"
+                        href="#carouselExampleControls"
+                        role="button"
+                        data-slide="next"
+                >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid padding-0">
+        <div class="row">
+
+            <div class="col-sm-12 policies padding-lg">
+                <div class="row policies ">
+                    <div class="col-6 col-sm-3 padding-0">
+                        <div class="policy d-flex align-items-center">
+                            <div style="width: 100%;"><i class="far fa-check-circle"></i>
+                                <p> Mẫu mã đa dạng,
+                                    chính hãng.</p></div>
+                        </div>
+                    </div>
+                    <div class="col-6  col-sm-3  padding-0">
+                        <div class="policy d-flex align-items-center">
+                            <div style="width: 100%;"><i class="fal fa-shipping-fast"></i>
+                                <p>Giao hàng toàn quốc.</p></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3 padding-0 ">
+                        <div class="policy d-flex align-items-center">
+                            <div style="width: 100%;"><i class="fal fa-shield"></i>
+                                <p>Bảo hành tới 36 tháng.</p></div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3 padding-0 ">
+                        <div class="policy d-flex align-items-center">
+                            <div style="width: 100%;"><i class="fal fa-undo"></i>
+                                <p>Thích là đổi. Chán là trả. <br>Miễn là nguyên seal. </p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 padding-lg">
+                <div class="row pt-5 pb-5">
+                    <div class="col-6 col-sm-3  pt-3">
+                        <a href="/iphone">
+                            <div class="category ">
+                                <img src="{% static 'img/product/iphone/iphone.png' %}" alt="">
+                                <p>iPhone</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3  pt-3">
+                        <a href="/mac">
+                            <div class="category ">
+                                <img src="{% static 'img/product/mac/mac.png' %}" alt="">
+                                <p>Mac</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3  pt-3">
+                        <a href="/ipad">
+                            <div class="category ">
+                                <img src="{% static 'img/product/ipad/ipad.png' %}" alt="">
+                                <p>iPad</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-3 pt-3">
+                        <a href="/watch">
+                            <div class="category ">
+                                <img src="{% static 'img/product/watch/watch.png' %}" alt="">
+                                <p>Watch</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 sessionTitle">
+            <i class="fab fa-apple"></i> <span>iPhone</span>
+        </div>
+    </div>
+    <div class="row padding-lg">
+        {% for product   in iPhone|slice:":8" %}
+                <div  class="col-6  col-sm-4 col-md-3 mt-5">
+                    <div class="product">
+                        <a href="/product/{{ product.id }}">
+                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
+                            <p class="productName">{{ product.name }}</p>
+                        </a>
+                       <div class="d-flex price w-100 justify-content-center">
+                            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+                        {% if product.sale != None and  product.sale != 0 %} 
+                            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+                        {% endif %}
+                           
+                    </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-12 sessionTitle">
+            <i class="fab fa-apple"></i> <span>Mac</span>
+        </div>
+    </div>
+    <div class="row  padding-lg">
+        {% for product   in mac|slice:":8" %}
+                <div class="col-6 col-sm-4 col-md-3  mt-3 pb-3 ">
+                    <div class="product">
+                        <a  href="/product/{{ product.id }}">
+                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
+                            <p class="productName ">{{ product.name }}</p>
+                        </a>
+                         <div class="d-flex price w-100 justify-content-center">
+                            <p class="productPrice  mr-2"> {%multiply product.sale product.price   %}₫</p>
+                        {% if product.sale != None and  product.sale != 0 %} 
+                            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+                        {% endif %}
+                           
+                    </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-12 sessionTitle">
+            <i class="fab fa-apple"></i> <span>iPad</span>
+        </div>
+    </div>
+    <div class="row padding-lg">
+        {% for product   in iPad|slice:":8" %}
+                <div class="col-6 col-sm-4 col-md-3 mt-3 pb-3 ">
+                    <div class="product">
+                        <a href="/product/{{ product.id }}">
+                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
+                            <p class="productName">{{ product.name }}</p>
+                        </a>
+                         <div class="d-flex price w-100 justify-content-center">
+                            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+                        {% if product.sale != None and  product.sale != 0 %} 
+                            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+                        {% endif %}
+                           
+                    </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+    <div class="row pt-5 pb-5">
+        <div class="col-sm-12 sessionTitle">
+            <i class="fab fa-apple"></i> <span>Watch</span>
+        </div>
+    </div>
+    <div class="row pb-5 padding-lg">
+        {% for product   in watch|slice:":8" %}
+                <div class="col-6 col-sm-4 col-md-3 mt-3 pb-3 ">
+                    <div class="product">
+                        <a href="/product/{{ product.id }}">
+                            <img class="productImg" width="100%" src="{{ product.showcasedImg.url }}" alt="">
+                            <p class="productName">{{ product.name }}</p>
+                        </a>
+                        <div class="d-flex price w-100 justify-content-center">
+                            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+                        {% if product.sale != None and  product.sale != 0 %} 
+                            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+                        {% endif %}
+                           
+                    </div>
+                    </div>
+                </div>
+                
+        {% endfor %}
+    </div>
+{% endblock content %}

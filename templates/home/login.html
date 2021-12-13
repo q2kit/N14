@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    {% load static %}
+    <link href="{% static '/logo.svg' %}" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{% static '/login/style.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="./login.css"> -->
+</head>
+
+<body>
+    <div class="login-box">
+        <a id="home" href="/"><img src="https://www.apple.com/ac/globalnav/6/en_US/images/be15095f-5a20-57d0-ad14-cf4c638e223a/globalnav_apple_image__cxwwnrj0urau_large.svg" alt="Home"></a>
+        {% if result == 'completeRegistration' %}
+        <p id="completeRegistration">Đăng ký thành công. Vui lòng đăng nhập.</p>
+        {% elif result == 'resetpw' %}
+        <p id="completeRegistration">Lất mật khẩu thành công. Vui lòng đăng nhập!<br>Mật khẩu mới là {{newpw}}</p>
+        {% endif %}
+        <form id="form" action="/login/" method="post">
+            {% csrf_token %}
+            <div class="user-box">
+                <input type="number" autocomplete="off" name="phone" inputmode="numeric" required id="phone">
+                <label>Số điện thoại</label>
+            </div>
+            <div class="user-box">
+                <input type="password" autocomplete="off" name="password" required>
+                <label>Mật khẩu</label>
+            </div>
+            {% if result == 'incorrect' %}
+            <div class="incorrect"><br>
+                <p>Sai tài khoản hoặc mật khẩu.</p>
+                Vui lòng thử lại.
+            </div>
+            <script>
+                document.getElementById("phone").value = "{{phone}}";
+            </script>
+            {% endif %}
+            <a href="#" onclick="document.getElementById('form').submit()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span> Đăng nhập
+            </a>
+            <input type="submit" hidden/>{# enter for submit #}
+        </form>
+        <p class="link">
+            <br>
+            <a href="/forgot">Quên mật khẩu?</a>
+            <br>
+            <br>
+            <a href="/register">Chưa có tài khoản?</a>
+        </p>
+    </div>
+</body>
+
+</html>

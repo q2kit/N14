@@ -44,13 +44,14 @@ class Customer(models.Model):
     name = models.CharField(max_length=40)
     phone = models.CharField(max_length=10, primary_key=True)
     password = models.CharField(max_length=100)
+    is_staff = models.BooleanField(default=False)
 
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
     district = models.ForeignKey(
         District, on_delete=models.SET_NULL, null=True)
     ward = models.ForeignKey(Ward, on_delete=models.SET_NULL, null=True)
     street = models.CharField(max_length=400, null=True)
-    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
+    # address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
 
     def getAddress(self):
         return self.street + ', ' + self.ward.name + ', ' + self.district.name + ', ' + self.city.name
@@ -105,9 +106,11 @@ class Order(models.Model):
     productCapacity = models.CharField(max_length=100, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     stt = (
         ('incart', 'Trong giỏ hàng'),
         ('processing', 'Đang xử lý'),
+        ('shipping', 'Đang giao hàng'),
         ('done', 'Đã hoàn thành'),
     )
     status = models.CharField(max_length=20, choices=stt, default='inCart')

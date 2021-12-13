@@ -1,0 +1,55 @@
+{% extends 'home/base.html' %} {% block title %} {{type}} {% endblock title %} {%
+load static %} {% block content %}
+{% load tags %}
+
+<div class="row pt-5">
+  <div class="col-sm-12 sessionTitle">
+    <i class="fab fa-apple"></i> <span>{{type}}</span>
+  </div>
+</div>
+
+<div class="row padding-lg pb-5">
+  {% for product in page_obj %}
+
+  <div class="col-6 col-sm-4 mt-5">
+    <div class="product">
+      <a href="/product/{{ product.id }}">
+        <img
+          class="productImg"
+          width="100%"
+          src="{{ product.showcasedImg.url }}"
+          alt=""
+        />
+        <p class="productName">{{ product.name }}</p>
+      </a>
+     <div class="d-flex price w-100 justify-content-center">
+            <p class="productPrice mr-2"> {%multiply product.sale product.price   %}₫</p>
+        {% if product.sale != None and  product.sale != 0 %} 
+            <p class="productPrice  productPrice--sale">{{ product.price }} ₫</p>
+        {% endif %}
+            
+    </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="col-sm-12 pt-5">
+    <span class="step-links d-flex justify-content-center">
+      {% if page_obj.has_previous %}
+      <a class="mr-3 pre" href="?page={{ page_obj.previous_page_number }}"
+        >&laquo; previous</a
+      >
+      {% endif %}
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+      <a class="ml-3 next" href="?page={{ page_obj.next_page_number }}"
+        >next &raquo;</a
+      >
+      {% endif %}
+    </span>
+  </div>
+</div>
+
+{% endblock content %}

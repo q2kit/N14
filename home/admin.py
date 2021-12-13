@@ -6,7 +6,7 @@ from .models import *
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['phone', 'name', 'password']
+    list_display = ['phone', 'name', 'password', 'is_staff']
     search_fields = ['phone', 'name']
 
 

@@ -20,5 +20,6 @@ handler404 = "home.views.page_not_found_view"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('manage/', include('staff.urls')),
     path('', include('home.urls')),
 ]

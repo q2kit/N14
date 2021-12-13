@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load tags %}
+    <!-- {% number_in_cart request %} -->
+    <title>{% block title %}{% endblock %}</title>
+    {% block templates %}{% endblock %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/queries.css' %}" />
+    <link rel="icon" href="{% static 'logo.svg' %}" />
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row myNavbar padding-lg">
+        <div class="col-3 d-flex align-items-center navLogo">
+          <div class="">
+            <a href="{% url 'home' %}">
+              <img src="{% static 'img/banner2.png' %}" alt="" />
+            </a>
+          </div>
+        </div>
+        <div class="col-9 col-sm-6 padding-0" style="text-align: center">
+          <div class="searchForm align-items-center">
+            <form class="" action="/search/" method="get">
+              <input
+                id="search"
+                autocomplete="off"
+                name="q"
+                class="searchInput"
+                type="search"
+                placeholder="Bạn tìm gì..."
+                aria-label="Search"
+                onblur="document.getElementById('closeSearch').click();"
+              />
+            </form>
+            <i id="closeSearch" class="fal fa-times"></i>
+          </div>
+          <div class="main justify-content-center">
+            <ul class="d-flex">
+              <li class="d-flex align-items-center">
+                <a href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="/iphone">iPhone</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="/mac">Mac</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="/ipad">iPad</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="/watch">Watch</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3 padding-0">
+          <div class="menu pl-5 pr-5">
+            <ul class="d-flex justify-content-between">
+              <li class="d-flex align-items-center">
+                <div class="bg searchIcon">
+                  <i class="far fa-search"></i>
+                </div>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="/order/">
+                  <div class="bg">
+                    <div
+                      class="grid"
+                      style="
+                        background-color: brown;
+                        border-radius: 50%;
+
+                        width: 1.3rem;
+                        height: 1.3rem;
+                        z-index: 2;
+                        position: relative;
+                        right: 5px;
+                      "
+                    >
+                      <p id='number_in_cart' style="font-size: 0.8rem; font-weight: 600">
+                        {% number_in_cart request %}
+                      </p>
+                    </div>
+                    <i class="far fa-shopping-bag"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="d-flex align-items-center">
+                <a href="{% url 'account' %}">
+                  <div class="bg">
+                    <i class="far fa-user"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row space"></div>
+      {% block content %}{% endblock %}
+
+      <div class="row footer pt-3 mt-2">
+        <div class="col-sm-12">
+          <img src="{% static 'img/banner2.png' %}" alt="" srcset="" />
+        </div>
+        <hr />
+        <div class="col-6 col-sm-3 pt-3">
+          <ul>
+            <li><strong>Tổng đài</strong></li>
+            <li>Mua hàng: xxxx.xxxx</li>
+            <li>CSKH: xxxx.xxxx</li>
+            <li>Kỹ thuật: xxxx.xxxx</li>
+          </ul>
+        </div>
+        <div class="col-6 col-sm-3 pt-3">
+          <ul>
+            <li><strong>Hệ thống cửa hàng</strong></li>
+            <li>CS1: ...</li>
+            <li>CS2: ...</li>
+            <li>CS3: ...</li>
+            <li>CS4: ...</li>
+          </ul>
+        </div>
+        <div class="col-6 col-sm-3 pt-3">
+          <ul>
+            <li><strong>Hỗ trợ khách hàng</strong></li>
+            <li>Chính sách bảo hành</li>
+            <li>Hướng dẫn mua hàng online</li>
+            <li>Chính sách giao hàng</li>
+            <li>Phương thức thanh toán</li>
+          </ul>
+        </div>
+        <div class="col-6 col-sm-3 pt-3">
+          <ul>
+            <li><strong>Team 14</strong></li>
+            <li>Doãn Hữu Quân</li>
+            <li>Nguyễn Phúc Tĩnh</li>
+            <li>Nguyễn Minh Nghĩa</li>
+            <li>Trần Khắc Phong</li>
+            <li>Nguyễn Thị Lê Na</li>
+          </ul>
+        </div>
+
+        <div class="col-sm-12 pt-4 address">
+          <p>Bài tập lớn lập trình với Python - Nhóm 14</p>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+  {% block loadjs %}{% endblock %}
+</html>
