@@ -82,8 +82,8 @@
                 </select>
             </td>
             <td>
-                <img class="{{ product.id }}" src="/media/{{ product.showcasedImg }}" alt="">
-                <input type="file" id="{{ product.id }}img" accept=".jpg, .jpeg, .png">
+                <input type="file" id="{{ product.id }}img" accept=".jpg, .jpeg, .png" onchange="loadPreviewImg(event, '{{ product.id }}');">
+                <img class="{{ product.id }}" src="/media/{{ product.showcasedImg }}" alt="" id="{{ product.id }}preview">
             </td>
             <td>
                 <p class="{{ product.id }}">{{ product.price }} ₫</p>
@@ -200,6 +200,16 @@
 
 
 <script>
+    var loadPreviewImg = function(event, id) {
+        console.log(event);
+        let img = document.getElementById(id+'preview');
+        img.src = URL.createObjectURL(event.target.files[0]);
+        img.style.display = 'block';
+        img.onload = function() {
+            URL.revokeObjectURL(img.src) // free memory
+        }
+    }
+
     function display(type) {
         if (type == 'all') {
             let arr = document.getElementsByClassName('product');
